@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>AJAX</title>
+    <url>/2020/04/02/AJAX/</url>
+    <content><![CDATA[<h1 id="AJAX"><a href="#AJAX" class="headerlink" title="AJAX"></a>AJAX</h1><p>三部曲：</p>
+<ol>
+<li>编写对应处理的Controller，返回消息或者字符串或者json格式的数据；</li>
+<li>编写ajax请求<ol>
+<li>url ：Controller请求</li>
+<li>data ：键值对</li>
+<li>success ：回调函数</li>
+</ol>
+</li>
+<li>给Ajax绑定事件，点击，失去焦点，键盘弹起</li>
+</ol>
+<h2 id="注意-：使用JQuery需要导入JQuery文件。"><a href="#注意-：使用JQuery需要导入JQuery文件。" class="headerlink" title="==注意==：使用JQuery需要导入JQuery文件。"></a>==注意==：使用JQuery需要导入JQuery文件。</h2><h2 id="具体实现步骤"><a href="#具体实现步骤" class="headerlink" title="具体实现步骤"></a>具体实现步骤</h2><p>一 ，Controller部分</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/ajax"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AjaxController</span> </span>&#123;</span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/a1"</span>)</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ajax</span><span class="params">(String name, HttpServletResponse response)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="string">"admin"</span>.equals(name))&#123;</span><br><span class="line">            response.getWriter().print(<span class="string">"true"</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            response.getWriter().print(<span class="string">"false"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>二 ，ajax请求以及绑定事件</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">%@</span> <span class="attr">page</span> <span class="attr">contentType</span>=<span class="string">"text/html;charset=UTF-8"</span> <span class="attr">language</span>=<span class="string">"java"</span> %&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"js/jquery-3.4.1.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">a1</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">        <span class="comment">//参数：</span></span></span><br><span class="line"><span class="actionscript">        <span class="comment">//      url:待载入页面的url地址（必填）</span></span></span><br><span class="line"><span class="actionscript">        <span class="comment">//      data：待发送Key/value参数</span></span></span><br><span class="line"><span class="actionscript">        <span class="comment">//      success：载入成功时回调函数</span></span></span><br><span class="line"><span class="actionscript">        <span class="comment">//      status：请求返回的状态</span></span></span><br><span class="line"><span class="javascript">        $.ajax(&#123;</span></span><br><span class="line"><span class="actionscript">            url:<span class="string">"ajax/a1"</span>,</span></span><br><span class="line"><span class="javascript">            data:&#123;<span class="string">"name"</span>:$(<span class="string">"#txtName"</span>).val()&#125;,</span></span><br><span class="line"><span class="actionscript">            success:<span class="function"><span class="keyword">function</span> <span class="params">(data)</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">                <span class="built_in">console</span>.log(data);</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    用户名：</span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"txtName"</span> <span class="attr">onblur</span>=<span class="string">"a1()"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>简洁的ajax请求方法</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function a1() &#123;</span><br><span class="line"></span><br><span class="line">     $.ajax(&quot;url&quot;,&quot;传入的参数&quot;,function(回来的参数)&#123;</span><br><span class="line">         </span><br><span class="line">       &#125;);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>ajax的请求方式</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. $.ajax() 默认是get请求。</span><br><span class="line">2. $.get()  get请求</span><br><span class="line">3. $.post() post请求</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2020/04/02/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+]]></content>
+      <tags>
+        <tag>hello world</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JQuery</title>
+    <url>/2020/04/02/JQuery/</url>
+    <content><![CDATA[<h1 id="JQuery"><a href="#JQuery" class="headerlink" title="JQuery"></a>JQuery</h1><p>先下载JQuery文件<br>在引入项目</p>
+<p><code>注意</code>：<strong>在事件响应的function函数中，有个一this对象，这个this对象是当前正在响应事件的dom对象</strong></p>
+<p>一，$</p>
+<ol>
+<li><p><strong>传入参数为【函数】时</strong> ：<br>在文档加载完成后执行这个函数。<br>相当于window.onload()=function(){}</p>
+</li>
+<li><p><strong>传入参数为【HTML字符串】时：</strong><br>会帮我们创建这个html标签对象</p>
+</li>
+<li><p><strong>传入参数为【选择器字符串】时：</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$&#123;&quot;#id属性值&quot;&#125;	id选择器，根据id查询标签对象</span><br><span class="line">$&#123;&quot;标签名&quot;&#125;	标签名选择器，根据指定的标签名查询标签对象</span><br><span class="line">$&#123;&quot;.class&quot;&#125;		类型选择器，可以根据class属性查询标签对象</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>传入参数为【DOM对象】时：</strong><br>会把这个dom对象转换为JQuery对象</p>
+</li>
+</ol>
+<hr>
+<p>二，jQuery对象和dom对象区分  </p>
+<ol>
+<li><p>Dom对象  </p>
+<ol start="2">
+<li>通过getElementById()查询出来的标签对象是Dom对象</li>
+<li>通过getElementByName()查询出来的标签对象是Dom对象</li>
+<li>通过getElementByTagName()查询出来的标签对象是Dom对象</li>
+<li>通过createElement()方法创建的对象，是Dom对象<br><code>DOM对象Alert出来的效果是：[object HTML标签名Element]</code>  </li>
+</ol>
+</li>
+<li><p>JQuery对象  </p>
+<ol start="7">
+<li>通过JQuery提供的API创建的对象</li>
+<li>通过JQuery包装的DOM对象</li>
+<li>通过JQuery提供的API查询到的对象<br><code>JQuery对象Alert出来的效果的：[object，object]</code></li>
+</ol>
+</li>
+<li><p>JQuery对象本质dom对象的数组+JQuery提供的一系列功能函数。</p>
+</li>
+<li><p>JQuery对象和DOM对象使用区别</p>
+<pre><code>JQuery对象不能使用DOM对象的属性和方法 
+DOM对象也不能使用JQuery对象的属性和方法</code></pre></li>
+<li><p>DOM对象和JQuery对象互转<br>​    </p>
+<ol>
+<li><p>dom对象转化为JQuery对象    （*）</p>
+<ol>
+<li><p>先有dom对象</p>
+</li>
+<li><p>${DOM对象} 就可以转换成为JQuery对象</p>
+<p>​</p>
+<ol start="2">
+<li>JQuery对象转化为dom对象（*）</li>
+</ol>
+<p>i，现有JQuery对象<br>ii，JQuery对象[下标]取出相应的dom对象</p>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p>三，JQuery选择器（<strong>**</strong>重点）</p>
+<ol>
+<li><p>基础选择器（和css样式选择器差不多）<br> $(“”)</p>
+</li>
+<li><p>层级选择器</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">i，在给定祖先元素下匹配所有的后代元素</span><br><span class="line">	     $(&quot;ancestor descendant&quot;)</span><br><span class="line">ii，在给定的父元素下匹配所有的子元素</span><br><span class="line">	     $(&quot;parent &gt;child&quot;)</span><br><span class="line">iii，匹配所有紧接在prev元素后的next元素(同级)</span><br><span class="line">	     $(&quot;prev + next&quot;)</span><br><span class="line">iv，匹配prev元素之后的所有siblings元素（同级）</span><br><span class="line">	     $(&quot;prev ~ siblings&quot;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>过滤选择器<br> <strong>基本</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">i，选择第一个元素</span><br><span class="line">      $(&quot;xxx :first&quot;)</span><br><span class="line">i，选择最后一个元素</span><br><span class="line">      $(&quot;xxx :last&quot;)</span><br><span class="line">i，去除所有与给定选择器匹配的元素</span><br><span class="line">      $(&quot;xxx:not(select)&quot;)</span><br><span class="line">i，匹配所有索引值为偶数的元素，从0开始计数</span><br><span class="line">      $(&quot;xxx:even&quot;)</span><br><span class="line">i，匹配所有索引值为奇数的元素，从0开始计数</span><br><span class="line">      $(&quot;xxx:odd&quot;)	</span><br><span class="line">i，匹配一个给定索引值的元素</span><br><span class="line">      $(&quot;xxx:eq(index)&quot;)</span><br><span class="line">i，匹配所有大于给定索引值的元素</span><br><span class="line">      $(&quot;xxx:gt(index)&quot;)</span><br><span class="line">i，匹配所有小于给定索引值的元素</span><br><span class="line">      $(&quot;xxx:Lt(index)&quot;)</span><br><span class="line">i，匹配所有标题元素</span><br><span class="line">      $(&quot;:header&quot;)</span><br><span class="line">i，匹配所有正在执行动画的元素</span><br><span class="line">      $(&quot;:animated&quot;)</span><br></pre></td></tr></table></figure>
+
+<pre><code>**内容**</code></pre><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">i，匹配包含给定文本的元素</span><br><span class="line">    $(&quot;xxx:contains(text)&quot;)</span><br><span class="line">i，匹配所有不包含子元素或者文本的空元素</span><br><span class="line">    $(&quot;xxx:empty&quot;)</span><br><span class="line">i，匹配含有子元素或者文本的元素</span><br><span class="line">    $(&quot;xxx:parent&quot;)</span><br><span class="line">i，匹配含有选择器所匹配的元素的元素</span><br><span class="line">    $(&quot;xxx:has(selector)&quot;)</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+<pre><code>**属性**  </code></pre> <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">i，匹配包含给定属性的元素</span><br><span class="line">    $(&quot;xxx[attribute]&quot;)</span><br><span class="line">i，匹配给定的属性是某个特定值的元素</span><br><span class="line">    $(&quot;xxx[attribute&#x3D;value]&quot;)	</span><br><span class="line">i，匹配所有不含有指定的属性或者属性不等于特定值的元素</span><br><span class="line">    $(&quot;xxx[attribute!&#x3D;value]&quot;)</span><br><span class="line">i，匹配给定的属性是以某些值开始的元素</span><br><span class="line">    $(&quot;xxx[attribute^&#x3D;value]&quot;)</span><br><span class="line">i，匹配给定的属性是以某些值结尾的元素</span><br><span class="line">    $(&quot;xxx[attribute$&#x3D;value]&quot;)</span><br><span class="line">i，匹配给定的属性是以包含某些值的元素</span><br><span class="line">    $(&quot;xxx[attribute*&#x3D;value]&quot;)</span><br><span class="line">i，复合属性选择器，需要同时满足多个条件</span><br><span class="line">    $(&quot;[][][]&quot;)</span><br></pre></td></tr></table></figure>
+<pre><code>**表单**  </code></pre> <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">i，匹配所有input，textarea，select和button源元素</span><br><span class="line">      :input</span><br><span class="line">i，匹配type是text类型</span><br><span class="line">      :text</span><br><span class="line">i，匹配type是password类型</span><br><span class="line">      :password</span><br><span class="line">i，匹配type是radio类型</span><br><span class="line">      :radio</span><br><span class="line">i，匹配type是checkbox类型</span><br><span class="line">      :checkbox</span><br><span class="line">i，匹配type是submit类型</span><br><span class="line">      :submit</span><br><span class="line">i，匹配type是reset类型（重置）</span><br><span class="line">      :reset</span><br><span class="line">i，匹配type是button类型</span><br><span class="line">      :button</span><br><span class="line">i，匹配type是file类型</span><br><span class="line">      :file</span><br><span class="line">i，匹配type是hidden类型(隐藏起来的)</span><br><span class="line">      :hidden</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">i，匹配能用的表单元素</span><br><span class="line">      :enabled</span><br><span class="line">i，匹配不能用的表单元素</span><br><span class="line">      :disabled</span><br><span class="line">i，匹配已经选中的表单元素</span><br><span class="line">      :checked</span><br><span class="line">i，匹配所有选中的option元素</span><br><span class="line">		 :selected</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>四，<br>JQuery方法</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.val()可以操作表单项的value属性值，他可以设置和获取</span><br><span class="line">.each(function（alert（this））&#123;&#125;) 遍历元素的方法，this对象，就是当前遍历到的dom对象</span><br><span class="line">.css(&quot;属性名&quot;，属性值)，增加样式</span><br></pre></td></tr></table></figure>
+<p>JQuery函数</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">confirm() 是JavaScript语言提供的一个确认提示框函数，传什么就提示什么，</span><br><span class="line">    当用户点击了确定，返回true，用户点击了取消，返回false</span><br><span class="line">find()	查找后代</span><br></pre></td></tr></table></figure>
+<hr>
+<p>五，<br>JQuery属性操作<br> <strong>不传参数是获取，传入参数是设置</strong>   </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">html()	它可以设置和获取起始标签和结束标签中的内容，和innerHTML一样  </span><br><span class="line">text()	它可以设置和获取起始标签和结束标签中的文本，和innerText一样  </span><br><span class="line">val()	它可以设置和获取表单项的value属性值	和value一样，还可以操作选中状态</span><br><span class="line">attr()	可以设置和获取属性的值，不推荐操作checked,readOnly,selected,disabked等等</span><br><span class="line">prop()	可以设置和获取属性的值，只推荐操作checked,readOnly,selected,disabked等等</span><br></pre></td></tr></table></figure>
+<p>六，DOM增删改</p>
+<pre><code>内部插入：
+    appendTo()    a.appendTo(b)    把a插入到b子元素末尾，成为最后一个子元素
+    prependTo()    a.prependTo(b)    把a插到b所有子元素前面，成为第一个子元素
+
+
+外部插入：
+    insertAfter()    a.insertfter(b)    得到ba
+    insertBefore()    a.insertBefore(b)    得到ab
+
+替换：
+    replaceWith()    a.replaceWith(b)    用b替换掉a
+    replaceAll()    a.replaceAll(b)    用a替换掉所有b
+
+删除：
+    remove()        a.remove()    删除a标签
+    empty()        a.empty()        清空a标签里面的内容</code></pre><p>七，css样式操作</p>
+<pre><code>addClass()    添加样式
+removeClass()    删除样式
+toggleClass()    有就删除，没有就添加样式
+offset()        获取和设置元素的坐标
+        设置
+            JQuery对象.offset({
+                top:100,
+                left:50
+            });</code></pre><p>八，JQuery动画</p>
+<pre><code>基本动画
+    show()    将隐藏的元素显示
+    hide()    将可见的元素隐藏
+    toggle()    可见就隐藏，隐藏就可见
+
+        以上动画方法都可以添加参数：
+            1，第一个参数是动画执行的时长，以毫秒为单位
+            2，第二个参数是动画的回调函数（动画完成后自动调用的函数）    
+
+
+
+淡入淡出动画
+
+    fadeIn()        淡入
+    fadeOut()        淡出
+    fadeTo()        在指定时长内慢慢的将透明度修改到指定的值，0透明，1完全可见    
+    fadeToggle()    淡入/淡出  切换</code></pre><p>九，JQuery事件操作<br>​<br>    $(function(){});<br>    和<br>    window.onload=function(){};<br>    的区别</p>
+<pre><code>他们分别在什么时候触发？
+1. JQuery的页面加载完成之后是浏览器的内核解析完页面的标签创建好DOM对象之后就会马上执行。
+2. 原生js的页面加载完成以后，除了等浏览器的内核解析完页面的标签创建好DOM对象，还要等标签显示时需要的内容加载完成。
+
+
+他们执行的次数？
+
+    1，原生js的页面加载完成之后，只会执行最后一次的赋值函数
+    2，JQuery的页面加载完成之后是全部把注册的function函数，依次顺序全部执行。</code></pre><p>​<br>    JQuery中其他事件处理方法</p>
+<pre><code>click()        它可以绑定单机事件，以及触发单击事件
+mouseover()    鼠标移入事件
+mouseout()    鼠标移出事件
+bind()        可以给元素一次性绑定一个或多个事件
+one()        使用上跟bind一样，但是one方法绑定的事件只会响应一次
+unbind()        跟bind方法相反的操作，接触事件的绑定
+live()        也是用来绑定事件，它可以用来绑定选择器匹配的所有元素的事件，
+        哪怕这个元素是后面动态创建出来的。</code></pre>]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>JQuery</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Spring</title>
+    <url>/2020/04/04/Spring/</url>
+    <content><![CDATA[<h1 id="1、Spring"><a href="#1、Spring" class="headerlink" title="1、Spring"></a>1、Spring</h1><h2 id="1-1-、简介"><a href="#1-1-、简介" class="headerlink" title="1.1 、简介"></a>1.1 、简介</h2><ul>
+<li><p>官网：<a href="https://docs.spring.io/spring/docs/5.2.5.RELEASE/spring-framework-reference/" target="_blank" rel="noopener">https://docs.spring.io/spring/docs/5.2.5.RELEASE/spring-framework-reference/</a></p>
+</li>
+<li><p>官方下载地址：<a href="https://repo.spring.io/release/org/springframework/spring" target="_blank" rel="noopener">http://repo.spring.io/release/org/springframework/spring</a></p>
+</li>
+<li><p>github地址：<a href="https://github.com/spring-projects/spring-framework" target="_blank" rel="noopener">https://github.com/spring-projects/spring-framework</a></p>
+</li>
+<li><p>依赖的jar包</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;5.2.4.RELEASE&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p>​</p>
+</li>
+</ul>
+<h2 id="1-2、优点"><a href="#1-2、优点" class="headerlink" title="1.2、优点"></a>1.2、优点</h2><ul>
+<li>Spring是一个开源的免费的框架（容器）</li>
+<li>Spring是一个轻量级的，非入侵式的框架</li>
+<li>==控制反转（IOC），面向切面编程（AOP）==</li>
+<li>支持事物的处理，对框架整合的支持</li>
+</ul>
+<p><code>总结一句话：Spring就是一个轻量级的控制反转（IOC）和面向切面编程（AOP）的框架！</code></p>
+<h2 id="1-3、组成"><a href="#1-3、组成" class="headerlink" title="1.3、组成"></a>1.3、组成</h2><p><img src="/2020/04/04/Spring/spring%E4%B8%83%E5%A4%A7%E6%A8%A1%E5%9D%97.png" alt="七大板块"></p>
+<h2 id="1-4、拓展"><a href="#1-4、拓展" class="headerlink" title="1.4、拓展"></a>1.4、拓展</h2><p>现代化的java开发，说白了就是基于Spring开发</p>
+<p><img src="/2020/04/04/Spring/%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF.png" alt="学习路线"></p>
+<ul>
+<li>Spring Boot<ul>
+<li>一个快速开发的脚手架</li>
+<li>基于SpringBoot可以快速的开发单个微服务</li>
+<li>约定大于配置！</li>
+</ul>
+</li>
+<li>Spring Cloud<ul>
+<li>SpringCloud是基于SpringBoot实现的</li>
+</ul>
+</li>
+</ul>
+<p>因为现在大多数公司都在使用SpringBoot进行快速开发，学习SpringBoot的前提，需要完全掌握Spring及SpringMVC！</p>
+<p>Spring弊端：发展了太久之后，违背了原来的理念！配置十分繁琐，人称：“配置地狱”</p>
+<h1 id="2、IOC理论推导"><a href="#2、IOC理论推导" class="headerlink" title="2、IOC理论推导"></a>2、IOC理论推导</h1><p>原来步骤</p>
+<ol>
+<li><p>UserDao接口</p>
+</li>
+<li><p>UserDaoImpl实现类</p>
+</li>
+<li><p>UserService业务接口</p>
+</li>
+<li><p>UserServiceImpl业务实现类</p>
+<p><img src="/2020/04/04/Spring/%E5%8F%8D%E8%BD%AC%E4%B9%8B%E5%89%8D.png" alt="反转之前"></p>
+</li>
+</ol>
+<p>在我们之前的业务中，用户的需求可能会影响我们原来的代码，我们需要根据用户的需求去修改源代码，如果程序代码量十分大，修改一次的成本代价十分昂贵</p>
+<p>我们使用一个Set接口实现。已经发生了革命性的变化！</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> UserDao userDao;</span><br><span class="line"><span class="comment">//利用set进行动态实现值的注入！</span></span><br><span class="line"><span class="function">Public <span class="keyword">void</span> <span class="title">setUserDao</span><span class="params">(UserDao userDao)</span></span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.userDao = userDao;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>之前程序是主动创建对象！控制权在程序员手上</li>
+<li>使用了set注入后，程序不在具有主动性，而是变成了被动的接收对象</li>
+</ul>
+<p>这种思想，从本质上解决了问题，我们程序员不用再去管理对象的创建了。系统的耦合性大大降低了，可以更加转转的在业务的实现上！这是IOC的原型</p>
+<p><img src="/2020/04/04/Spring/set%E6%96%B9%E5%BC%8F%E5%8F%8D%E8%BD%AC%E4%B9%8B%E5%90%8E.png" alt="set方式反转之后"></p>
+<h2 id="IOC本质"><a href="#IOC本质" class="headerlink" title="IOC本质"></a>IOC本质</h2><p><strong>控制反转IOC，是一种设计思想，DI（依赖注入）是实现IOC的一种方法</strong>，也有人认为DI只是IOC的另一种说法。没有IOC的程序中，我们使用面向对象编程，对象的创建与对象间的依赖关系完全硬编码在程序中，对象的创建由程序自己控制，控制反转后，将对象的创建转移给第三方，控制反转就是获得依赖对象的方式反转了</p>
+<p><img src="/2020/04/04/Spring/%E8%A7%A3%E8%80%A6%E5%8F%91%E5%B1%95.png" alt="解耦发展"></p>
+<p>采用XML方式配置Bean的时候，Bean的定义信息是和实现分离的，而采用注解的方式可以把两者合为一体，Bean的定义信息直接以注解的形式定义在实现类中，从而达到了零配置的目的</p>
+<p><strong>控制反转是哟中通过描述（XML或注解）并通过第三方去生产或获取特定对象的方式。在Spring中实现控制反转的是IOC容器，其实现方法是依赖注入</strong></p>
+<p><img src="/2020/04/04/Spring/spring%E5%B7%A5%E4%BD%9C%E8%A7%86%E5%9B%BE.png" alt="spring工作视图"></p>
+<h1 id="3、HelloSpring"><a href="#3、HelloSpring" class="headerlink" title="3、HelloSpring"></a>3、HelloSpring</h1><ol>
+<li><p>引入需要的jar包</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;5.2.4.RELEASE&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编写pojo实体类</p>
+<p><code>重点是set方法</code></p>
+</li>
+<li><p>编写beans.xml配置文件</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="tag"><span class="string">        https://www.springframework.org/schema/beans/spring-beans.xsd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--使用Spring来创建对象，在Spring这些都称为Bean</span></span><br><span class="line"><span class="comment">    类型 变量名 = new 类型();</span></span><br><span class="line"><span class="comment">    Hello hello = new Hello();</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    id = 变量名</span></span><br><span class="line"><span class="comment">    class = new 的对象</span></span><br><span class="line"><span class="comment">    property 相当于给对象中的属性设置一个值</span></span><br><span class="line"><span class="comment">--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"hello"</span> <span class="attr">class</span>=<span class="string">"com.zhaoning.pojo.Hello"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"str"</span> <span class="attr">value</span>=<span class="string">"Spring"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>​</p>
+<p>​</p>
+<p>​</p>
+</li>
+<li><p>编写测试类</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//获取Spring的上下文对象！</span></span><br><span class="line">        ApplicationContext context = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"beans.xml"</span>);</span><br><span class="line">        Hello hello = (Hello)context.getBean(<span class="string">"hello"</span>);</span><br><span class="line">        System.out.println(hello);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​</p>
+</li>
+</ol>
+<h1 id="4依赖注入"><a href="#4依赖注入" class="headerlink" title="4依赖注入"></a>4依赖注入</h1><h2 id="4-1、构造函数注入："><a href="#4-1、构造函数注入：" class="headerlink" title="4.1、构造函数注入："></a>4.1、构造函数注入：</h2><p>​    1. 使用的标签：constructor-arg<br>​    2. 标签出现的位置：bean标签的内部<br>​    3. 标签中的属性:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">type：用于指定要注入的数据类型，该数据类型也是构造函数中某个或某些参数的类型</span><br><span class="line">index：用于指定要注入的数据，给构造函数中指定索引位置的参数赋值，索引位置是从<span class="number">0</span>开始</span><br><span class="line">name：用于指定给构造函数中指定名称的参数赋值    （常用）</span><br><span class="line"> ===================以上三个用于指定给构造函数中那个参数赋值=======================</span><br><span class="line">value：用于提供基本类型和String类型的数据</span><br><span class="line">ref：用于指定其他的bean类型数据，它指的就是在spring的ioc容器中出现过的bean对象</span><br></pre></td></tr></table></figure>
+
+
+
+<p>​    4.优势：<br>​        在获取bean对象时，注入数据是必须的操作，否则对象无法创建成功</p>
+<p>​    5.弊端：<br>​        改变了bean对象的实例化方式，是我们在创建对象时，如果用不到这些数据，也必须提供        </p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span> = <span class="string">"accountService"</span> <span class="attr">class</span>=<span class="string">"org.zhaoning.service.impl.AccountServiceImpl"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">value</span>=<span class="string">"test"</span>&gt;</span><span class="tag">&lt;/<span class="name">constructor-arg</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">"age"</span>  <span class="attr">value</span>=<span class="string">"18"</span>&gt;</span><span class="tag">&lt;/<span class="name">constructor-arg</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">"birthday"</span> <span class="attr">ref</span>=<span class="string">"now"</span>&gt;</span><span class="tag">&lt;/<span class="name">constructor-arg</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="4-2、set方式注入"><a href="#4-2、set方式注入" class="headerlink" title="4.2、set方式注入"></a>4.2、set方式注入</h2><p>（更常用的方式）</p>
+<ul>
+<li>依赖：bean对象的创建依赖于容器</li>
+<li>注入：bean对象中的所有属性，由容器来注入</li>
+</ul>
+<ol>
+<li><p>设计的标签：prpterty</p>
+</li>
+<li><p>出现的位置：bean标签内部</p>
+</li>
+<li><p>标签的属性：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">name：用于指定注入时所调用的set方法名称</span><br><span class="line">value：用于提供基本类型和String类型的数据</span><br><span class="line">ref：用于指定其他的bean类型数据，它指的就是在spring的ioc容器中出现过的bean对象</span><br></pre></td></tr></table></figure>
+
+<p>​</p>
+</li>
+<li><p>优势：创建对象时没有明确的限制，可以直接使用默认构造函数</p>
+</li>
+<li><p>弊端：如果有某个成员必须有值，则获取对象有可能set方法没有执行。</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span> = <span class="string">"accountService2"</span> <span class="attr">class</span>=<span class="string">"org.zhaoning.service.impl.AccountServiceImpl2"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">value</span>=<span class="string">"text"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"age"</span>  <span class="attr">value</span>=<span class="string">"21"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"birthday"</span> <span class="attr">ref</span>=<span class="string">"now"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<h2 id="4-3、复杂类型的注入-集合类型的注入"><a href="#4-3、复杂类型的注入-集合类型的注入" class="headerlink" title="4.3、复杂类型的注入/集合类型的注入"></a>4.3、复杂类型的注入/集合类型的注入</h2><p>用于给List结构集合注入的标签：</p>
+<ul>
+<li>list</li>
+<li>array</li>
+<li>set</li>
+</ul>
+<p>用于给Map结构集合注入的标签：</p>
+<ul>
+<li><p>map</p>
+</li>
+<li><p>props</p>
+<p>结构相同，标签可以互换</p>
+</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span> = <span class="string">"accountService3"</span> <span class="attr">class</span>=<span class="string">"org.zhaoning.service.impl.AccountServiceImpl3"</span>&gt;</span></span><br><span class="line"> 		<span class="comment">&lt;!-- 数组--&gt;</span> </span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"myStrs"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">array</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">value</span>&gt;</span>aaa<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">value</span>&gt;</span>bbb<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">value</span>&gt;</span>ccc<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">array</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- List--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"myList"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">list</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">value</span>&gt;</span>aaa<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">value</span>&gt;</span>bbb<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">value</span>&gt;</span>ccc<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">list</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">  		<span class="comment">&lt;!-- Set--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"mySet"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">set</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">value</span>&gt;</span>aaa<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">value</span>&gt;</span>bbb<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">value</span>&gt;</span>ccc<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">  		<span class="comment">&lt;!-- Map--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"myMap"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">map</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">entry</span> <span class="attr">key</span>=<span class="string">""</span> <span class="attr">value</span>=<span class="string">""</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">entry</span> <span class="attr">key</span>=<span class="string">""</span> <span class="attr">value</span>=<span class="string">""</span>&gt;</span></span><br><span class="line">                 <span class="tag">&lt;<span class="name">entry</span> <span class="attr">key</span>=<span class="string">""</span> <span class="attr">value</span>=<span class="string">""</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">map</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">          <span class="comment">&lt;!-- Properties--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"myPros"</span> &gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">props</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"driver"</span>&gt;</span>xxx <span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"url"</span>&gt;</span>xxx <span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"username"</span>&gt;</span>xxx <span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"password"</span>&gt;</span>xx <span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">props</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">          <span class="comment">&lt;!-- null --&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span> = <span class="string">"wife"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">null</span>/&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">              </span><br><span class="line">   <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-4、拓展"><a href="#4-4、拓展" class="headerlink" title="4.4、拓展"></a>4.4、拓展</h2><p>p命名和c命名</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span>&gt;</span> id = "" class = ""  p:属性="" p:属性=""<span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span>&gt;</span> id = "" class = ""  c:属性="" c:属性=""<span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>注意：使用p和c要导入xml约束</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">xmlns:c="http://www.springframeword.org/schema/c"</span><br><span class="line">xmlns:p="http://www.springframeword.org/schema/p"</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="5、Spring配置"><a href="#5、Spring配置" class="headerlink" title="5、Spring配置"></a>5、Spring配置</h1><h2 id="5-1、Bean的配置"><a href="#5-1、Bean的配置" class="headerlink" title="5.1、Bean的配置"></a>5.1、Bean的配置</h2><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--使用Spring来创建对象，在Spring这些都称为Bean</span></span><br><span class="line"><span class="comment">    类型 变量名 = new 类型();</span></span><br><span class="line"><span class="comment">    Hello hello = new Hello();</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    id = 变量名</span></span><br><span class="line"><span class="comment">	name:别名，可以同时取多个别名</span></span><br><span class="line"><span class="comment">    class = new 的对象</span></span><br><span class="line"><span class="comment">    property 相当于给对象中的属性设置一个值</span></span><br><span class="line"><span class="comment">--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"hello"</span> <span class="attr">class</span>=<span class="string">"com.zhaoning.pojo.Hello"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"str"</span> <span class="attr">value</span>=<span class="string">"Spring"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="5-2、import"><a href="#5-2、import" class="headerlink" title="5.2、import"></a>5.2、import</h2><p>将多个配置文件导入合并为一个</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">improt</span>&gt;</span> resource = "beans1.xml"/&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">improt</span>&gt;</span> resource = "beans2.xml"/&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">improt</span>&gt;</span> resource = "beans3.xml"/&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="6、bean的作用域"><a href="#6、bean的作用域" class="headerlink" title="6、bean的作用域"></a>6、bean的作用域</h1><p><img src="/2020/04/04/Spring/bean%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F.png" alt="bean的作用域"></p>
+<p>##6.1 单例模式（Spring默认机制）</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span>&gt;</span> id = "" class = ""  p:属性="" p:属性=""</span><br><span class="line">scope = "singleton"</span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>![bean的单例对象]./Spring/bean的单例对象.png)</p>
+<h2 id="6-2原型模式"><a href="#6-2原型模式" class="headerlink" title="6.2原型模式"></a>6.2原型模式</h2><p>每次从容器中get的时候，都会产生一个对象</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;bean&gt; id &#x3D; &quot;&quot; class &#x3D; &quot;&quot;  p:属性&#x3D;&quot;&quot; p:属性&#x3D;&quot;&quot;</span><br><span class="line">scope &#x3D; &quot;prototype&quot;</span><br><span class="line">&lt;&#x2F;bean&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/04/04/Spring/bean%E7%9A%84%E5%A4%9A%E4%BE%8B%E5%AF%B9%E8%B1%A1.png" alt="bean的多例对象"></p>
+<p>其余的request、session、application这些只能在web开发中使用到</p>
+<h1 id="7、Bean的自动装配"><a href="#7、Bean的自动装配" class="headerlink" title="7、Bean的自动装配"></a>7、Bean的自动装配</h1><ul>
+<li>自动装配时Spring满足bean依赖的一种方式</li>
+<li>Spring会在上下文中自动寻找，并自动给bean装配属性</li>
+</ul>
+<p>子Spring中有三种装配的方式</p>
+<ol>
+<li>在xml中显示的配置</li>
+<li>在java中显示配置</li>
+<li>隐式的自动装配bean【重要】</li>
+</ol>
+<h2 id="7-1-byName自动装配"><a href="#7-1-byName自动装配" class="headerlink" title="7.1 byName自动装配"></a>7.1 byName自动装配</h2><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- </span></span><br><span class="line"><span class="comment">byName:会自动在容器上下文中查找和自己对象set方法后面的值对应的bean id</span></span><br><span class="line"><span class="comment">--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span> = <span class="string">"people"</span> <span class="attr">class</span>=<span class="string">""</span> <span class="attr">autowire</span>=<span class="string">"byName"</span>&gt;</span></span><br><span class="line">  	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">value</span>=<span class="string">""</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="7-2byType自动装配"><a href="#7-2byType自动装配" class="headerlink" title="7.2byType自动装配"></a>7.2byType自动装配</h2><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- </span></span><br><span class="line"><span class="comment">bytype:会自动在容器上下文中查找和自己对象属性类型相同的bean</span></span><br><span class="line"><span class="comment">--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span> = <span class="string">"people"</span> <span class="attr">class</span>=<span class="string">""</span> <span class="attr">autowire</span>=<span class="string">"byType"</span>&gt;</span></span><br><span class="line">  	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">value</span>=<span class="string">""</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>小结：</p>
+<ul>
+<li><p>byName的时候，需要保证所有bean的id唯一，并且这个bean需要和自动注入的属性的set方法的值一致</p>
+</li>
+<li><p>byType的时候，需要保证所有bean的class唯一，并且这个bean需要和自动注入的属性的类型一致</p>
+<p>​</p>
+</li>
+</ul>
+<h2 id="7-4使用注解实现自动装配"><a href="#7-4使用注解实现自动装配" class="headerlink" title="7.4使用注解实现自动装配"></a>7.4使用注解实现自动装配</h2><ol>
+<li><p>导入约束：context约束</p>
+</li>
+<li><p>配置注解的支持：<a href="context:annotation-config/">context:annotation-config/</a></p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:context</span>=<span class="string">"http://www.springframework.org/schema/context"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="tag"><span class="string">        https://www.springframework.org/schema/beans/spring-beans.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/context</span></span></span><br><span class="line"><span class="tag"><span class="string">        https://www.springframework.org/schema/context/spring-context.xsd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">context:annotation-config</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+</li>
+</ol>
+<p><strong>注解</strong></p>
+<ol>
+<li><p>@Autowired</p>
+<p>直接在属性上使用即可，也可以在set方式上使用</p>
+<p>使用Autowired我们可以不用编写set方法，前提是你这个自动装配的属性在IOC容器中存在，且符合byname</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Nullable	字段标记了这个注解，说明这个字段可以为null</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">people</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> Cat cat;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Dog dog;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCat1</span><span class="params">(Cat cat)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.cat = cat;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setDog1</span><span class="params">(Dog dog)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.dog = dog;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>如果@Autowired自动装配的环境比较复杂，自动装配无法通过一个注解完成的时候，我们可以使用@Qualifier(value=”xxx”)    去配合@Autowired使用，指定一个唯一的bean对象注入</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Autowired</span><br><span class="line">@Qualifier(value&#x3D;&quot;cattt&quot;)</span><br><span class="line">private Cat cat;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>@resource注解和@Autowired实现的功能相同</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@resource</span></span><br><span class="line"><span class="keyword">private</span> Cat cat;</span><br><span class="line"><span class="meta">@resource</span>(name=<span class="string">"doggg"</span>)</span><br><span class="line"><span class="keyword">private</span> Dog dog;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="8、使用注解开发"><a href="#8、使用注解开发" class="headerlink" title="8、使用注解开发"></a>8、使用注解开发</h1><ol>
+<li>要保证aop的包导入了</li>
+<li>使用注解需要导入context约束，增加注解的支持</li>
+</ol>
+<p><strong>注解</strong></p>
+<ul>
+<li><p>@Component：组件，放在类上，说明这个类被Spring管理了，就是bean</p>
+<ul>
+<li><p>dao  【@Repository】</p>
+</li>
+<li><p>service 【@Service】</p>
+</li>
+<li><p>controller 【@Controller】</p>
+<p>这四个注解功能相同，将某个类</p>
+</li>
+</ul>
+</li>
+<li><p>@Value(“属性名”)：放在属性或set方法上，相当于<code>&lt;property name=&quot;name&quot; value=&quot;赵凝&quot;&gt;</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//@Value("赵凝")</span></span><br><span class="line">    <span class="keyword">public</span> String name;</span><br><span class="line">    <span class="meta">@Value</span>(<span class="string">"赵凝"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>@Scope(“singleton”)  单例</p>
+<p>@Scope(“prototype “)  多例</p>
+</li>
+</ul>
+<ol start="4">
+<li>自动装配</li>
+<li>作用域</li>
+<li>小结：<ul>
+<li>xml与注解<ul>
+<li>xml更加万能，是用于任何场合！维护简单方便</li>
+<li>注解不是自己类使用不了，维护相对复杂</li>
+</ul>
+</li>
+<li>xml与注解最佳实践：<ul>
+<li>xml用来管理bean</li>
+<li>注解只负责完成属性的注入</li>
+<li>我们在使用的过程中，只需要注意一个问题：必须让注解生效，开启注解的支持</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>后端</category>
+      </categories>
+      <tags>
+        <tag>Spring</tag>
+      </tags>
+  </entry>
+</search>
