@@ -1,89 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>AJAX</title>
-    <url>/2020/04/02/AJAX/</url>
-    <content><![CDATA[<h1 id="AJAX"><a href="#AJAX" class="headerlink" title="AJAX"></a>AJAX</h1><p>三部曲：</p>
+    <title>JQuery</title>
+    <url>/2020/04/02/JQuery/</url>
+    <content><![CDATA[<h1 id="JQuery"><a href="#JQuery" class="headerlink" title="JQuery"></a>JQuery</h1><p>先下载JQuery文件<br>在引入项目</p>
+<p><code>注意</code>：<strong>在事件响应的function函数中，有个一this对象，这个this对象是当前正在响应事件的dom对象</strong></p>
+<p>一，$</p>
 <ol>
-<li>编写对应处理的Controller，返回消息或者字符串或者json格式的数据；</li>
-<li>编写ajax请求<ol>
-<li>url ：Controller请求</li>
-<li>data ：键值对</li>
-<li>success ：回调函数</li>
+<li><p><strong>传入参数为【函数】时</strong> ：<br>在文档加载完成后执行这个函数。<br>相当于window.onload()=function(){}</p>
+</li>
+<li><p><strong>传入参数为【HTML字符串】时：</strong><br>会帮我们创建这个html标签对象</p>
+</li>
+<li><p><strong>传入参数为【选择器字符串】时：</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$&#123;&quot;#id属性值&quot;&#125;	id选择器，根据id查询标签对象</span><br><span class="line">$&#123;&quot;标签名&quot;&#125;	标签名选择器，根据指定的标签名查询标签对象</span><br><span class="line">$&#123;&quot;.class&quot;&#125;		类型选择器，可以根据class属性查询标签对象</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>传入参数为【DOM对象】时：</strong><br>会把这个dom对象转换为JQuery对象</p>
+</li>
+</ol>
+<hr>
+<p>二，jQuery对象和dom对象区分  </p>
+<ol>
+<li><p>Dom对象  </p>
+<ol start="2">
+<li>通过getElementById()查询出来的标签对象是Dom对象</li>
+<li>通过getElementByName()查询出来的标签对象是Dom对象</li>
+<li>通过getElementByTagName()查询出来的标签对象是Dom对象</li>
+<li>通过createElement()方法创建的对象，是Dom对象<br><code>DOM对象Alert出来的效果是：[object HTML标签名Element]</code>  </li>
 </ol>
 </li>
-<li>给Ajax绑定事件，点击，失去焦点，键盘弹起</li>
+<li><p>JQuery对象  </p>
+<ol start="7">
+<li>通过JQuery提供的API创建的对象</li>
+<li>通过JQuery包装的DOM对象</li>
+<li>通过JQuery提供的API查询到的对象<br><code>JQuery对象Alert出来的效果的：[object，object]</code></li>
 </ol>
-<h2 id="注意-：使用JQuery需要导入JQuery文件。"><a href="#注意-：使用JQuery需要导入JQuery文件。" class="headerlink" title="==注意==：使用JQuery需要导入JQuery文件。"></a>==注意==：使用JQuery需要导入JQuery文件。</h2><h2 id="具体实现步骤"><a href="#具体实现步骤" class="headerlink" title="具体实现步骤"></a>具体实现步骤</h2><p>一 ，Controller部分</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/ajax"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AjaxController</span> </span>&#123;</span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/a1"</span>)</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ajax</span><span class="params">(String name, HttpServletResponse response)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="string">"admin"</span>.equals(name))&#123;</span><br><span class="line">            response.getWriter().print(<span class="string">"true"</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            response.getWriter().print(<span class="string">"false"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>二 ，ajax请求以及绑定事件</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">%@</span> <span class="attr">page</span> <span class="attr">contentType</span>=<span class="string">"text/html;charset=UTF-8"</span> <span class="attr">language</span>=<span class="string">"java"</span> %&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"js/jquery-3.4.1.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">a1</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">        <span class="comment">//参数：</span></span></span><br><span class="line"><span class="actionscript">        <span class="comment">//      url:待载入页面的url地址（必填）</span></span></span><br><span class="line"><span class="actionscript">        <span class="comment">//      data：待发送Key/value参数</span></span></span><br><span class="line"><span class="actionscript">        <span class="comment">//      success：载入成功时回调函数</span></span></span><br><span class="line"><span class="actionscript">        <span class="comment">//      status：请求返回的状态</span></span></span><br><span class="line"><span class="javascript">        $.ajax(&#123;</span></span><br><span class="line"><span class="actionscript">            url:<span class="string">"ajax/a1"</span>,</span></span><br><span class="line"><span class="javascript">            data:&#123;<span class="string">"name"</span>:$(<span class="string">"#txtName"</span>).val()&#125;,</span></span><br><span class="line"><span class="actionscript">            success:<span class="function"><span class="keyword">function</span> <span class="params">(data)</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">                <span class="built_in">console</span>.log(data);</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    用户名：</span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"txtName"</span> <span class="attr">onblur</span>=<span class="string">"a1()"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p><strong>简洁的ajax请求方法</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function a1() &#123;</span><br><span class="line"></span><br><span class="line">     $.ajax(&quot;url&quot;,&quot;传入的参数&quot;,function(回来的参数)&#123;</span><br><span class="line">         </span><br><span class="line">       &#125;);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>JQuery对象本质dom对象的数组+JQuery提供的一系列功能函数。</p>
+</li>
+<li><p>JQuery对象和DOM对象使用区别</p>
+<pre><code>JQuery对象不能使用DOM对象的属性和方法 
+DOM对象也不能使用JQuery对象的属性和方法</code></pre></li>
+<li><p>DOM对象和JQuery对象互转<br>​    </p>
+<ol>
+<li><p>dom对象转化为JQuery对象    （*）</p>
+<ol>
+<li><p>先有dom对象</p>
+</li>
+<li><p>${DOM对象} 就可以转换成为JQuery对象</p>
+<p>​</p>
+<ol start="2">
+<li>JQuery对象转化为dom对象（*）</li>
+</ol>
+<p>i，现有JQuery对象<br>ii，JQuery对象[下标]取出相应的dom对象</p>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p>三，JQuery选择器（<strong>**</strong>重点）</p>
+<ol>
+<li><p>基础选择器（和css样式选择器差不多）<br> $(“”)</p>
+</li>
+<li><p>层级选择器</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">i，在给定祖先元素下匹配所有的后代元素</span><br><span class="line">	     $(&quot;ancestor descendant&quot;)</span><br><span class="line">ii，在给定的父元素下匹配所有的子元素</span><br><span class="line">	     $(&quot;parent &gt;child&quot;)</span><br><span class="line">iii，匹配所有紧接在prev元素后的next元素(同级)</span><br><span class="line">	     $(&quot;prev + next&quot;)</span><br><span class="line">iv，匹配prev元素之后的所有siblings元素（同级）</span><br><span class="line">	     $(&quot;prev ~ siblings&quot;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>过滤选择器<br> <strong>基本</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">i，选择第一个元素</span><br><span class="line">      $(&quot;xxx :first&quot;)</span><br><span class="line">i，选择最后一个元素</span><br><span class="line">      $(&quot;xxx :last&quot;)</span><br><span class="line">i，去除所有与给定选择器匹配的元素</span><br><span class="line">      $(&quot;xxx:not(select)&quot;)</span><br><span class="line">i，匹配所有索引值为偶数的元素，从0开始计数</span><br><span class="line">      $(&quot;xxx:even&quot;)</span><br><span class="line">i，匹配所有索引值为奇数的元素，从0开始计数</span><br><span class="line">      $(&quot;xxx:odd&quot;)	</span><br><span class="line">i，匹配一个给定索引值的元素</span><br><span class="line">      $(&quot;xxx:eq(index)&quot;)</span><br><span class="line">i，匹配所有大于给定索引值的元素</span><br><span class="line">      $(&quot;xxx:gt(index)&quot;)</span><br><span class="line">i，匹配所有小于给定索引值的元素</span><br><span class="line">      $(&quot;xxx:Lt(index)&quot;)</span><br><span class="line">i，匹配所有标题元素</span><br><span class="line">      $(&quot;:header&quot;)</span><br><span class="line">i，匹配所有正在执行动画的元素</span><br><span class="line">      $(&quot;:animated&quot;)</span><br></pre></td></tr></table></figure>
+
+<pre><code>**内容**</code></pre><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">i，匹配包含给定文本的元素</span><br><span class="line">    $(&quot;xxx:contains(text)&quot;)</span><br><span class="line">i，匹配所有不包含子元素或者文本的空元素</span><br><span class="line">    $(&quot;xxx:empty&quot;)</span><br><span class="line">i，匹配含有子元素或者文本的元素</span><br><span class="line">    $(&quot;xxx:parent&quot;)</span><br><span class="line">i，匹配含有选择器所匹配的元素的元素</span><br><span class="line">    $(&quot;xxx:has(selector)&quot;)</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+<pre><code>**属性**  </code></pre> <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">i，匹配包含给定属性的元素</span><br><span class="line">    $(&quot;xxx[attribute]&quot;)</span><br><span class="line">i，匹配给定的属性是某个特定值的元素</span><br><span class="line">    $(&quot;xxx[attribute&#x3D;value]&quot;)	</span><br><span class="line">i，匹配所有不含有指定的属性或者属性不等于特定值的元素</span><br><span class="line">    $(&quot;xxx[attribute!&#x3D;value]&quot;)</span><br><span class="line">i，匹配给定的属性是以某些值开始的元素</span><br><span class="line">    $(&quot;xxx[attribute^&#x3D;value]&quot;)</span><br><span class="line">i，匹配给定的属性是以某些值结尾的元素</span><br><span class="line">    $(&quot;xxx[attribute$&#x3D;value]&quot;)</span><br><span class="line">i，匹配给定的属性是以包含某些值的元素</span><br><span class="line">    $(&quot;xxx[attribute*&#x3D;value]&quot;)</span><br><span class="line">i，复合属性选择器，需要同时满足多个条件</span><br><span class="line">    $(&quot;[][][]&quot;)</span><br></pre></td></tr></table></figure>
+<pre><code>**表单**  </code></pre> <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">i，匹配所有input，textarea，select和button源元素</span><br><span class="line">      :input</span><br><span class="line">i，匹配type是text类型</span><br><span class="line">      :text</span><br><span class="line">i，匹配type是password类型</span><br><span class="line">      :password</span><br><span class="line">i，匹配type是radio类型</span><br><span class="line">      :radio</span><br><span class="line">i，匹配type是checkbox类型</span><br><span class="line">      :checkbox</span><br><span class="line">i，匹配type是submit类型</span><br><span class="line">      :submit</span><br><span class="line">i，匹配type是reset类型（重置）</span><br><span class="line">      :reset</span><br><span class="line">i，匹配type是button类型</span><br><span class="line">      :button</span><br><span class="line">i，匹配type是file类型</span><br><span class="line">      :file</span><br><span class="line">i，匹配type是hidden类型(隐藏起来的)</span><br><span class="line">      :hidden</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">i，匹配能用的表单元素</span><br><span class="line">      :enabled</span><br><span class="line">i，匹配不能用的表单元素</span><br><span class="line">      :disabled</span><br><span class="line">i，匹配已经选中的表单元素</span><br><span class="line">      :checked</span><br><span class="line">i，匹配所有选中的option元素</span><br><span class="line">		 :selected</span><br></pre></td></tr></table></figure>
 
 <hr>
-<p><strong>ajax的请求方式</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. $.ajax() 默认是get请求。</span><br><span class="line">2. $.get()  get请求</span><br><span class="line">3. $.post() post请求</span><br></pre></td></tr></table></figure>
+<p>四，<br>JQuery方法</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.val()可以操作表单项的value属性值，他可以设置和获取</span><br><span class="line">.each(function（alert（this））&#123;&#125;) 遍历元素的方法，this对象，就是当前遍历到的dom对象</span><br><span class="line">.css(&quot;属性名&quot;，属性值)，增加样式</span><br></pre></td></tr></table></figure>
+<p>JQuery函数</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">confirm() 是JavaScript语言提供的一个确认提示框函数，传什么就提示什么，</span><br><span class="line">    当用户点击了确定，返回true，用户点击了取消，返回false</span><br><span class="line">find()	查找后代</span><br></pre></td></tr></table></figure>
+<hr>
+<p>五，<br>JQuery属性操作<br> <strong>不传参数是获取，传入参数是设置</strong>   </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">html()	它可以设置和获取起始标签和结束标签中的内容，和innerHTML一样  </span><br><span class="line">text()	它可以设置和获取起始标签和结束标签中的文本，和innerText一样  </span><br><span class="line">val()	它可以设置和获取表单项的value属性值	和value一样，还可以操作选中状态</span><br><span class="line">attr()	可以设置和获取属性的值，不推荐操作checked,readOnly,selected,disabked等等</span><br><span class="line">prop()	可以设置和获取属性的值，只推荐操作checked,readOnly,selected,disabked等等</span><br></pre></td></tr></table></figure>
+<p>六，DOM增删改</p>
+<pre><code>内部插入：
+    appendTo()    a.appendTo(b)    把a插入到b子元素末尾，成为最后一个子元素
+    prependTo()    a.prependTo(b)    把a插到b所有子元素前面，成为第一个子元素
+
+
+外部插入：
+    insertAfter()    a.insertfter(b)    得到ba
+    insertBefore()    a.insertBefore(b)    得到ab
+
+替换：
+    replaceWith()    a.replaceWith(b)    用b替换掉a
+    replaceAll()    a.replaceAll(b)    用a替换掉所有b
+
+删除：
+    remove()        a.remove()    删除a标签
+    empty()        a.empty()        清空a标签里面的内容</code></pre><p>七，css样式操作</p>
+<pre><code>addClass()    添加样式
+removeClass()    删除样式
+toggleClass()    有就删除，没有就添加样式
+offset()        获取和设置元素的坐标
+        设置
+            JQuery对象.offset({
+                top:100,
+                left:50
+            });</code></pre><p>八，JQuery动画</p>
+<pre><code>基本动画
+    show()    将隐藏的元素显示
+    hide()    将可见的元素隐藏
+    toggle()    可见就隐藏，隐藏就可见
+
+        以上动画方法都可以添加参数：
+            1，第一个参数是动画执行的时长，以毫秒为单位
+            2，第二个参数是动画的回调函数（动画完成后自动调用的函数）    
 
 
 
+淡入淡出动画
+
+    fadeIn()        淡入
+    fadeOut()        淡出
+    fadeTo()        在指定时长内慢慢的将透明度修改到指定的值，0透明，1完全可见    
+    fadeToggle()    淡入/淡出  切换</code></pre><p>九，JQuery事件操作<br>​<br>    $(function(){});<br>    和<br>    window.onload=function(){};<br>    的区别</p>
+<pre><code>他们分别在什么时候触发？
+1. JQuery的页面加载完成之后是浏览器的内核解析完页面的标签创建好DOM对象之后就会马上执行。
+2. 原生js的页面加载完成以后，除了等浏览器的内核解析完页面的标签创建好DOM对象，还要等标签显示时需要的内容加载完成。
 
 
+他们执行的次数？
 
-
-
-
-
-
-
-
-
-
-
-
-]]></content>
+    1，原生js的页面加载完成之后，只会执行最后一次的赋值函数
+    2，JQuery的页面加载完成之后是全部把注册的function函数，依次顺序全部执行。</code></pre><p>​<br>    JQuery中其他事件处理方法</p>
+<pre><code>click()        它可以绑定单机事件，以及触发单击事件
+mouseover()    鼠标移入事件
+mouseout()    鼠标移出事件
+bind()        可以给元素一次性绑定一个或多个事件
+one()        使用上跟bind一样，但是one方法绑定的事件只会响应一次
+unbind()        跟bind方法相反的操作，接触事件的绑定
+live()        也是用来绑定事件，它可以用来绑定选择器匹配的所有元素的事件，
+        哪怕这个元素是后面动态创建出来的。</code></pre>]]></content>
       <categories>
         <category>前端</category>
       </categories>
       <tags>
-        <tag>Ajax</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JSON</title>
-    <url>/2020/04/04/JSON/</url>
-    <content><![CDATA[<h1 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h1><p><strong>是一种轻量级的数据交换格式，目前使用特别广泛</strong><br><strong>采用完全独立于标称语言的文本格式来存储和表示数据。简洁和清晰的层次结构使得JSON成为理想的数据交换语言。</strong>  </p>
-<p>  在js语言中，一切都是对象。因此，任何js支持通过json来表示，语法要求和语法格式如下:</p>
-<ul>
-<li>对象表示为键值对</li>
-<li>数据由逗号分隔  </li>
-<li>花括号保存对象  </li>
-<li>方括号保存数组  </li>
-</ul>
-<p><strong>JSON键值对</strong>是用来保存js对象的一种方式，和js对象的写法也大同小异，键值对的健名写在前面，用双引号<code>&quot;&quot;</code>包裹，使用冒号<code>:</code>分隔，然后紧接着值：  </p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;&quot;name&quot; : &quot;QinJiang&quot;&#125; </span><br><span class="line">&#123;&quot;age&quot;  : &quot;3&quot;&#125;</span><br><span class="line">&#123;&quot;sex&quot;  : &quot;男&quot;&#125;</span><br></pre></td></tr></table></figure>
-
-<p>可以理解为:<br>JSON是JS对象的字符串表示法，它使用文本表示一个JS对象的信息，本质是一个字符串</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var obj &#x3D; &#123;a:&#39;Hello&#39;,b:&#39;Wordl&#39;&#125;;  &#x2F;&#x2F;这是一个对象，注意健名也是可以使用引号包裹的  </span><br><span class="line">var json &#x3D; &#39;&#123;&quot;a&quot;:&quot;Hello&quot;,&quot;b&quot;:&quot;World&quot;&#125;&#39;;  &#x2F;&#x2F;这是一个json字符串，本质是一个字符串</span><br></pre></td></tr></table></figure>
-<p><strong>JSON和JS对象互转</strong><br>要实现从JSON字符串转换为JS对象，使用JSON.parse()方法：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var obj &#x3D; JSON.parse(&#39;&#123;&quot;a&quot;:&quot;Hello&quot;,&quot;b&quot;:&quot;World&quot;&#125;&#39;)&#x2F;&#x2F;结果是&#123;a:&#39;Hello&#39;,b:&#39;World&#39;&#125;</span><br></pre></td></tr></table></figure>
-<p>要实现从JS对象转化为JSON字符串，使用JSON.stringify()方法：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var json &#x3D; JSON.stringify(&#123;a:&#39;Hello&#39;,b:&#39;World&#39;&#125;);&#x2F;&#x2F;结果是&#39;&#123;&quot;a&quot;:&quot;Hello&quot;,&quot;b&quot;:&quot;World&quot;&#125;&#39;</span><br></pre></td></tr></table></figure>
-<h2 id="Java转换JSON"><a href="#Java转换JSON" class="headerlink" title="Java转换JSON"></a>Java转换JSON</h2><p><strong>普通javaBean对象转换成JSON</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//    思考问题，我们正常返回他会走视图解析器，而json需要返回的是一个字符串;</span></span><br><span class="line"><span class="comment">//    市面上有很多的jar包可以实现这个功能，jackson，只需要一个简单的注解就可以实现了；</span></span><br><span class="line"><span class="comment">//  @ResponseBody,将服务器端返回的对象转换为json对象响应回去。</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/json1"</span>)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">json1</span><span class="params">()</span> <span class="keyword">throws</span> JsonProcessingException </span>&#123;</span><br><span class="line"><span class="comment">//        需要一个jackson的对象映射器，就是一个类，使用它可以直接将对象转换为json字符串；</span></span><br><span class="line">        ObjectMapper mapper = <span class="keyword">new</span> ObjectMapper();</span><br><span class="line"></span><br><span class="line"><span class="comment">//        创建一个对象</span></span><br><span class="line">        User user = <span class="keyword">new</span> User(<span class="string">"秦疆1号"</span>,<span class="number">1</span>,<span class="string">"男"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//       将java对象转换为json字符串；</span></span><br><span class="line">        String str = mapper.writeValueAsString(user);</span><br><span class="line"><span class="comment">//        由于使用了@ResponseBody注解，这里会将str以json格式的字符串返回，十分方便</span></span><br><span class="line">        <span class="keyword">return</span> str;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p><strong>List数组转换成JSON</strong>  </p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(value=<span class="string">"/json3"</span>)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">json3</span><span class="params">()</span> <span class="keyword">throws</span> JsonProcessingException </span>&#123;</span><br><span class="line">        ObjectMapper mapper = <span class="keyword">new</span> ObjectMapper();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        List&lt;User&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        User user1 = <span class="keyword">new</span> User(<span class="string">"秦疆1"</span>,<span class="number">11</span>,<span class="string">"男"</span>);</span><br><span class="line">        User user2 = <span class="keyword">new</span> User(<span class="string">"秦疆2"</span>,<span class="number">22</span>,<span class="string">"男"</span>);</span><br><span class="line">        User user3 = <span class="keyword">new</span> User(<span class="string">"秦疆3"</span>,<span class="number">33</span>,<span class="string">"男"</span>);</span><br><span class="line">        User user4 = <span class="keyword">new</span> User(<span class="string">"秦疆4"</span>,<span class="number">44</span>,<span class="string">"男"</span>);</span><br><span class="line">        list.add(user1);</span><br><span class="line">        list.add(user2);</span><br><span class="line">        list.add(user3);</span><br><span class="line">        list.add(user4);</span><br><span class="line">        String str = mapper.writeValueAsString(list);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> str;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>用了上面的方法会出现中文乱码，用下面方法可以解决</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@RequestMapping的produces属性可以解决</span><br><span class="line">produces：指定响应体返回类型和编码</span><br><span class="line">@RequestMapping(value&#x3D;&quot;&#x2F;json1&quot;,produces&#x3D;&quot;text&#x2F;html;charset&#x3D;UTF-8&quot;)</span><br></pre></td></tr></table></figure>
-<p>有一种一劳永逸的方法：配置SpringMVC.xml文件</p>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;mvc:annotation-driven &gt;</span><br><span class="line">       &lt;mvc:message-converters register-defaults=<span class="string">"true"</span>&gt;</span><br><span class="line">           &lt;bean <span class="class"><span class="keyword">class</span></span>=<span class="string">"org.springframework.http.converter.StringHttpMessageConverter"</span>&gt;</span><br><span class="line">               &lt;constructor-arg value=<span class="string">"UTF-8"</span>/&gt;</span><br><span class="line">           &lt;/bean&gt;</span><br><span class="line">           &lt;bean <span class="class"><span class="keyword">class</span></span>=<span class="string">"org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"</span>&gt;</span><br><span class="line">               &lt;property name=<span class="string">"objectMapper"</span>&gt;</span><br><span class="line">                   &lt;bean <span class="class"><span class="keyword">class</span></span>=<span class="string">"org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean"</span>&gt;</span><br><span class="line">                       &lt;property name=<span class="string">"failOnEmptyBeans"</span> value=<span class="string">"false"</span>/&gt;</span><br><span class="line">                   &lt;/bean&gt;</span><br><span class="line">               &lt;/property&gt;</span><br><span class="line">           &lt;/bean&gt;</span><br><span class="line">       &lt;/mvc:message-converters&gt;</span><br><span class="line">   &lt;/mvc:annotation-driven&gt;</span><br></pre></td></tr></table></figure>
-<p>返回时间</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(value=<span class="string">"/json5"</span>)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">json5</span><span class="params">()</span> <span class="keyword">throws</span> JsonProcessingException </span>&#123;</span><br><span class="line">        ObjectMapper mapper = <span class="keyword">new</span> ObjectMapper();</span><br><span class="line"><span class="comment">//        1，如何让他不返回时间戳，我们要关闭时间戳功能</span></span><br><span class="line">        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS,<span class="keyword">false</span>);</span><br><span class="line"><span class="comment">//        时间格式化问题，自定义日期格式对象</span></span><br><span class="line">        SimpleDateFormat simpleDateFormat = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyy-MM-dd HH:mm:ss"</span>);</span><br><span class="line"><span class="comment">//        让mapper指定使劲按日期格式对象</span></span><br><span class="line">        mapper.setDateFormat(simpleDateFormat);</span><br><span class="line"><span class="comment">//        写一个日期对象</span></span><br><span class="line">        Date date = <span class="keyword">new</span> Date();</span><br><span class="line">        <span class="keyword">return</span> mapper.writeValueAsString(date);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>JSON</tag>
+        <tag>JQuery</tag>
       </tags>
   </entry>
   <entry>
@@ -628,153 +692,89 @@ return &quot;redirect:/index.jsp&quot;</code></pre><p>  ​</p>
       </tags>
   </entry>
   <entry>
-    <title>JQuery</title>
-    <url>/2020/04/02/JQuery/</url>
-    <content><![CDATA[<h1 id="JQuery"><a href="#JQuery" class="headerlink" title="JQuery"></a>JQuery</h1><p>先下载JQuery文件<br>在引入项目</p>
-<p><code>注意</code>：<strong>在事件响应的function函数中，有个一this对象，这个this对象是当前正在响应事件的dom对象</strong></p>
-<p>一，$</p>
+    <title>AJAX</title>
+    <url>/2020/04/02/AJAX/</url>
+    <content><![CDATA[<h1 id="AJAX"><a href="#AJAX" class="headerlink" title="AJAX"></a>AJAX</h1><p>三部曲：</p>
 <ol>
-<li><p><strong>传入参数为【函数】时</strong> ：<br>在文档加载完成后执行这个函数。<br>相当于window.onload()=function(){}</p>
-</li>
-<li><p><strong>传入参数为【HTML字符串】时：</strong><br>会帮我们创建这个html标签对象</p>
-</li>
-<li><p><strong>传入参数为【选择器字符串】时：</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$&#123;&quot;#id属性值&quot;&#125;	id选择器，根据id查询标签对象</span><br><span class="line">$&#123;&quot;标签名&quot;&#125;	标签名选择器，根据指定的标签名查询标签对象</span><br><span class="line">$&#123;&quot;.class&quot;&#125;		类型选择器，可以根据class属性查询标签对象</span><br></pre></td></tr></table></figure></li>
-<li><p><strong>传入参数为【DOM对象】时：</strong><br>会把这个dom对象转换为JQuery对象</p>
-</li>
-</ol>
-<hr>
-<p>二，jQuery对象和dom对象区分  </p>
-<ol>
-<li><p>Dom对象  </p>
-<ol start="2">
-<li>通过getElementById()查询出来的标签对象是Dom对象</li>
-<li>通过getElementByName()查询出来的标签对象是Dom对象</li>
-<li>通过getElementByTagName()查询出来的标签对象是Dom对象</li>
-<li>通过createElement()方法创建的对象，是Dom对象<br><code>DOM对象Alert出来的效果是：[object HTML标签名Element]</code>  </li>
+<li>编写对应处理的Controller，返回消息或者字符串或者json格式的数据；</li>
+<li>编写ajax请求<ol>
+<li>url ：Controller请求</li>
+<li>data ：键值对</li>
+<li>success ：回调函数</li>
 </ol>
 </li>
-<li><p>JQuery对象  </p>
-<ol start="7">
-<li>通过JQuery提供的API创建的对象</li>
-<li>通过JQuery包装的DOM对象</li>
-<li>通过JQuery提供的API查询到的对象<br><code>JQuery对象Alert出来的效果的：[object，object]</code></li>
+<li>给Ajax绑定事件，点击，失去焦点，键盘弹起</li>
 </ol>
-</li>
-<li><p>JQuery对象本质dom对象的数组+JQuery提供的一系列功能函数。</p>
-</li>
-<li><p>JQuery对象和DOM对象使用区别</p>
-<pre><code>JQuery对象不能使用DOM对象的属性和方法 
-DOM对象也不能使用JQuery对象的属性和方法</code></pre></li>
-<li><p>DOM对象和JQuery对象互转<br>​    </p>
-<ol>
-<li><p>dom对象转化为JQuery对象    （*）</p>
-<ol>
-<li><p>先有dom对象</p>
-</li>
-<li><p>${DOM对象} 就可以转换成为JQuery对象</p>
-<p>​</p>
-<ol start="2">
-<li>JQuery对象转化为dom对象（*）</li>
-</ol>
-<p>i，现有JQuery对象<br>ii，JQuery对象[下标]取出相应的dom对象</p>
-</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-<p>三，JQuery选择器（<strong>**</strong>重点）</p>
-<ol>
-<li><p>基础选择器（和css样式选择器差不多）<br> $(“”)</p>
-</li>
-<li><p>层级选择器</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">i，在给定祖先元素下匹配所有的后代元素</span><br><span class="line">	     $(&quot;ancestor descendant&quot;)</span><br><span class="line">ii，在给定的父元素下匹配所有的子元素</span><br><span class="line">	     $(&quot;parent &gt;child&quot;)</span><br><span class="line">iii，匹配所有紧接在prev元素后的next元素(同级)</span><br><span class="line">	     $(&quot;prev + next&quot;)</span><br><span class="line">iv，匹配prev元素之后的所有siblings元素（同级）</span><br><span class="line">	     $(&quot;prev ~ siblings&quot;)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>过滤选择器<br> <strong>基本</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">i，选择第一个元素</span><br><span class="line">      $(&quot;xxx :first&quot;)</span><br><span class="line">i，选择最后一个元素</span><br><span class="line">      $(&quot;xxx :last&quot;)</span><br><span class="line">i，去除所有与给定选择器匹配的元素</span><br><span class="line">      $(&quot;xxx:not(select)&quot;)</span><br><span class="line">i，匹配所有索引值为偶数的元素，从0开始计数</span><br><span class="line">      $(&quot;xxx:even&quot;)</span><br><span class="line">i，匹配所有索引值为奇数的元素，从0开始计数</span><br><span class="line">      $(&quot;xxx:odd&quot;)	</span><br><span class="line">i，匹配一个给定索引值的元素</span><br><span class="line">      $(&quot;xxx:eq(index)&quot;)</span><br><span class="line">i，匹配所有大于给定索引值的元素</span><br><span class="line">      $(&quot;xxx:gt(index)&quot;)</span><br><span class="line">i，匹配所有小于给定索引值的元素</span><br><span class="line">      $(&quot;xxx:Lt(index)&quot;)</span><br><span class="line">i，匹配所有标题元素</span><br><span class="line">      $(&quot;:header&quot;)</span><br><span class="line">i，匹配所有正在执行动画的元素</span><br><span class="line">      $(&quot;:animated&quot;)</span><br></pre></td></tr></table></figure>
-
-<pre><code>**内容**</code></pre><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">i，匹配包含给定文本的元素</span><br><span class="line">    $(&quot;xxx:contains(text)&quot;)</span><br><span class="line">i，匹配所有不包含子元素或者文本的空元素</span><br><span class="line">    $(&quot;xxx:empty&quot;)</span><br><span class="line">i，匹配含有子元素或者文本的元素</span><br><span class="line">    $(&quot;xxx:parent&quot;)</span><br><span class="line">i，匹配含有选择器所匹配的元素的元素</span><br><span class="line">    $(&quot;xxx:has(selector)&quot;)</span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ol>
-<pre><code>**属性**  </code></pre> <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">i，匹配包含给定属性的元素</span><br><span class="line">    $(&quot;xxx[attribute]&quot;)</span><br><span class="line">i，匹配给定的属性是某个特定值的元素</span><br><span class="line">    $(&quot;xxx[attribute&#x3D;value]&quot;)	</span><br><span class="line">i，匹配所有不含有指定的属性或者属性不等于特定值的元素</span><br><span class="line">    $(&quot;xxx[attribute!&#x3D;value]&quot;)</span><br><span class="line">i，匹配给定的属性是以某些值开始的元素</span><br><span class="line">    $(&quot;xxx[attribute^&#x3D;value]&quot;)</span><br><span class="line">i，匹配给定的属性是以某些值结尾的元素</span><br><span class="line">    $(&quot;xxx[attribute$&#x3D;value]&quot;)</span><br><span class="line">i，匹配给定的属性是以包含某些值的元素</span><br><span class="line">    $(&quot;xxx[attribute*&#x3D;value]&quot;)</span><br><span class="line">i，复合属性选择器，需要同时满足多个条件</span><br><span class="line">    $(&quot;[][][]&quot;)</span><br></pre></td></tr></table></figure>
-<pre><code>**表单**  </code></pre> <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">i，匹配所有input，textarea，select和button源元素</span><br><span class="line">      :input</span><br><span class="line">i，匹配type是text类型</span><br><span class="line">      :text</span><br><span class="line">i，匹配type是password类型</span><br><span class="line">      :password</span><br><span class="line">i，匹配type是radio类型</span><br><span class="line">      :radio</span><br><span class="line">i，匹配type是checkbox类型</span><br><span class="line">      :checkbox</span><br><span class="line">i，匹配type是submit类型</span><br><span class="line">      :submit</span><br><span class="line">i，匹配type是reset类型（重置）</span><br><span class="line">      :reset</span><br><span class="line">i，匹配type是button类型</span><br><span class="line">      :button</span><br><span class="line">i，匹配type是file类型</span><br><span class="line">      :file</span><br><span class="line">i，匹配type是hidden类型(隐藏起来的)</span><br><span class="line">      :hidden</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">i，匹配能用的表单元素</span><br><span class="line">      :enabled</span><br><span class="line">i，匹配不能用的表单元素</span><br><span class="line">      :disabled</span><br><span class="line">i，匹配已经选中的表单元素</span><br><span class="line">      :checked</span><br><span class="line">i，匹配所有选中的option元素</span><br><span class="line">		 :selected</span><br></pre></td></tr></table></figure>
+<h2 id="注意-：使用JQuery需要导入JQuery文件。"><a href="#注意-：使用JQuery需要导入JQuery文件。" class="headerlink" title="==注意==：使用JQuery需要导入JQuery文件。"></a>==注意==：使用JQuery需要导入JQuery文件。</h2><h2 id="具体实现步骤"><a href="#具体实现步骤" class="headerlink" title="具体实现步骤"></a>具体实现步骤</h2><p>一 ，Controller部分</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/ajax"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AjaxController</span> </span>&#123;</span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/a1"</span>)</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ajax</span><span class="params">(String name, HttpServletResponse response)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="string">"admin"</span>.equals(name))&#123;</span><br><span class="line">            response.getWriter().print(<span class="string">"true"</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            response.getWriter().print(<span class="string">"false"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>二 ，ajax请求以及绑定事件</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">%@</span> <span class="attr">page</span> <span class="attr">contentType</span>=<span class="string">"text/html;charset=UTF-8"</span> <span class="attr">language</span>=<span class="string">"java"</span> %&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"js/jquery-3.4.1.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">a1</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">        <span class="comment">//参数：</span></span></span><br><span class="line"><span class="actionscript">        <span class="comment">//      url:待载入页面的url地址（必填）</span></span></span><br><span class="line"><span class="actionscript">        <span class="comment">//      data：待发送Key/value参数</span></span></span><br><span class="line"><span class="actionscript">        <span class="comment">//      success：载入成功时回调函数</span></span></span><br><span class="line"><span class="actionscript">        <span class="comment">//      status：请求返回的状态</span></span></span><br><span class="line"><span class="javascript">        $.ajax(&#123;</span></span><br><span class="line"><span class="actionscript">            url:<span class="string">"ajax/a1"</span>,</span></span><br><span class="line"><span class="javascript">            data:&#123;<span class="string">"name"</span>:$(<span class="string">"#txtName"</span>).val()&#125;,</span></span><br><span class="line"><span class="actionscript">            success:<span class="function"><span class="keyword">function</span> <span class="params">(data)</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">                <span class="built_in">console</span>.log(data);</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    用户名：</span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"txtName"</span> <span class="attr">onblur</span>=<span class="string">"a1()"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>简洁的ajax请求方法</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function a1() &#123;</span><br><span class="line"></span><br><span class="line">     $.ajax(&quot;url&quot;,&quot;传入的参数&quot;,function(回来的参数)&#123;</span><br><span class="line">         </span><br><span class="line">       &#125;);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
 
 <hr>
-<p>四，<br>JQuery方法</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.val()可以操作表单项的value属性值，他可以设置和获取</span><br><span class="line">.each(function（alert（this））&#123;&#125;) 遍历元素的方法，this对象，就是当前遍历到的dom对象</span><br><span class="line">.css(&quot;属性名&quot;，属性值)，增加样式</span><br></pre></td></tr></table></figure>
-<p>JQuery函数</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">confirm() 是JavaScript语言提供的一个确认提示框函数，传什么就提示什么，</span><br><span class="line">    当用户点击了确定，返回true，用户点击了取消，返回false</span><br><span class="line">find()	查找后代</span><br></pre></td></tr></table></figure>
-<hr>
-<p>五，<br>JQuery属性操作<br> <strong>不传参数是获取，传入参数是设置</strong>   </p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">html()	它可以设置和获取起始标签和结束标签中的内容，和innerHTML一样  </span><br><span class="line">text()	它可以设置和获取起始标签和结束标签中的文本，和innerText一样  </span><br><span class="line">val()	它可以设置和获取表单项的value属性值	和value一样，还可以操作选中状态</span><br><span class="line">attr()	可以设置和获取属性的值，不推荐操作checked,readOnly,selected,disabked等等</span><br><span class="line">prop()	可以设置和获取属性的值，只推荐操作checked,readOnly,selected,disabked等等</span><br></pre></td></tr></table></figure>
-<p>六，DOM增删改</p>
-<pre><code>内部插入：
-    appendTo()    a.appendTo(b)    把a插入到b子元素末尾，成为最后一个子元素
-    prependTo()    a.prependTo(b)    把a插到b所有子元素前面，成为第一个子元素
-
-
-外部插入：
-    insertAfter()    a.insertfter(b)    得到ba
-    insertBefore()    a.insertBefore(b)    得到ab
-
-替换：
-    replaceWith()    a.replaceWith(b)    用b替换掉a
-    replaceAll()    a.replaceAll(b)    用a替换掉所有b
-
-删除：
-    remove()        a.remove()    删除a标签
-    empty()        a.empty()        清空a标签里面的内容</code></pre><p>七，css样式操作</p>
-<pre><code>addClass()    添加样式
-removeClass()    删除样式
-toggleClass()    有就删除，没有就添加样式
-offset()        获取和设置元素的坐标
-        设置
-            JQuery对象.offset({
-                top:100,
-                left:50
-            });</code></pre><p>八，JQuery动画</p>
-<pre><code>基本动画
-    show()    将隐藏的元素显示
-    hide()    将可见的元素隐藏
-    toggle()    可见就隐藏，隐藏就可见
-
-        以上动画方法都可以添加参数：
-            1，第一个参数是动画执行的时长，以毫秒为单位
-            2，第二个参数是动画的回调函数（动画完成后自动调用的函数）    
+<p><strong>ajax的请求方式</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. $.ajax() 默认是get请求。</span><br><span class="line">2. $.get()  get请求</span><br><span class="line">3. $.post() post请求</span><br></pre></td></tr></table></figure>
 
 
 
-淡入淡出动画
-
-    fadeIn()        淡入
-    fadeOut()        淡出
-    fadeTo()        在指定时长内慢慢的将透明度修改到指定的值，0透明，1完全可见    
-    fadeToggle()    淡入/淡出  切换</code></pre><p>九，JQuery事件操作<br>​<br>    $(function(){});<br>    和<br>    window.onload=function(){};<br>    的区别</p>
-<pre><code>他们分别在什么时候触发？
-1. JQuery的页面加载完成之后是浏览器的内核解析完页面的标签创建好DOM对象之后就会马上执行。
-2. 原生js的页面加载完成以后，除了等浏览器的内核解析完页面的标签创建好DOM对象，还要等标签显示时需要的内容加载完成。
 
 
-他们执行的次数？
 
-    1，原生js的页面加载完成之后，只会执行最后一次的赋值函数
-    2，JQuery的页面加载完成之后是全部把注册的function函数，依次顺序全部执行。</code></pre><p>​<br>    JQuery中其他事件处理方法</p>
-<pre><code>click()        它可以绑定单机事件，以及触发单击事件
-mouseover()    鼠标移入事件
-mouseout()    鼠标移出事件
-bind()        可以给元素一次性绑定一个或多个事件
-one()        使用上跟bind一样，但是one方法绑定的事件只会响应一次
-unbind()        跟bind方法相反的操作，接触事件的绑定
-live()        也是用来绑定事件，它可以用来绑定选择器匹配的所有元素的事件，
-        哪怕这个元素是后面动态创建出来的。</code></pre>]]></content>
+
+
+
+
+
+
+
+
+
+
+
+]]></content>
       <categories>
         <category>前端</category>
       </categories>
       <tags>
-        <tag>JQuery</tag>
+        <tag>Ajax</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JSON</title>
+    <url>/2020/04/04/JSON/</url>
+    <content><![CDATA[<h1 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h1><p><strong>是一种轻量级的数据交换格式，目前使用特别广泛</strong><br><strong>采用完全独立于标称语言的文本格式来存储和表示数据。简洁和清晰的层次结构使得JSON成为理想的数据交换语言。</strong>  </p>
+<p>  在js语言中，一切都是对象。因此，任何js支持通过json来表示，语法要求和语法格式如下:</p>
+<ul>
+<li>对象表示为键值对</li>
+<li>数据由逗号分隔  </li>
+<li>花括号保存对象  </li>
+<li>方括号保存数组  </li>
+</ul>
+<p><strong>JSON键值对</strong>是用来保存js对象的一种方式，和js对象的写法也大同小异，键值对的健名写在前面，用双引号<code>&quot;&quot;</code>包裹，使用冒号<code>:</code>分隔，然后紧接着值：  </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;&quot;name&quot; : &quot;QinJiang&quot;&#125; </span><br><span class="line">&#123;&quot;age&quot;  : &quot;3&quot;&#125;</span><br><span class="line">&#123;&quot;sex&quot;  : &quot;男&quot;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以理解为:<br>JSON是JS对象的字符串表示法，它使用文本表示一个JS对象的信息，本质是一个字符串</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var obj &#x3D; &#123;a:&#39;Hello&#39;,b:&#39;Wordl&#39;&#125;;  &#x2F;&#x2F;这是一个对象，注意健名也是可以使用引号包裹的  </span><br><span class="line">var json &#x3D; &#39;&#123;&quot;a&quot;:&quot;Hello&quot;,&quot;b&quot;:&quot;World&quot;&#125;&#39;;  &#x2F;&#x2F;这是一个json字符串，本质是一个字符串</span><br></pre></td></tr></table></figure>
+<p><strong>JSON和JS对象互转</strong><br>要实现从JSON字符串转换为JS对象，使用JSON.parse()方法：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var obj &#x3D; JSON.parse(&#39;&#123;&quot;a&quot;:&quot;Hello&quot;,&quot;b&quot;:&quot;World&quot;&#125;&#39;)&#x2F;&#x2F;结果是&#123;a:&#39;Hello&#39;,b:&#39;World&#39;&#125;</span><br></pre></td></tr></table></figure>
+<p>要实现从JS对象转化为JSON字符串，使用JSON.stringify()方法：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var json &#x3D; JSON.stringify(&#123;a:&#39;Hello&#39;,b:&#39;World&#39;&#125;);&#x2F;&#x2F;结果是&#39;&#123;&quot;a&quot;:&quot;Hello&quot;,&quot;b&quot;:&quot;World&quot;&#125;&#39;</span><br></pre></td></tr></table></figure>
+<h2 id="Java转换JSON"><a href="#Java转换JSON" class="headerlink" title="Java转换JSON"></a>Java转换JSON</h2><p><strong>普通javaBean对象转换成JSON</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//    思考问题，我们正常返回他会走视图解析器，而json需要返回的是一个字符串;</span></span><br><span class="line"><span class="comment">//    市面上有很多的jar包可以实现这个功能，jackson，只需要一个简单的注解就可以实现了；</span></span><br><span class="line"><span class="comment">//  @ResponseBody,将服务器端返回的对象转换为json对象响应回去。</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/json1"</span>)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">json1</span><span class="params">()</span> <span class="keyword">throws</span> JsonProcessingException </span>&#123;</span><br><span class="line"><span class="comment">//        需要一个jackson的对象映射器，就是一个类，使用它可以直接将对象转换为json字符串；</span></span><br><span class="line">        ObjectMapper mapper = <span class="keyword">new</span> ObjectMapper();</span><br><span class="line"></span><br><span class="line"><span class="comment">//        创建一个对象</span></span><br><span class="line">        User user = <span class="keyword">new</span> User(<span class="string">"秦疆1号"</span>,<span class="number">1</span>,<span class="string">"男"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//       将java对象转换为json字符串；</span></span><br><span class="line">        String str = mapper.writeValueAsString(user);</span><br><span class="line"><span class="comment">//        由于使用了@ResponseBody注解，这里会将str以json格式的字符串返回，十分方便</span></span><br><span class="line">        <span class="keyword">return</span> str;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p><strong>List数组转换成JSON</strong>  </p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(value=<span class="string">"/json3"</span>)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">json3</span><span class="params">()</span> <span class="keyword">throws</span> JsonProcessingException </span>&#123;</span><br><span class="line">        ObjectMapper mapper = <span class="keyword">new</span> ObjectMapper();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        List&lt;User&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        User user1 = <span class="keyword">new</span> User(<span class="string">"秦疆1"</span>,<span class="number">11</span>,<span class="string">"男"</span>);</span><br><span class="line">        User user2 = <span class="keyword">new</span> User(<span class="string">"秦疆2"</span>,<span class="number">22</span>,<span class="string">"男"</span>);</span><br><span class="line">        User user3 = <span class="keyword">new</span> User(<span class="string">"秦疆3"</span>,<span class="number">33</span>,<span class="string">"男"</span>);</span><br><span class="line">        User user4 = <span class="keyword">new</span> User(<span class="string">"秦疆4"</span>,<span class="number">44</span>,<span class="string">"男"</span>);</span><br><span class="line">        list.add(user1);</span><br><span class="line">        list.add(user2);</span><br><span class="line">        list.add(user3);</span><br><span class="line">        list.add(user4);</span><br><span class="line">        String str = mapper.writeValueAsString(list);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> str;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>用了上面的方法会出现中文乱码，用下面方法可以解决</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@RequestMapping的produces属性可以解决</span><br><span class="line">produces：指定响应体返回类型和编码</span><br><span class="line">@RequestMapping(value&#x3D;&quot;&#x2F;json1&quot;,produces&#x3D;&quot;text&#x2F;html;charset&#x3D;UTF-8&quot;)</span><br></pre></td></tr></table></figure>
+<p>有一种一劳永逸的方法：配置SpringMVC.xml文件</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;mvc:annotation-driven &gt;</span><br><span class="line">       &lt;mvc:message-converters register-defaults=<span class="string">"true"</span>&gt;</span><br><span class="line">           &lt;bean <span class="class"><span class="keyword">class</span></span>=<span class="string">"org.springframework.http.converter.StringHttpMessageConverter"</span>&gt;</span><br><span class="line">               &lt;constructor-arg value=<span class="string">"UTF-8"</span>/&gt;</span><br><span class="line">           &lt;/bean&gt;</span><br><span class="line">           &lt;bean <span class="class"><span class="keyword">class</span></span>=<span class="string">"org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"</span>&gt;</span><br><span class="line">               &lt;property name=<span class="string">"objectMapper"</span>&gt;</span><br><span class="line">                   &lt;bean <span class="class"><span class="keyword">class</span></span>=<span class="string">"org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean"</span>&gt;</span><br><span class="line">                       &lt;property name=<span class="string">"failOnEmptyBeans"</span> value=<span class="string">"false"</span>/&gt;</span><br><span class="line">                   &lt;/bean&gt;</span><br><span class="line">               &lt;/property&gt;</span><br><span class="line">           &lt;/bean&gt;</span><br><span class="line">       &lt;/mvc:message-converters&gt;</span><br><span class="line">   &lt;/mvc:annotation-driven&gt;</span><br></pre></td></tr></table></figure>
+<p>返回时间</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(value=<span class="string">"/json5"</span>)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">json5</span><span class="params">()</span> <span class="keyword">throws</span> JsonProcessingException </span>&#123;</span><br><span class="line">        ObjectMapper mapper = <span class="keyword">new</span> ObjectMapper();</span><br><span class="line"><span class="comment">//        1，如何让他不返回时间戳，我们要关闭时间戳功能</span></span><br><span class="line">        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS,<span class="keyword">false</span>);</span><br><span class="line"><span class="comment">//        时间格式化问题，自定义日期格式对象</span></span><br><span class="line">        SimpleDateFormat simpleDateFormat = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyy-MM-dd HH:mm:ss"</span>);</span><br><span class="line"><span class="comment">//        让mapper指定使劲按日期格式对象</span></span><br><span class="line">        mapper.setDateFormat(simpleDateFormat);</span><br><span class="line"><span class="comment">//        写一个日期对象</span></span><br><span class="line">        Date date = <span class="keyword">new</span> Date();</span><br><span class="line">        <span class="keyword">return</span> mapper.writeValueAsString(date);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>JSON</tag>
       </tags>
   </entry>
   <entry>
