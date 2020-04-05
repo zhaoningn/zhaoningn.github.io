@@ -1828,7 +1828,7 @@ a {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #3ed1ff;
+  background: #fbe740;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3133,4 +3133,16 @@ body {
   background-attachment: fixed;
   background-position: 50% 50%;
   background-size: 100% 100%;
+}
+.menu-item-active a:after,
+.menu .menu-item a:hover:after,
+.menu .menu-item span.exturl:hover:after {
+  background-color: #fc6423;
+}
+#menu > li.menu-item-active > a {
+  color: #fc6423;
+}
+.back-to-top:hover {
+  background: #fc6423;
+  color: #06a2e4;
 }
