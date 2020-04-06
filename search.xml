@@ -1,6 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>AJAX</title>
+    <url>/2020/04/02/AJAX/</url>
+    <content><![CDATA[<h1 id="AJAX"><a href="#AJAX" class="headerlink" title="AJAX"></a>AJAX</h1><p>三部曲：</p>
+<ol>
+<li>编写对应处理的Controller，返回消息或者字符串或者json格式的数据；</li>
+<li>编写ajax请求<ol>
+<li>url ：Controller请求</li>
+<li>data ：键值对</li>
+<li>success ：回调函数</li>
+</ol>
+</li>
+<li>给Ajax绑定事件，点击，失去焦点，键盘弹起</li>
+</ol>
+<h2 id="注意-：使用JQuery需要导入JQuery文件。"><a href="#注意-：使用JQuery需要导入JQuery文件。" class="headerlink" title="==注意==：使用JQuery需要导入JQuery文件。"></a>==注意==：使用JQuery需要导入JQuery文件。</h2><h2 id="具体实现步骤"><a href="#具体实现步骤" class="headerlink" title="具体实现步骤"></a>具体实现步骤</h2><p>一 ，Controller部分</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/ajax"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AjaxController</span> </span>&#123;</span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/a1"</span>)</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ajax</span><span class="params">(String name, HttpServletResponse response)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="string">"admin"</span>.equals(name))&#123;</span><br><span class="line">            response.getWriter().print(<span class="string">"true"</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            response.getWriter().print(<span class="string">"false"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>二 ，ajax请求以及绑定事件</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">%@</span> <span class="attr">page</span> <span class="attr">contentType</span>=<span class="string">"text/html;charset=UTF-8"</span> <span class="attr">language</span>=<span class="string">"java"</span> %&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"js/jquery-3.4.1.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">a1</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">        <span class="comment">//参数：</span></span></span><br><span class="line"><span class="actionscript">        <span class="comment">//      url:待载入页面的url地址（必填）</span></span></span><br><span class="line"><span class="actionscript">        <span class="comment">//      data：待发送Key/value参数</span></span></span><br><span class="line"><span class="actionscript">        <span class="comment">//      success：载入成功时回调函数</span></span></span><br><span class="line"><span class="actionscript">        <span class="comment">//      status：请求返回的状态</span></span></span><br><span class="line"><span class="javascript">        $.ajax(&#123;</span></span><br><span class="line"><span class="actionscript">            url:<span class="string">"ajax/a1"</span>,</span></span><br><span class="line"><span class="javascript">            data:&#123;<span class="string">"name"</span>:$(<span class="string">"#txtName"</span>).val()&#125;,</span></span><br><span class="line"><span class="actionscript">            success:<span class="function"><span class="keyword">function</span> <span class="params">(data)</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">                <span class="built_in">console</span>.log(data);</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    用户名：</span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"txtName"</span> <span class="attr">onblur</span>=<span class="string">"a1()"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>简洁的ajax请求方法</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function a1() &#123;</span><br><span class="line"></span><br><span class="line">     $.ajax(&quot;url&quot;,&quot;传入的参数&quot;,function(回来的参数)&#123;</span><br><span class="line">         </span><br><span class="line">       &#125;);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>ajax的请求方式</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. $.ajax() 默认是get请求。</span><br><span class="line">2. $.get()  get请求</span><br><span class="line">3. $.post() post请求</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>Ajax</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JQuery</title>
     <url>/2020/04/02/JQuery/</url>
     <content><![CDATA[<h1 id="JQuery"><a href="#JQuery" class="headerlink" title="JQuery"></a>JQuery</h1><p>先下载JQuery文件<br>在引入项目</p>
@@ -148,6 +197,43 @@ live()        也是用来绑定事件，它可以用来绑定选择器匹配的
       </categories>
       <tags>
         <tag>JQuery</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JSON</title>
+    <url>/2020/04/04/JSON/</url>
+    <content><![CDATA[<h1 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h1><p><strong>是一种轻量级的数据交换格式，目前使用特别广泛</strong><br><strong>采用完全独立于标称语言的文本格式来存储和表示数据。简洁和清晰的层次结构使得JSON成为理想的数据交换语言。</strong>  </p>
+<p>  在js语言中，一切都是对象。因此，任何js支持通过json来表示，语法要求和语法格式如下:</p>
+<ul>
+<li>对象表示为键值对</li>
+<li>数据由逗号分隔  </li>
+<li>花括号保存对象  </li>
+<li>方括号保存数组  </li>
+</ul>
+<p><strong>JSON键值对</strong>是用来保存js对象的一种方式，和js对象的写法也大同小异，键值对的健名写在前面，用双引号<code>&quot;&quot;</code>包裹，使用冒号<code>:</code>分隔，然后紧接着值：  </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;&quot;name&quot; : &quot;QinJiang&quot;&#125; </span><br><span class="line">&#123;&quot;age&quot;  : &quot;3&quot;&#125;</span><br><span class="line">&#123;&quot;sex&quot;  : &quot;男&quot;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以理解为:<br>JSON是JS对象的字符串表示法，它使用文本表示一个JS对象的信息，本质是一个字符串</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var obj &#x3D; &#123;a:&#39;Hello&#39;,b:&#39;Wordl&#39;&#125;;  &#x2F;&#x2F;这是一个对象，注意健名也是可以使用引号包裹的  </span><br><span class="line">var json &#x3D; &#39;&#123;&quot;a&quot;:&quot;Hello&quot;,&quot;b&quot;:&quot;World&quot;&#125;&#39;;  &#x2F;&#x2F;这是一个json字符串，本质是一个字符串</span><br></pre></td></tr></table></figure>
+<p><strong>JSON和JS对象互转</strong><br>要实现从JSON字符串转换为JS对象，使用JSON.parse()方法：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var obj &#x3D; JSON.parse(&#39;&#123;&quot;a&quot;:&quot;Hello&quot;,&quot;b&quot;:&quot;World&quot;&#125;&#39;)&#x2F;&#x2F;结果是&#123;a:&#39;Hello&#39;,b:&#39;World&#39;&#125;</span><br></pre></td></tr></table></figure>
+<p>要实现从JS对象转化为JSON字符串，使用JSON.stringify()方法：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var json &#x3D; JSON.stringify(&#123;a:&#39;Hello&#39;,b:&#39;World&#39;&#125;);&#x2F;&#x2F;结果是&#39;&#123;&quot;a&quot;:&quot;Hello&quot;,&quot;b&quot;:&quot;World&quot;&#125;&#39;</span><br></pre></td></tr></table></figure>
+<h2 id="Java转换JSON"><a href="#Java转换JSON" class="headerlink" title="Java转换JSON"></a>Java转换JSON</h2><p><strong>普通javaBean对象转换成JSON</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//    思考问题，我们正常返回他会走视图解析器，而json需要返回的是一个字符串;</span></span><br><span class="line"><span class="comment">//    市面上有很多的jar包可以实现这个功能，jackson，只需要一个简单的注解就可以实现了；</span></span><br><span class="line"><span class="comment">//  @ResponseBody,将服务器端返回的对象转换为json对象响应回去。</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/json1"</span>)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">json1</span><span class="params">()</span> <span class="keyword">throws</span> JsonProcessingException </span>&#123;</span><br><span class="line"><span class="comment">//        需要一个jackson的对象映射器，就是一个类，使用它可以直接将对象转换为json字符串；</span></span><br><span class="line">        ObjectMapper mapper = <span class="keyword">new</span> ObjectMapper();</span><br><span class="line"></span><br><span class="line"><span class="comment">//        创建一个对象</span></span><br><span class="line">        User user = <span class="keyword">new</span> User(<span class="string">"秦疆1号"</span>,<span class="number">1</span>,<span class="string">"男"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//       将java对象转换为json字符串；</span></span><br><span class="line">        String str = mapper.writeValueAsString(user);</span><br><span class="line"><span class="comment">//        由于使用了@ResponseBody注解，这里会将str以json格式的字符串返回，十分方便</span></span><br><span class="line">        <span class="keyword">return</span> str;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p><strong>List数组转换成JSON</strong>  </p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(value=<span class="string">"/json3"</span>)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">json3</span><span class="params">()</span> <span class="keyword">throws</span> JsonProcessingException </span>&#123;</span><br><span class="line">        ObjectMapper mapper = <span class="keyword">new</span> ObjectMapper();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        List&lt;User&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        User user1 = <span class="keyword">new</span> User(<span class="string">"秦疆1"</span>,<span class="number">11</span>,<span class="string">"男"</span>);</span><br><span class="line">        User user2 = <span class="keyword">new</span> User(<span class="string">"秦疆2"</span>,<span class="number">22</span>,<span class="string">"男"</span>);</span><br><span class="line">        User user3 = <span class="keyword">new</span> User(<span class="string">"秦疆3"</span>,<span class="number">33</span>,<span class="string">"男"</span>);</span><br><span class="line">        User user4 = <span class="keyword">new</span> User(<span class="string">"秦疆4"</span>,<span class="number">44</span>,<span class="string">"男"</span>);</span><br><span class="line">        list.add(user1);</span><br><span class="line">        list.add(user2);</span><br><span class="line">        list.add(user3);</span><br><span class="line">        list.add(user4);</span><br><span class="line">        String str = mapper.writeValueAsString(list);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> str;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>用了上面的方法会出现中文乱码，用下面方法可以解决</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@RequestMapping的produces属性可以解决</span><br><span class="line">produces：指定响应体返回类型和编码</span><br><span class="line">@RequestMapping(value&#x3D;&quot;&#x2F;json1&quot;,produces&#x3D;&quot;text&#x2F;html;charset&#x3D;UTF-8&quot;)</span><br></pre></td></tr></table></figure>
+<p>有一种一劳永逸的方法：配置SpringMVC.xml文件</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;mvc:annotation-driven &gt;</span><br><span class="line">       &lt;mvc:message-converters register-defaults=<span class="string">"true"</span>&gt;</span><br><span class="line">           &lt;bean <span class="class"><span class="keyword">class</span></span>=<span class="string">"org.springframework.http.converter.StringHttpMessageConverter"</span>&gt;</span><br><span class="line">               &lt;constructor-arg value=<span class="string">"UTF-8"</span>/&gt;</span><br><span class="line">           &lt;/bean&gt;</span><br><span class="line">           &lt;bean <span class="class"><span class="keyword">class</span></span>=<span class="string">"org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"</span>&gt;</span><br><span class="line">               &lt;property name=<span class="string">"objectMapper"</span>&gt;</span><br><span class="line">                   &lt;bean <span class="class"><span class="keyword">class</span></span>=<span class="string">"org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean"</span>&gt;</span><br><span class="line">                       &lt;property name=<span class="string">"failOnEmptyBeans"</span> value=<span class="string">"false"</span>/&gt;</span><br><span class="line">                   &lt;/bean&gt;</span><br><span class="line">               &lt;/property&gt;</span><br><span class="line">           &lt;/bean&gt;</span><br><span class="line">       &lt;/mvc:message-converters&gt;</span><br><span class="line">   &lt;/mvc:annotation-driven&gt;</span><br></pre></td></tr></table></figure>
+<p>返回时间</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(value=<span class="string">"/json5"</span>)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">json5</span><span class="params">()</span> <span class="keyword">throws</span> JsonProcessingException </span>&#123;</span><br><span class="line">        ObjectMapper mapper = <span class="keyword">new</span> ObjectMapper();</span><br><span class="line"><span class="comment">//        1，如何让他不返回时间戳，我们要关闭时间戳功能</span></span><br><span class="line">        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS,<span class="keyword">false</span>);</span><br><span class="line"><span class="comment">//        时间格式化问题，自定义日期格式对象</span></span><br><span class="line">        SimpleDateFormat simpleDateFormat = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyy-MM-dd HH:mm:ss"</span>);</span><br><span class="line"><span class="comment">//        让mapper指定使劲按日期格式对象</span></span><br><span class="line">        mapper.setDateFormat(simpleDateFormat);</span><br><span class="line"><span class="comment">//        写一个日期对象</span></span><br><span class="line">        Date date = <span class="keyword">new</span> Date();</span><br><span class="line">        <span class="keyword">return</span> mapper.writeValueAsString(date);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>JSON</tag>
       </tags>
   </entry>
   <entry>
@@ -689,92 +775,6 @@ return &quot;redirect:/index.jsp&quot;</code></pre><p>  ​</p>
       </categories>
       <tags>
         <tag>SpringMVC</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>AJAX</title>
-    <url>/2020/04/02/AJAX/</url>
-    <content><![CDATA[<h1 id="AJAX"><a href="#AJAX" class="headerlink" title="AJAX"></a>AJAX</h1><p>三部曲：</p>
-<ol>
-<li>编写对应处理的Controller，返回消息或者字符串或者json格式的数据；</li>
-<li>编写ajax请求<ol>
-<li>url ：Controller请求</li>
-<li>data ：键值对</li>
-<li>success ：回调函数</li>
-</ol>
-</li>
-<li>给Ajax绑定事件，点击，失去焦点，键盘弹起</li>
-</ol>
-<h2 id="注意-：使用JQuery需要导入JQuery文件。"><a href="#注意-：使用JQuery需要导入JQuery文件。" class="headerlink" title="==注意==：使用JQuery需要导入JQuery文件。"></a>==注意==：使用JQuery需要导入JQuery文件。</h2><h2 id="具体实现步骤"><a href="#具体实现步骤" class="headerlink" title="具体实现步骤"></a>具体实现步骤</h2><p>一 ，Controller部分</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/ajax"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AjaxController</span> </span>&#123;</span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/a1"</span>)</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ajax</span><span class="params">(String name, HttpServletResponse response)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="string">"admin"</span>.equals(name))&#123;</span><br><span class="line">            response.getWriter().print(<span class="string">"true"</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            response.getWriter().print(<span class="string">"false"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>二 ，ajax请求以及绑定事件</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">%@</span> <span class="attr">page</span> <span class="attr">contentType</span>=<span class="string">"text/html;charset=UTF-8"</span> <span class="attr">language</span>=<span class="string">"java"</span> %&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"js/jquery-3.4.1.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">a1</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">        <span class="comment">//参数：</span></span></span><br><span class="line"><span class="actionscript">        <span class="comment">//      url:待载入页面的url地址（必填）</span></span></span><br><span class="line"><span class="actionscript">        <span class="comment">//      data：待发送Key/value参数</span></span></span><br><span class="line"><span class="actionscript">        <span class="comment">//      success：载入成功时回调函数</span></span></span><br><span class="line"><span class="actionscript">        <span class="comment">//      status：请求返回的状态</span></span></span><br><span class="line"><span class="javascript">        $.ajax(&#123;</span></span><br><span class="line"><span class="actionscript">            url:<span class="string">"ajax/a1"</span>,</span></span><br><span class="line"><span class="javascript">            data:&#123;<span class="string">"name"</span>:$(<span class="string">"#txtName"</span>).val()&#125;,</span></span><br><span class="line"><span class="actionscript">            success:<span class="function"><span class="keyword">function</span> <span class="params">(data)</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">                <span class="built_in">console</span>.log(data);</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    用户名：</span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"txtName"</span> <span class="attr">onblur</span>=<span class="string">"a1()"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p><strong>简洁的ajax请求方法</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function a1() &#123;</span><br><span class="line"></span><br><span class="line">     $.ajax(&quot;url&quot;,&quot;传入的参数&quot;,function(回来的参数)&#123;</span><br><span class="line">         </span><br><span class="line">       &#125;);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<p><strong>ajax的请求方式</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. $.ajax() 默认是get请求。</span><br><span class="line">2. $.get()  get请求</span><br><span class="line">3. $.post() post请求</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>Ajax</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JSON</title>
-    <url>/2020/04/04/JSON/</url>
-    <content><![CDATA[<h1 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h1><p><strong>是一种轻量级的数据交换格式，目前使用特别广泛</strong><br><strong>采用完全独立于标称语言的文本格式来存储和表示数据。简洁和清晰的层次结构使得JSON成为理想的数据交换语言。</strong>  </p>
-<p>  在js语言中，一切都是对象。因此，任何js支持通过json来表示，语法要求和语法格式如下:</p>
-<ul>
-<li>对象表示为键值对</li>
-<li>数据由逗号分隔  </li>
-<li>花括号保存对象  </li>
-<li>方括号保存数组  </li>
-</ul>
-<p><strong>JSON键值对</strong>是用来保存js对象的一种方式，和js对象的写法也大同小异，键值对的健名写在前面，用双引号<code>&quot;&quot;</code>包裹，使用冒号<code>:</code>分隔，然后紧接着值：  </p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;&quot;name&quot; : &quot;QinJiang&quot;&#125; </span><br><span class="line">&#123;&quot;age&quot;  : &quot;3&quot;&#125;</span><br><span class="line">&#123;&quot;sex&quot;  : &quot;男&quot;&#125;</span><br></pre></td></tr></table></figure>
-
-<p>可以理解为:<br>JSON是JS对象的字符串表示法，它使用文本表示一个JS对象的信息，本质是一个字符串</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var obj &#x3D; &#123;a:&#39;Hello&#39;,b:&#39;Wordl&#39;&#125;;  &#x2F;&#x2F;这是一个对象，注意健名也是可以使用引号包裹的  </span><br><span class="line">var json &#x3D; &#39;&#123;&quot;a&quot;:&quot;Hello&quot;,&quot;b&quot;:&quot;World&quot;&#125;&#39;;  &#x2F;&#x2F;这是一个json字符串，本质是一个字符串</span><br></pre></td></tr></table></figure>
-<p><strong>JSON和JS对象互转</strong><br>要实现从JSON字符串转换为JS对象，使用JSON.parse()方法：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var obj &#x3D; JSON.parse(&#39;&#123;&quot;a&quot;:&quot;Hello&quot;,&quot;b&quot;:&quot;World&quot;&#125;&#39;)&#x2F;&#x2F;结果是&#123;a:&#39;Hello&#39;,b:&#39;World&#39;&#125;</span><br></pre></td></tr></table></figure>
-<p>要实现从JS对象转化为JSON字符串，使用JSON.stringify()方法：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var json &#x3D; JSON.stringify(&#123;a:&#39;Hello&#39;,b:&#39;World&#39;&#125;);&#x2F;&#x2F;结果是&#39;&#123;&quot;a&quot;:&quot;Hello&quot;,&quot;b&quot;:&quot;World&quot;&#125;&#39;</span><br></pre></td></tr></table></figure>
-<h2 id="Java转换JSON"><a href="#Java转换JSON" class="headerlink" title="Java转换JSON"></a>Java转换JSON</h2><p><strong>普通javaBean对象转换成JSON</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//    思考问题，我们正常返回他会走视图解析器，而json需要返回的是一个字符串;</span></span><br><span class="line"><span class="comment">//    市面上有很多的jar包可以实现这个功能，jackson，只需要一个简单的注解就可以实现了；</span></span><br><span class="line"><span class="comment">//  @ResponseBody,将服务器端返回的对象转换为json对象响应回去。</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/json1"</span>)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">json1</span><span class="params">()</span> <span class="keyword">throws</span> JsonProcessingException </span>&#123;</span><br><span class="line"><span class="comment">//        需要一个jackson的对象映射器，就是一个类，使用它可以直接将对象转换为json字符串；</span></span><br><span class="line">        ObjectMapper mapper = <span class="keyword">new</span> ObjectMapper();</span><br><span class="line"></span><br><span class="line"><span class="comment">//        创建一个对象</span></span><br><span class="line">        User user = <span class="keyword">new</span> User(<span class="string">"秦疆1号"</span>,<span class="number">1</span>,<span class="string">"男"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//       将java对象转换为json字符串；</span></span><br><span class="line">        String str = mapper.writeValueAsString(user);</span><br><span class="line"><span class="comment">//        由于使用了@ResponseBody注解，这里会将str以json格式的字符串返回，十分方便</span></span><br><span class="line">        <span class="keyword">return</span> str;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p><strong>List数组转换成JSON</strong>  </p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(value=<span class="string">"/json3"</span>)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">json3</span><span class="params">()</span> <span class="keyword">throws</span> JsonProcessingException </span>&#123;</span><br><span class="line">        ObjectMapper mapper = <span class="keyword">new</span> ObjectMapper();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        List&lt;User&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        User user1 = <span class="keyword">new</span> User(<span class="string">"秦疆1"</span>,<span class="number">11</span>,<span class="string">"男"</span>);</span><br><span class="line">        User user2 = <span class="keyword">new</span> User(<span class="string">"秦疆2"</span>,<span class="number">22</span>,<span class="string">"男"</span>);</span><br><span class="line">        User user3 = <span class="keyword">new</span> User(<span class="string">"秦疆3"</span>,<span class="number">33</span>,<span class="string">"男"</span>);</span><br><span class="line">        User user4 = <span class="keyword">new</span> User(<span class="string">"秦疆4"</span>,<span class="number">44</span>,<span class="string">"男"</span>);</span><br><span class="line">        list.add(user1);</span><br><span class="line">        list.add(user2);</span><br><span class="line">        list.add(user3);</span><br><span class="line">        list.add(user4);</span><br><span class="line">        String str = mapper.writeValueAsString(list);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> str;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>用了上面的方法会出现中文乱码，用下面方法可以解决</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@RequestMapping的produces属性可以解决</span><br><span class="line">produces：指定响应体返回类型和编码</span><br><span class="line">@RequestMapping(value&#x3D;&quot;&#x2F;json1&quot;,produces&#x3D;&quot;text&#x2F;html;charset&#x3D;UTF-8&quot;)</span><br></pre></td></tr></table></figure>
-<p>有一种一劳永逸的方法：配置SpringMVC.xml文件</p>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;mvc:annotation-driven &gt;</span><br><span class="line">       &lt;mvc:message-converters register-defaults=<span class="string">"true"</span>&gt;</span><br><span class="line">           &lt;bean <span class="class"><span class="keyword">class</span></span>=<span class="string">"org.springframework.http.converter.StringHttpMessageConverter"</span>&gt;</span><br><span class="line">               &lt;constructor-arg value=<span class="string">"UTF-8"</span>/&gt;</span><br><span class="line">           &lt;/bean&gt;</span><br><span class="line">           &lt;bean <span class="class"><span class="keyword">class</span></span>=<span class="string">"org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"</span>&gt;</span><br><span class="line">               &lt;property name=<span class="string">"objectMapper"</span>&gt;</span><br><span class="line">                   &lt;bean <span class="class"><span class="keyword">class</span></span>=<span class="string">"org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean"</span>&gt;</span><br><span class="line">                       &lt;property name=<span class="string">"failOnEmptyBeans"</span> value=<span class="string">"false"</span>/&gt;</span><br><span class="line">                   &lt;/bean&gt;</span><br><span class="line">               &lt;/property&gt;</span><br><span class="line">           &lt;/bean&gt;</span><br><span class="line">       &lt;/mvc:message-converters&gt;</span><br><span class="line">   &lt;/mvc:annotation-driven&gt;</span><br></pre></td></tr></table></figure>
-<p>返回时间</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(value=<span class="string">"/json5"</span>)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">json5</span><span class="params">()</span> <span class="keyword">throws</span> JsonProcessingException </span>&#123;</span><br><span class="line">        ObjectMapper mapper = <span class="keyword">new</span> ObjectMapper();</span><br><span class="line"><span class="comment">//        1，如何让他不返回时间戳，我们要关闭时间戳功能</span></span><br><span class="line">        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS,<span class="keyword">false</span>);</span><br><span class="line"><span class="comment">//        时间格式化问题，自定义日期格式对象</span></span><br><span class="line">        SimpleDateFormat simpleDateFormat = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyy-MM-dd HH:mm:ss"</span>);</span><br><span class="line"><span class="comment">//        让mapper指定使劲按日期格式对象</span></span><br><span class="line">        mapper.setDateFormat(simpleDateFormat);</span><br><span class="line"><span class="comment">//        写一个日期对象</span></span><br><span class="line">        Date date = <span class="keyword">new</span> Date();</span><br><span class="line">        <span class="keyword">return</span> mapper.writeValueAsString(date);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>JSON</tag>
       </tags>
   </entry>
   <entry>
