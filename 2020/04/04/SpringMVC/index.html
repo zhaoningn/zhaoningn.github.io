@@ -90,14 +90,14 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="SpringMVC">
 <meta property="og:url" content="http://yoursite.com/2020/04/04/SpringMVC/index.html">
-<meta property="og:site_name" content="简单的小博客">
+<meta property="og:site_name" content="赵凝的小博客">
 <meta property="og:description" content="SpringMVC1234MVC	M：model	        模型 （JavaBean）	V：view		    视图（jsp html，css，js）	C：Controller	控制器（Servlet）  入门程序的需求：  需要搭建开发的环境  创建maven项目，选择web骨架 在main文件夹下面创建java和resources文件夹   版本控制   在pom文件中 写在标签中123">
 <meta property="og:image" content="http://yoursite.com/2020/04/04/SpringMVC/%E7%AC%94%E8%AE%B0%E6%88%AA%E5%9B%BE/SpringMVC%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0.png">
 <meta property="og:image" content="http://yoursite.com/2020/04/04/SpringMVC/%E7%AC%94%E8%AE%B0%E6%88%AA%E5%9B%BE/%E8%B7%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6.png">
 <meta property="og:image" content="http://yoursite.com/2020/04/04/SpringMVC/E:%5C%E7%AC%94%E8%AE%B0%E6%88%AA%E5%9B%BE%5CSpringMVC%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86.png">
 <meta property="og:image" content="http://yoursite.com/2020/04/04/SpringMVC/E:%5C%E7%AC%94%E8%AE%B0%E6%88%AA%E5%9B%BE%5CSpringMVC%E6%8B%A6%E6%88%AA%E5%99%A8.png">
 <meta property="article:published_time" content="2020-04-04T13:04:49.169Z">
-<meta property="article:modified_time" content="2020-04-04T13:36:20.243Z">
+<meta property="article:modified_time" content="2020-04-06T13:40:10.420Z">
 <meta property="article:author" content="赵凝">
 <meta property="article:tag" content="SpringMVC">
 <meta name="twitter:card" content="summary">
@@ -111,7 +111,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -137,7 +137,7 @@
 
 
 
-  <title>SpringMVC | 简单的小博客</title>
+  <title>SpringMVC | 赵凝的小博客</title>
   
 
 
@@ -167,7 +167,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">简单的小博客</span>
+        <span class="site-title">赵凝的小博客</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -307,7 +307,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="简单的小博客">
+      <meta itemprop="name" content="赵凝的小博客">
     </span>
 
     
@@ -352,6 +352,17 @@
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index">
                     <span itemprop="name">后端</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%90%8E%E7%AB%AF/ssm/" itemprop="url" rel="index">
+                    <span itemprop="name">ssm</span>
                   </a>
                 </span>
 
@@ -405,7 +416,8 @@
 
      <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-context<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-webmvc<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>servlet-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jsp-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-6. 在resources文件夹下创建configuration.xml</code></pre><ol start="2">
+6. 在resources文件夹下创建configuration.xml</code></pre><a id="more"></a>
+<ol start="2">
 <li>编写入门的程序        <ol>
 <li>在Java文件夹下创建一个控制器类</li>
 <li>将类交给ioc容器，在springMVC.xml中添加命名空间<br>开启注解扫描（&lt;context:component-scan base-package=”com.zhaoning”&gt;）</li>
@@ -768,7 +780,7 @@ return &quot;redirect:/index.jsp&quot;</code></pre><p>  ​</p>
             
                 <a href="/archives">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -779,7 +791,7 @@ return &quot;redirect:/index.jsp&quot;</code></pre><p>  ​</p>
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -790,7 +802,7 @@ return &quot;redirect:/index.jsp&quot;</code></pre><p>  ​</p>
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -807,6 +819,18 @@ return &quot;redirect:/index.jsp&quot;</code></pre><p>  ​</p>
                     <a href="https://github.com/zhaoningn" target="_blank" title="GitHub">
                       
                         <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="366111937@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="undefined" target="_blank" title="QQ">
+                      
+                        <i class="fa fa-fw fa-globe"></i>QQ</a>
                   </span>
                 
             </div>
@@ -842,6 +866,13 @@ return &quot;redirect:/index.jsp&quot;</code></pre><p>  ​</p>
       
 
       
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
 
     </div>
   </aside>
@@ -863,15 +894,9 @@ return &quot;redirect:/index.jsp&quot;</code></pre><p>  ​</p>
 </div>
 
 
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
 
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
 
 
 
@@ -888,11 +913,6 @@ return &quot;redirect:/index.jsp&quot;</code></pre><p>  ​</p>
       </div>
     </footer>
 
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
     
 
     
@@ -1369,6 +1389,6 @@ return &quot;redirect:/index.jsp&quot;</code></pre><p>  ​</p>
 
   
 
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 <script type="text/javascript" src="/js/src/clicklove.js"></script>
 </html>

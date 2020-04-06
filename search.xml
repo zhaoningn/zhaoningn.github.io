@@ -16,6 +16,7 @@
 </ol>
 <h2 id="注意-：使用JQuery需要导入JQuery文件。"><a href="#注意-：使用JQuery需要导入JQuery文件。" class="headerlink" title="==注意==：使用JQuery需要导入JQuery文件。"></a>==注意==：使用JQuery需要导入JQuery文件。</h2><h2 id="具体实现步骤"><a href="#具体实现步骤" class="headerlink" title="具体实现步骤"></a>具体实现步骤</h2><p>一 ，Controller部分</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/ajax"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AjaxController</span> </span>&#123;</span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/a1"</span>)</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ajax</span><span class="params">(String name, HttpServletResponse response)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="string">"admin"</span>.equals(name))&#123;</span><br><span class="line">            response.getWriter().print(<span class="string">"true"</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            response.getWriter().print(<span class="string">"false"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <p>二 ，ajax请求以及绑定事件</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">%@</span> <span class="attr">page</span> <span class="attr">contentType</span>=<span class="string">"text/html;charset=UTF-8"</span> <span class="attr">language</span>=<span class="string">"java"</span> %&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"js/jquery-3.4.1.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">a1</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">        <span class="comment">//参数：</span></span></span><br><span class="line"><span class="actionscript">        <span class="comment">//      url:待载入页面的url地址（必填）</span></span></span><br><span class="line"><span class="actionscript">        <span class="comment">//      data：待发送Key/value参数</span></span></span><br><span class="line"><span class="actionscript">        <span class="comment">//      success：载入成功时回调函数</span></span></span><br><span class="line"><span class="actionscript">        <span class="comment">//      status：请求返回的状态</span></span></span><br><span class="line"><span class="javascript">        $.ajax(&#123;</span></span><br><span class="line"><span class="actionscript">            url:<span class="string">"ajax/a1"</span>,</span></span><br><span class="line"><span class="javascript">            data:&#123;<span class="string">"name"</span>:$(<span class="string">"#txtName"</span>).val()&#125;,</span></span><br><span class="line"><span class="actionscript">            success:<span class="function"><span class="keyword">function</span> <span class="params">(data)</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">                <span class="built_in">console</span>.log(data);</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    用户名：</span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"txtName"</span> <span class="attr">onblur</span>=<span class="string">"a1()"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p><strong>简洁的ajax请求方法</strong></p>
@@ -47,6 +48,102 @@
       </categories>
       <tags>
         <tag>Ajax</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JDBC</title>
+    <url>/2020/04/06/JDBC/</url>
+    <content><![CDATA[<h1 id="JDBC"><a href="#JDBC" class="headerlink" title="JDBC"></a>JDBC</h1><p><code>使用JDBC操作数据库时，如果对数据库进行了更换，只需要替换：驱（jar包），具体驱动类，连接字符串，用户名（数据库名），密码（数据库密码）</code><br><code>先开的后关，后开的先关</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">      if(rs !&#x3D;null)     rs.close();			</span><br><span class="line">if (stmt !&#x3D; null)  stmt.close();</span><br><span class="line">if (connection !&#x3D; null)  connection.close();</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-JDBC"><a href="#1-JDBC" class="headerlink" title="1. JDBC"></a>1. JDBC</h2><p>Java DataBase Connectivity  可以为多种关系型数据库DBMS 提供统一的</p>
+<h2 id="2-JDBC-API"><a href="#2-JDBC-API" class="headerlink" title="2.JDBC  API"></a>2.JDBC  API</h2><p>提供了各种操作接口   （接口，方法，类）</p>
+<h2 id="3-JDBC-DriverManager"><a href="#3-JDBC-DriverManager" class="headerlink" title="3.JDBC DriverManager"></a>3.JDBC DriverManager</h2><p>管理不同的数据库驱动 （Oracle驱动/mysql驱动）</p>
+<h2 id="4-各种数据库驱动"><a href="#4-各种数据库驱动" class="headerlink" title="4.各种数据库驱动"></a>4.各种数据库驱动</h2><p>相应的数据库厂商提供的（第三方公司提供，谁开发数据库谁提供 （jar包）  ），<br>    作用： 连接/直接操作数据库。</p>
+<h2 id="5-数据库驱动"><a href="#5-数据库驱动" class="headerlink" title="5.数据库驱动"></a>5.数据库驱动</h2><ol>
+<li>驱动jar包 </li>
+<li>具体驱动类</li>
+<li>连接字符串</li>
+</ol>
+<p><code>Oracle</code> </p>
+<ol>
+<li>ojdbc-x.jar</li>
+<li>oracle.jdbc.OracleDriver.class</li>
+<li>jdbc:oracle:thin:@localhost:1521:数据库实例名</li>
+</ol>
+<p><code>MySQL</code></p>
+<ol>
+<li>mysql-connector-java-x.jar        </li>
+<li>com.mysql.jdbc.Driver.class            </li>
+<li>jdbc:mysql://localhost:3306/数据库实例名</li>
+</ol>
+<p><code>SqlServer</code>                </p>
+<ol>
+<li>sql jdbc -x.jar            </li>
+<li>com.microsoft.sqlserver.jdbc.SQLServerDriver.class  </li>
+<li>jabc:microsoft:sqlserver:localhost:1433:databasename=数据库实例名<a id="more"></a>
+<code>x对应于版本号</code></li>
+</ol>
+<p>##6.jar包下载</p>
+<ol>
+<li>去 maven库   ：  jar包 + mvn  网址 mvn/mvnrepositor开头</li>
+<li>去Oracle官网下载</li>
+<li>Oracle安装目录    下载Oracle自带</li>
+</ol>
+<h2 id="7-JDBC-API："><a href="#7-JDBC-API：" class="headerlink" title="7.  JDBC  API："></a>7.  JDBC  API：</h2><p>1.Java程序与数据库建立连接<br>2.Java程序给数据库发送sql语句<br>3.数据库返回处理结果<br>4.处理结果集 （增删改不需要处理 ，查询需要处理）</p>
+<h2 id="8-JDBC-API通过以-下类-接口（方法）实现："><a href="#8-JDBC-API通过以-下类-接口（方法）实现：" class="headerlink" title="8.  JDBC API通过以 下类/接口（方法）实现："></a>8.  JDBC API通过以 下类/接口（方法）实现：</h2><pre><code>DriverManager    : 管理JDBC驱动
+    |
+    |
+               \|/
+Connection              ：实现连接    （通过DriverManager产生）  
+    |
+    |
+               \|/
+Statement 对象（PerparedStatement对象）     ：实现增删改查        （通过Connection产生）      Connection.createStatement()     Connection.perpareStatement()
+CallableStatement  对象        ：调用数据库中 存储过程/存储函数     （通过Connection产生） Connection.perpareCall()
+    |
+    |
+               \|/
+Result    ：返回的结果集        （上面的 ment等产生）</code></pre><h2 id="9-JDBC访问数据库的具体步骤："><a href="#9-JDBC访问数据库的具体步骤：" class="headerlink" title="9.JDBC访问数据库的具体步骤："></a>9.JDBC访问数据库的具体步骤：</h2><ol>
+<li>导入驱动程序（jar包），加载具体的驱动类（jar包中的那一个类）。</li>
+</ol>
+<ul>
+<li>将jar包复制到项目中</li>
+<li>增加到内路径中   <code>右击jar包 ---&gt;Build Path ---&gt; Add to Build Path</code></li>
+<li>加载具体的驱动类      <code>oracle.jdbc---&gt;OracleDriver.class            java代码  ---&gt;Class.forName(&quot;oracle.jdbc.OracleDriver&quot;);</code></li>
+</ul>
+<ol start="2">
+<li><p>与数据库建立连接<br>需要知道 :  </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">IP地址+端口号+数据库实例名 ---&gt;连接字符串      &#x2F;&#x2F;从很多数据库中定位数据库</span><br><span class="line">用户名 ：数据库名    scott		        &#x2F;&#x2F; 权限</span><br><span class="line">密码  ：数据库密码   tiger</span><br><span class="line">java代码---&gt;   Connection connection &#x3D;  DriverManager.getConnection(连接字符串，用户名，密码);    </span><br><span class="line">&#x2F;&#x2F;结束时关闭   </span><br><span class="line">if(connection!&#x3D;null) connection.close</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>发送sql，执行sql<br><code>java代码---&gt;（增删改）</code></p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Statement stmt = connection.creatStatement();           </span><br><span class="line"><span class="comment">//结束时关闭   </span></span><br><span class="line"><span class="keyword">if</span>(stmt!=<span class="keyword">null</span>) stmt.close</span><br><span class="line"><span class="comment">//增加语句 </span></span><br><span class="line">String sql = <span class="string">"insert into bonus values('zs','jl',4,5)"</span>;    </span><br><span class="line"><span class="comment">//执行增加语句</span></span><br><span class="line">stmt.executeUpdate(sql);</span><br><span class="line"><span class="comment">//返回值表示增删改了几条数据</span></span><br><span class="line"><span class="keyword">int</span> count = stmt.executeUpdate(sql);    </span><br><span class="line"><span class="keyword">if</span> (count&gt;<span class="number">0</span>) &#123;system.out.print(<span class="string">"操作成功"</span>);&#125;</span><br></pre></td></tr></table></figure>
+<p><code>java代码---&gt;（查询）</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Statement stmt = connection.creatStatement();</span><br><span class="line"><span class="comment">//结束时关闭   </span></span><br><span class="line"><span class="keyword">if</span>(stmt!=<span class="keyword">null</span>)   stmt.close</span><br><span class="line"><span class="comment">//查询语句 </span></span><br><span class="line">String sql = <span class="string">"select * from student"</span>;</span><br><span class="line"><span class="comment">//执行  查询语句       </span></span><br><span class="line">stmt.executeQuery(sql);</span><br><span class="line">		     ResultSet rs = stmt.executeQuery(sql);  <span class="comment">//返回值表示增删改了几条数据  if (count&gt;0) 操作成功</span></span><br></pre></td></tr></table></figure>
+<p><code>查询：</code><br>rs 默认指向结果集的前一行<br>rs.next();   ： //遍历<br>        1. 下移<br>        2. 判断下移之后的元素是否有数据<br>              有数据返回 true<br>               没有返回 false<br>rs.<br><code>rs.getXxx(字段名/位置):</code> 获取rs指向行的数据–&gt;getInt();   getString();   getDate(); </p>
+<h2 id="10-PreparedStatement-与-Stetement-在使用时的区别"><a href="#10-PreparedStatement-与-Stetement-在使用时的区别" class="headerlink" title="10 PreparedStatement 与 Stetement 在使用时的区别"></a>10 PreparedStatement 与 Stetement 在使用时的区别</h2><ol>
+<li>Statement :<br> sql<br> executeUpdate(sql)</li>
+<li>PreparedStatement :<br> sql (可能存在占位符  ？）<br> 在创建PreparedStatement 对象时，将sql预编译 prepareStatement(sql)<br> setXxx()替换占位符 ？<br> execueteUpdate()</li>
+</ol>
+<p>推荐使用PreparedStatement:  </p>
+<ol>
+<li><p>编码更加简便(避免了字符串的拼接)  </p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">String name =<span class="string">"zs"</span>;</span><br><span class="line"><span class="keyword">int</span> age = <span class="number">23</span>;</span><br><span class="line"></span><br><span class="line">stmt:</span><br><span class="line">String sql = <span class="string">"insert into student    (stuno,stuname)    values   ('"</span>+name+<span class="string">"' , "</span>+age+<span class="string">")  "</span>;</span><br><span class="line">stmt.executeUpdate(sql);</span><br><span class="line">-------------------------------------------------------------------------</span><br><span class="line">pstmt:</span><br><span class="line">String sql =<span class="string">"insert into student    (stuno,stuname)    values(?,?)  "</span>;</span><br><span class="line">pstmt = connection.prepareStatement(sql);     <span class="comment">//预编译sql</span></span><br><span class="line">pstmt.setString(<span class="number">1</span>,name);</span><br><span class="line">pstmt.setInt(<span class="number">2</span>,age);</span><br><span class="line">pstmt.executeUpdate();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>提高性能（因为有预编译操作，预编译只需要执行一次）<br>需要重复增加100条数（批量处理）  </p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">stmt:</span><br><span class="line">String sql = <span class="string">"insert into student (stuno,stuname)  values  ('"</span>+name+<span class="string">"' , "</span>+age+<span class="string">")  "</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="number">100</span>)</span><br><span class="line">stmt.executeUpdate(sql);</span><br><span class="line"></span><br><span class="line">pstmt: </span><br><span class="line">String sql =<span class="string">"insert into student    (stuno,stuname)    values(?,?)  "</span>;</span><br><span class="line">pstmt = connection.prepareStatement(sql);     预编译sql</span><br><span class="line">pstmt.setString(<span class="number">1</span>,name);</span><br><span class="line">pstmt.setInt(<span class="number">2</span>,age);</span><br><span class="line"><span class="keyword">for</span>(<span class="number">100</span>)</span><br><span class="line">pstmt.executeUpdate();</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>3.安全（可以有效防止sql注入）<br>sql注入：将客户输入的内容 和 开发人员的sql混为一体<br>stmt：存在被sql注入的风险<br>（例如  输入  用户名：任意值 ‘ or 1=1 –<br>             密码：任意值  ）</p>
+]]></content>
+      <categories>
+        <category>后端</category>
+      </categories>
+      <tags>
+        <tag>JDBC</tag>
       </tags>
   </entry>
   <entry>
@@ -87,7 +184,7 @@
 </li>
 <li><p>JQuery对象和DOM对象使用区别</p>
 <pre><code>JQuery对象不能使用DOM对象的属性和方法 
-DOM对象也不能使用JQuery对象的属性和方法</code></pre></li>
+DOM对象也不能使用JQuery对象的属性和方法</code></pre><a id="more"></a></li>
 <li><p>DOM对象和JQuery对象互转<br>​    </p>
 <ol>
 <li><p>dom对象转化为JQuery对象    （*）</p>
@@ -220,6 +317,7 @@ live()        也是用来绑定事件，它可以用来绑定选择器匹配的
 <p>要实现从JS对象转化为JSON字符串，使用JSON.stringify()方法：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var json &#x3D; JSON.stringify(&#123;a:&#39;Hello&#39;,b:&#39;World&#39;&#125;);&#x2F;&#x2F;结果是&#39;&#123;&quot;a&quot;:&quot;Hello&quot;,&quot;b&quot;:&quot;World&quot;&#125;&#39;</span><br></pre></td></tr></table></figure>
 <h2 id="Java转换JSON"><a href="#Java转换JSON" class="headerlink" title="Java转换JSON"></a>Java转换JSON</h2><p><strong>普通javaBean对象转换成JSON</strong></p>
+<a id="more"></a>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//    思考问题，我们正常返回他会走视图解析器，而json需要返回的是一个字符串;</span></span><br><span class="line"><span class="comment">//    市面上有很多的jar包可以实现这个功能，jackson，只需要一个简单的注解就可以实现了；</span></span><br><span class="line"><span class="comment">//  @ResponseBody,将服务器端返回的对象转换为json对象响应回去。</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/json1"</span>)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">json1</span><span class="params">()</span> <span class="keyword">throws</span> JsonProcessingException </span>&#123;</span><br><span class="line"><span class="comment">//        需要一个jackson的对象映射器，就是一个类，使用它可以直接将对象转换为json字符串；</span></span><br><span class="line">        ObjectMapper mapper = <span class="keyword">new</span> ObjectMapper();</span><br><span class="line"></span><br><span class="line"><span class="comment">//        创建一个对象</span></span><br><span class="line">        User user = <span class="keyword">new</span> User(<span class="string">"秦疆1号"</span>,<span class="number">1</span>,<span class="string">"男"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//       将java对象转换为json字符串；</span></span><br><span class="line">        String str = mapper.writeValueAsString(user);</span><br><span class="line"><span class="comment">//        由于使用了@ResponseBody注解，这里会将str以json格式的字符串返回，十分方便</span></span><br><span class="line">        <span class="keyword">return</span> str;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <p><strong>List数组转换成JSON</strong>  </p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(value=<span class="string">"/json3"</span>)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">json3</span><span class="params">()</span> <span class="keyword">throws</span> JsonProcessingException </span>&#123;</span><br><span class="line">        ObjectMapper mapper = <span class="keyword">new</span> ObjectMapper();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        List&lt;User&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        User user1 = <span class="keyword">new</span> User(<span class="string">"秦疆1"</span>,<span class="number">11</span>,<span class="string">"男"</span>);</span><br><span class="line">        User user2 = <span class="keyword">new</span> User(<span class="string">"秦疆2"</span>,<span class="number">22</span>,<span class="string">"男"</span>);</span><br><span class="line">        User user3 = <span class="keyword">new</span> User(<span class="string">"秦疆3"</span>,<span class="number">33</span>,<span class="string">"男"</span>);</span><br><span class="line">        User user4 = <span class="keyword">new</span> User(<span class="string">"秦疆4"</span>,<span class="number">44</span>,<span class="string">"男"</span>);</span><br><span class="line">        list.add(user1);</span><br><span class="line">        list.add(user2);</span><br><span class="line">        list.add(user3);</span><br><span class="line">        list.add(user4);</span><br><span class="line">        String str = mapper.writeValueAsString(list);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> str;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
@@ -234,6 +332,256 @@ live()        也是用来绑定事件，它可以用来绑定选择器匹配的
       </categories>
       <tags>
         <tag>JSON</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Mybatis</title>
+    <url>/2020/04/06/Mybatis/</url>
+    <content><![CDATA[<h1 id="Mybatis"><a href="#Mybatis" class="headerlink" title="Mybatis"></a>Mybatis</h1><h2 id="1、概念"><a href="#1、概念" class="headerlink" title="1、概念"></a>1、概念</h2><p>MyBatis可以简化JDBC操作，实现数据的持久化（将数据存入数据库）<br><code>ORM：</code>Object Relational Mapping   ORM可以将对象和表一 一映射起来<br>person对象 - - -&gt; person表<br>ORM是概念，Mybatis是ORM的实现<br>ORM可以使得开发人员 像操作对象一样  操作数据库表。  </p>
+<h2 id="2、MyBatis的环境搭建"><a href="#2、MyBatis的环境搭建" class="headerlink" title="2、MyBatis的环境搭建"></a>2、MyBatis的环境搭建</h2><ol>
+<li>创建maven工程并导入坐标</li>
+<li>创建实体类和dao的接口</li>
+<li>创建Mybatis的主配置文件<pre><code>`SqlMapConifg.xml`</code></pre></li>
+<li>创建映射配置文件  <code>InterfacePersonDao.xml</code></li>
+</ol>
+<h2 id="3、环境搭建的注意事项："><a href="#3、环境搭建的注意事项：" class="headerlink" title="3、环境搭建的注意事项："></a>3、环境搭建的注意事项：</h2><ol>
+<li>创建InterfacePersonDao.xml  和InterfacePersonDao.java时 名称是为了和我们之前的知识保持一致<br>在Mybatis中  它把持久层的操作接口名称和映射文件也叫做：Mapper</li>
+<li>mybatis的映射配置文件位置必须和dao接口的包结构相同。</li>
+<li>映射配置文件的mapper标签namespace属性的取值必须是dao接口的全限定类名</li>
+<li>映射配置文件的操作配置，id属性的取值必须是dao接口的方法名</li>
+</ol>
+<p><code>当我们遵从了第二，三，四点之后，我们在开发中就无需在写dao的实现类</code></p>
+<h2 id="5、mybatis的入门案例："><a href="#5、mybatis的入门案例：" class="headerlink" title="5、mybatis的入门案例："></a>5、mybatis的入门案例：</h2><ol>
+<li>读取配置文件</li>
+<li>创建SqlSessionFactory工厂</li>
+<li>创建SqlSession</li>
+<li>创建Dao接口的代理对象</li>
+<li>执行dao中的方法</li>
+<li>释放资源  </li>
+</ol>
+<p><code>注意事项：</code><br>    不要忘记在映射配置中告知mybatis要封装到那个实体类中<br><code>配置的方式：</code>制定实体类的全限定类名</p>
+<a id="more"></a>
+
+<h2 id="6、mybatis基于注解的入门案例："><a href="#6、mybatis基于注解的入门案例：" class="headerlink" title="6、mybatis基于注解的入门案例："></a>6、mybatis基于注解的入门案例：</h2><p>把InterfacePersonDao.xml移除，在dao接口的方法上使用@Select注解，并指定sql语句，同时需要在SqlMapConfig.xml中使用mapper配置时，使用class属性指定dao接口的全限定类名</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 读取配置文件</span></span><br><span class="line">InputStream inputStream = Resources.getResourceAsStream(<span class="string">"conf.xml"</span>);	</span><br><span class="line"><span class="comment">// 创建Sqlsessiontory工厂</span></span><br><span class="line">      <span class="comment">//创建工厂mybatis使用了构建者模式</span></span><br><span class="line">SqlSessionFactoryBuilder builder = <span class="keyword">new</span> SqlSessionFactoryBuilder();  </span><br><span class="line">      <span class="comment">//构建者模式：把对象的创建细节隐藏，使用者直接调用方法即可拿到对象  		</span></span><br><span class="line">SqlSessionFactory factory = builder.build(inputStream);			</span><br><span class="line"><span class="comment">// 使用工厂生产SqlSession对象</span></span><br><span class="line">      <span class="comment">//生产SqlSession使用了工厂模式	优势：解耦（降低类之间的依赖关系）</span></span><br><span class="line">SqlSession session = factory.openSession();			</span><br><span class="line"><span class="comment">// 使用SqlSession创建Dao接口的代理对象</span></span><br><span class="line">      <span class="comment">//创建Dao接口实现类使用了代理模式   优势：不修改源码的基础上对已有方法的增强</span></span><br><span class="line">InterfacePersonDao interfacePersonDao = session.getMapper(InterfacePersonDao<span class="class">.<span class="keyword">class</span>)</span>;	</span><br><span class="line"><span class="comment">// 使用代理对象执行方法</span></span><br><span class="line">List&lt;Person&gt; persons = interfacePersonDao.findAll();</span><br><span class="line"><span class="keyword">for</span> (Person person : persons) &#123;</span><br><span class="line">	System.out.println(person);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 释放资源</span></span><br><span class="line">session.close();</span><br><span class="line">inputStream.close();</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="7、自定义mybatis的分析："><a href="#7、自定义mybatis的分析：" class="headerlink" title="7、自定义mybatis的分析："></a>7、自定义mybatis的分析：</h2><p>mybatis在使用代理dao的方式实现增删改查时做了什么？<br>两件事：<br>第一：创建代理对象<br>第二：在代理对象中调用selectList</p>
+<h2 id="8、开发mybatis程序："><a href="#8、开发mybatis程序：" class="headerlink" title="8、开发mybatis程序："></a>8、开发mybatis程序：</h2><ol>
+<li><p>配置mybatis<br>conf.xml：配置数据库信息  和需要加载的映射文件</p>
+</li>
+<li><p>表  –  类<br>映射文件xxMapper.xml：增删改查标签 写sql语句</p>
+</li>
+<li><p>测试类：<br>session.selectOne(“需要查询的sql的namespace.id”,“sql的参数值”)</p>
+</li>
+</ol>
+<hr>
+<h2 id="一，基础方式的增删改查："><a href="#一，基础方式的增删改查：" class="headerlink" title="一，基础方式的增删改查："></a>一，基础方式的增删改查：</h2><p>mybatis约定：<br>输入参数和输出参数在形式上只能有一个  </p>
+<p>如果输入参数是简单类型（8个基本类型+String）是可以使用任何占位符，#{xxx}<br>如果是对象类型，则必须是属性名#{属性名}</p>
+<p><code>输出参数：</code>如果返回值类型是一个对象（如Person），则无论返回一个还是多个，在resultType都写org.zhaoning.entity.Person</p>
+<p><code>注意事项：</code><br>a.  如果使用的事物提交方式为JDBC  则需要手动提交，即session.commit();<br>b.  所有的标签<code>&lt;select&gt;&lt;update&gt;</code>等，都必须有sql语句，但是sql参数值可选<br>    <figure class="highlight plain"><figcaption><span>* from student where id </span></figcaption><table><tr><td class="code"><pre><span class="line">sql有参数：session.insert(statement, 参数值)  </span><br><span class="line">sql没参数：session.insert(statement)</span><br><span class="line"></span><br><span class="line">## 二 ,  mapper 动态代理方式的crud（Mybatis接口开发）：</span><br><span class="line"></span><br><span class="line">&#96;原则：约定优于配置 &#96;</span><br><span class="line"></span><br><span class="line">硬编码方式</span><br><span class="line">&#96;&#96;&#96;java</span><br><span class="line">abc.java</span><br><span class="line">Configuration conf &#x3D; new Configuration();</span><br><span class="line">conf.setName(myProject);</span><br></pre></td></tr></table></figure><br>配置形式：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">abc.xml   </span><br><span class="line"><span class="tag">&lt;<span class="name">name</span>&gt;</span> myProject<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>约定：默认值就是myProject</p>
+<p>具体实现步骤：  </p>
+<ol>
+<li><p>基础环境:  </p>
+<ul>
+<li>mybatis.jar </li>
+<li>ojdbc.jar  </li>
+<li>conf.xml   </li>
+<li>mapper.xml</li>
+</ul>
+</li>
+<li><p>不同之处<br> 约定的目标：省略statement，即根据约定 直接可以定位出sql语句</p>
+</li>
+<li><p>接口中的方法必须遵循以下约定</p>
+<ul>
+<li><p>1.方法名和mapper.xm文件中标签的id值相同</p>
+</li>
+<li><p>2.方法的输入参数和mapper.xml文件中标签的parameterType类型一致</p>
+</li>
+<li><p>3.方法的返回值和mapper.xml文件中标签的resultType类型一致  </p>
+<p>除了以上约定，要实现 <code>接口中的方法</code>  和<code>Mapper.xml 中sql标签</code>一 一对应，还需要以下1点：<br><code>1.namespace的值，就是 接口的全类名（接口---mapper.xml 一一对应）</code></p>
+</li>
+</ul>
+</li>
+<li><p>匹配的过程：（约定的过程）  </p>
+<ol>
+<li><p>根据 接口名 找到 mapper.xml文件  （根据的是 namespace = 接口全类名）</p>
+</li>
+<li><p>根据 接口的方法名  找到 mapper.xml 文件中的sql标签（方法名=sql标签的id值 、参数=sql标签的parameterType、返回值=sql标签的resultType）  </p>
+<p>以上2点可以保证，当我们调用接口中的方法时，程序能自动定位到 某一个Mapper.xml文件中的sql标签</p>
+<p><code>习惯：</code>sql映射文件（mapper.xml）和接口放在同一个包中  （注意修改conf.xml中加载mapper.xml文件的路径）</p>
+</li>
+</ol>
+</li>
+</ol>
+<p>以上步骤：可以通过接口的方法–&gt;sql语句</p>
+<ol start="5">
+<li>执行：  <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">PersonMapper personMapper = session.getMapper(PersonMapper<span class="class">.<span class="keyword">class</span>)</span>;  </span><br><span class="line">personMapper .方法();</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+<p>通过session对象获取接口，在调用接口中的方法，程序会自动执行该方式对应的sql；</p>
+<ol start="6">
+<li><p>优化：</p>
+<ol>
+<li>可以将配置信息 单独放入db.properties 文件 ，然后再动态引入<br> db.properties:  <pre><code>k --- v</code></pre> <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">properties</span> <span class="attr">resource</span>=<span class="string">"bd.properties"</span>&gt;</span><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br></pre></td></tr></table></figure>
+ 引入之后，使用${key}  </li>
+<li>别名<br> a、设置单个别名 <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 设置别名 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">typeAliases</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- 单个别名 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">typeAlias</span> <span class="attr">type</span>=<span class="string">"org.zhaoning.entity.Person"</span> <span class="attr">alias</span> = <span class="string">"Person"</span>/&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- 多个别名   该包下都有一个别名  就是本身 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">"org.zhaoning.entity"</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">typeAliases</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="三、自定义Mybatis类型转换器"><a href="#三、自定义Mybatis类型转换器" class="headerlink" title="三、自定义Mybatis类型转换器"></a>三、自定义Mybatis类型转换器</h2>java  -  数据库（jdbc类型）<br>示例：<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">实体类Person ：  boolean     Sex</span><br><span class="line">			true:男</span><br><span class="line">			faluse:女</span><br><span class="line"></span><br><span class="line">表person： number	  sex</span><br><span class="line">		1：男</span><br><span class="line">		0：女</span><br></pre></td></tr></table></figure>
+自定义类型转换器（boolean – number ）步骤：  </li>
+</ol>
+</li>
+<li><p>创建转换器：需要实现TypeHandler接口  </p>
+<pre><code>通过阅读源码发现，此接口有一个实现类BaseTypeHandler，因此 要实现类型转换有2种选择：  </code></pre><ul>
+<li>实现接口TypeHandler</li>
+<li>继承BaseTypeHandler</li>
+</ul>
+</li>
+<li><p>配置<br> conf.xml<br>需要注意的问题：INTEGER</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> person(<span class="keyword">id</span>,<span class="keyword">name</span>,age,sex) <span class="keyword">values</span>(<span class="comment">#&#123;id&#125;,#&#123;name&#125;,#&#123;age&#125;,#&#123;sex ,javaType =boolean,jdbcType=INTEGER &#125;)</span></span><br></pre></td></tr></table></figure>
+<p><code>注意#{id}中存放的是 属性值，需要严格区分大小写。</code></p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 查询   使用类型转换器 </span></span><br><span class="line"><span class="comment">1、 如果类中的属性和表中的字段类型能够合理识别  则可以使用 resultType，否则使用resultMap </span></span><br><span class="line"><span class="comment">2、 如果类中的数姓名  和表中的字段名能合理识别 （id - id） 则可以使用resultType，否则使用resultMap</span></span><br><span class="line"><span class="comment">--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">type</span>=<span class="string">"person"</span> <span class="attr">id</span>=<span class="string">"personResult"</span>&gt;</span></span><br><span class="line">	  <span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span> = <span class="string">"id"</span>  <span class="attr">column</span> = <span class="string">"id"</span>/&gt;</span></span><br><span class="line">	  <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span> = <span class="string">"name"</span>  <span class="attr">column</span> = <span class="string">"name"</span>/&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span> = <span class="string">"age"</span>  <span class="attr">column</span> = <span class="string">"age"</span>/&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span> = <span class="string">"sex"</span>  <span class="attr">column</span> = <span class="string">"sex"</span> <span class="attr">javaType</span>=<span class="string">"boolean"</span> <span class="attr">jdbcType</span>=<span class="string">"INTEGER"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line"></span><br><span class="line"> <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"queryPersonByConverter"</span> <span class="attr">resultMap</span>=<span class="string">"personResult"</span> <span class="attr">parameterType</span>=<span class="string">"int"</span>&gt;</span></span><br><span class="line"> 		 select * from person where id =#&#123;id&#125; </span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="四、输入参数：parameterType"><a href="#四、输入参数：parameterType" class="headerlink" title="四、输入参数：parameterType"></a>四、输入参数：parameterType</h2><ol>
+<li>类型为 简单类型（8个基本类型+String）  </li>
+</ol>
+<ul>
+<li>#{xxx}    语法上是任意值  </li>
+<li>${value},其中的标识符只能是value</li>
+</ul>
+<ol start="2">
+<li><p>两者不同：<br>#{}自动给String类型加上’’ (自动类型转换)<br>${}原样输出</p>
+ <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> person <span class="keyword">where</span> <span class="keyword">id</span> =<span class="comment">#&#123;id&#125; </span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> person <span class="keyword">where</span> <span class="keyword">id</span> =<span class="string">'$&#123;value&#125;'</span></span><br></pre></td></tr></table></figure>
+
+<p> 动态排序：<br>select  id, name,age from person order by ${value} asc<br>#{}可以防止SQL注入<br>${}不防止  </p>
+</li>
+<li><p>两者相同：<br>都可以 获取对象的值（嵌套类型对象）</p>
+</li>
+<li><p>模糊查询<br>方式一：</p>
+ <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">person.setName("%w%")</span><br><span class="line"><span class="keyword">select</span> <span class="keyword">id</span>,<span class="keyword">name</span>,age  <span class="keyword">from</span> person <span class="keyword">where</span>  <span class="keyword">name</span> <span class="keyword">like</span> <span class="comment">#&#123;name&#125;</span></span><br></pre></td></tr></table></figure>
+<p> 方式二：</p>
+</li>
+</ol>
+<pre><code><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">person.setName("w")</span><br><span class="line">  	<span class="keyword">select</span> <span class="keyword">id</span>,<span class="keyword">name</span>,age  <span class="keyword">from</span> person <span class="keyword">where</span>  <span class="keyword">name</span> <span class="keyword">like</span> <span class="string">'%$&#123;name&#125;%'</span></span><br></pre></td></tr></table></figure></code></pre><ol start="5">
+<li>嵌套类型查询</li>
+</ol>
+<p>输入对象为HashMap：<br>where stuage = #{age}<br>用map中的key的值 匹配 占位符#{age}，如果匹配成功  就用map的value替换占位符</p>
+<ol start="6">
+<li>对象类型：<br>#{属性名}<br>#{属性名}<br>mybatis调用存储过程<br>1、查询某个年级的学生总数<br>输入：年级<br>输出：该年级的学生总数 </li>
+</ol>
+<h2 id="五、输出参数：resultType"><a href="#五、输出参数：resultType" class="headerlink" title="五、输出参数：resultType"></a>五、输出参数：resultType</h2><ol>
+<li><p>简单类型（8个基本类型+string）</p>
+</li>
+<li><p>实体对象类型</p>
+</li>
+<li><p>实体对象类型的集合，但是resultType还是写 集合的元素类型</p>
+</li>
+<li><p>输出参数为HashMap<br> HashMap本身是一个集合，可以存放多个元素，但是根据提示发现，返回值为HashMap时，查询的结果只能是一个</p>
+<p> 一个HashMap对应一个学生的多个元素（多个属性）【一个map，一个学生】<br>resultMap：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 查询   使用类型转换器 </span></span><br><span class="line"><span class="comment"> 1、 如果类中的属性和表中的字段类型能够合理识别  则可是使用 resultType，否则使用resultMap </span></span><br><span class="line"><span class="comment"> 2、 如果类中的数姓名  和表中的字段名能合理识别 （id - id） 则可以使用resultType，否则使用resultMap</span></span><br><span class="line"><span class="comment"> --&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">type</span>=<span class="string">"person"</span> <span class="attr">id</span>=<span class="string">"personResult"</span>&gt;</span></span><br><span class="line"> 	  <span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span> = <span class="string">"id"</span>  <span class="attr">column</span> = <span class="string">"id"</span>/&gt;</span></span><br><span class="line"> 	  <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span> = <span class="string">"name"</span>  <span class="attr">column</span> = <span class="string">"name"</span>/&gt;</span></span><br><span class="line">     	<span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span> = <span class="string">"age"</span>  <span class="attr">column</span> = <span class="string">"age"</span>/&gt;</span></span><br><span class="line">     	<span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span> = <span class="string">"sex"</span>  <span class="attr">column</span> = <span class="string">"sex"</span> <span class="attr">javaType</span>=<span class="string">"boolean"</span> <span class="attr">jdbcType</span>=<span class="string">"INTEGER"</span>/&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line"> </span><br><span class="line">  <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"queryPersonByConverter"</span> <span class="attr">resultMap</span>=<span class="string">"personResult"</span> <span class="attr">parameterType</span>=<span class="string">"int"</span>&gt;</span></span><br><span class="line">  		 select * from person where id =#&#123;id&#125; </span><br><span class="line"> <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>注意：当属性名 和字段名不一致时，除了使用resultMap以外，还可以使用resultType+HashMap;</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span> = <span class="string">"queryPerson"</span>  <span class="attr">parameterType</span> = <span class="string">"int "</span> <span class="attr">resultType</span> = <span class="string">"HashMap"</span>&gt;</span></span><br><span class="line">	selsect  id "Pid",name "Pname"  from person where id = #&#123;id&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><code>注意：</code>如果有10个字段 ，一旦发现结果始终为默认值（0   0.0   null） 则可能是表的字段和类的属性名字写错</p>
+<p><code>&lt;where&gt;</code>会自动处理第一个<code>&lt;if&gt;</code>标签中的and，但不会处理之后<if>中的and<br><code>&lt;foreach&gt;</code>  </if></p>
+<p>查询学号为1 ， 2 的学生信息<br><code>select id,name  from person where id in(1,2)</code></p>
+<p><code>&lt;foreach&gt;</code>迭代的类型：数组，对象数组，集合，属性（Grade类：List<Integer> ids）</Integer></p>
+<p><code>数组：</code>无论编写代码时，传递的是什么参数名，在mappe.xml中  必须用array代替该数组</p>
+<p><code>集合：</code>无论编写代码时，传递的是什么参数名，在mappe.xml中  必须用list代替该数组</p>
+<p><code>对象数组：</code></p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">person[] persons = &#123;person1,person2,person3&#125;</span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"queryPersonByobj"</span> <span class="attr">parameterType</span>=<span class="string">"object[]"</span> <span class="attr">resultType</span>=<span class="string">"person"</span>&gt;</span></span><br><span class="line">        select id,name,age from person</span><br><span class="line">        <span class="tag">&lt;<span class="name">where</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"array!= null and array.length&gt;0"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">"array"</span> <span class="attr">open</span>=<span class="string">" and id in ("</span> <span class="attr">close</span>=<span class="string">")"</span> <span class="attr">item</span>=<span class="string">"person"</span> <span class="attr">separator</span>=<span class="string">","</span>&gt;</span></span><br><span class="line">                    #&#123;person.id&#125;</span><br><span class="line">                <span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">where</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>sql片段：<br>    java：方法<br>    数据库：存储过程，存储函数<br>    Mybatis：sql片段  </p>
+<p>a、提取相似代码<br>b、引用</p>
+<h2 id="六、关联查询："><a href="#六、关联查询：" class="headerlink" title="六、关联查询："></a>六、关联查询：</h2><ol>
+<li>一对一 </li>
+</ol>
+<ul>
+<li>业务扩展类<br>  <code>核心：</code>用resultType指定类的属性  包含 多表查询的所有字段</li>
+<li>resultMap<ol>
+<li>通过属性成员 将2个类建立起联系</li>
+<li><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">      <span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">"per_card"</span> <span class="attr">type</span>=<span class="string">"person"</span>&gt;</span></span><br><span class="line">      			<span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span>=<span class="string">"id"</span> <span class="attr">column</span>=<span class="string">"id"</span>/&gt;</span></span><br><span class="line">     			 <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"name"</span> <span class="attr">column</span>=<span class="string">"name"</span>/&gt;</span></span><br><span class="line">     			 <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"age"</span> <span class="attr">column</span>=<span class="string">"age"</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 一对一时，对象成员使用 association映射：javaType指定该属性的类型 --&gt;</span></span><br><span class="line">      	<span class="tag">&lt;<span class="name">association</span> <span class="attr">property</span>=<span class="string">"card"</span> <span class="attr">javaType</span>=<span class="string">"personcard"</span>&gt;</span></span><br><span class="line">      			<span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span>=<span class="string">"cardid"</span> <span class="attr">column</span>=<span class="string">"cardid"</span>/&gt;</span></span><br><span class="line">     			 <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">"cardinfo"</span> <span class="attr">column</span>=<span class="string">"cardinfo"</span>/&gt;</span></span><br><span class="line">    		  <span class="tag">&lt;/<span class="name">association</span> &gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ul>
+<ol start="2">
+<li><p>一对多</p>
+<p> <code>mybatis认为  多对一，多对多的本质就是 一对多的变化</code></p>
+</li>
+</ol>
+<p>日志：<br>Log4j：log4j.jar</p>
+<p>开启日志：<br>    如果不指定，mybatis就会根据以下顺序  寻找日志<br>    SLF4J  、 Apache Commons Logging 、Log4j 2、Log4j 、JDK logging</p>
+<ol>
+<li>引入依赖  log4.jar</li>
+<li>开启依赖<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">settings</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--        开启日志--&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">"logImpl"</span> <span class="attr">value</span>=<span class="string">"LOG4J"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">  	 <span class="tag">&lt;/<span class="name">settings</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li>编写配置日志输出文件<br>log4j.properties<br> 日志级别：<br> DEBUG&lt;INFO&lt;WARN&lt;ERROR<br>如果设置为info，则只显示 info及以上级别的信息；<br><code>建议：</code>在开发时设置debug，在运行时设置为info或以上  </li>
+</ol>
+<p>log4j.properties内容：  </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">log4j.rootLogger&#x3D;DEBUG, stdout</span><br><span class="line">log4j.appender.stdout&#x3D;org.apache.log4j.ConsoleAppender</span><br><span class="line">log4j.appender.stdout.layout&#x3D;org.apache.log4j.PatternLayout</span><br><span class="line">log4j.appender.stdout.layout.ConversionPattern&#x3D;%5p [%t] - %m%n</span><br></pre></td></tr></table></figure>
+<p>可以通过日志信息，详细的阅读mybatis执行情况（观察mybatis实际执行sql语句  以及sql中的参数和返回结果）</p>
+<h2 id="7、延迟加载："><a href="#7、延迟加载：" class="headerlink" title="7、延迟加载："></a>7、延迟加载：</h2><p><code>一对一、 一对多、多对一、多对多</code></p>
+<ol>
+<li><p>一对多：班级–学生<br>如果不采用延迟加载（即为立即加载），查询时会将 一和 多 都查询 ，班级，班级中的所有学生。<br>如果想要 暂时只查询1的一方 而 多的一方 先不查询  而是在需要的时候再去查询 –&gt;延迟加载  </p>
+</li>
+<li><p>一对一：学生，学生证</p>
+<p> mybatis 中使用了延迟加载，需要先配置：</p>
+ <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">settings</span>&gt;</span></span><br><span class="line">   <span class="comment">&lt;!-- 开启日志--&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">"logImpl"</span> <span class="attr">value</span>=<span class="string">"LOG4J"</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 开启延迟加载--&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">"lazyLoadingEnabled"</span> <span class="attr">value</span>=<span class="string">"true"</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 关闭立即加载--&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">"aggressiveLazyLoading"</span> <span class="attr">value</span>=<span class="string">"false"</span>/&gt;</span></span><br><span class="line">   	<span class="tag">&lt;/<span class="name">settings</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p> 如果增加了mapper.xml 要修改conf.xml配置文件  (将新增的mapper.xml加载进去）</p>
+<p> 通过debug可以发现 ，如果程序只需要学生，则只向数据库发送了查询学生的sql，当我们后续需要用到学生证的时候，在第二次发送 查询学生证的sql</p>
+</li>
+<li><p>一对多：和一对一的延迟加载配置方法相同</p>
+</li>
+</ol>
+<p><code>延迟加载的步骤：</code>  </p>
+<ol>
+<li>开启延迟加载conf.xml配置settings</li>
+<li>配置mapper.xml<br> 写两个mapper.xml<br> 班级mapper.xml<br> 先查班级<br> 查询学生的sql通过 select属性指定，并且通过column指定外键<br> 学生mapper.xml    </li>
+</ol>
+<h2 id="八、查询缓存"><a href="#八、查询缓存" class="headerlink" title="八、查询缓存"></a>八、查询缓存</h2><h3 id="一、一级缓存"><a href="#一、一级缓存" class="headerlink" title="一、一级缓存"></a>一、一级缓存</h3><p>同一个SqlSession对象<br>Mybatis默认开启一级缓存，如果用同样的SqlSession对象查询相同的数据，则只会在第一次查询时 向数据库发送sq语句 放入到sqlsession中（作为缓存存在）</p>
+<p>后续再次查询该对象时，则直接从缓存中查询该对象即可（即省略了数据库的访问）</p>
+<h3 id="二、-二级缓存"><a href="#二、-二级缓存" class="headerlink" title="二、 二级缓存"></a>二、 二级缓存</h3><p>（默认没有开启二级缓存）<br>开启二级缓存：<br>    <code>&lt;setting name=&quot;cacheEnabled&quot; value=&quot;true&quot;/&gt;</code></p>
+<p>在Mapper.xml文件中加<code>&lt;cache/&gt;</code><br>mybatis的二级缓存 是将对象放入硬盘<br>序列化：内存  硬盘<br>反序列化：硬盘  内存<br>准备缓存的对象，必须实现了序列化接口<br>触发将对象写入二级缓存的时机：sqlsession对象的close()方法  </p>
+<p>mybatis自带二级缓存：同一个namespace生成的mapper对象<br><code>回顾</code>：namespace的值 就是接口的全类名（包名.类名），通过接口可以产生代理对象（personMapper对象）<br><code>结论：</code>namespace决定了personMapper对象的产生<br><code>最终结论：</code>只要产生的xxxMapper对象  来自于同一个namespace ，则这些对象 共享二级缓存。</p>
+<h3 id="三、禁用二级缓存："><a href="#三、禁用二级缓存：" class="headerlink" title="三、禁用二级缓存："></a>三、禁用二级缓存：</h3><p><code>select中加 usecache = “false”</code><br><code>清理：</code></p>
+<ol>
+<li>commit();（执行增删改时，会清理掉缓存：设计原因  防止脏数据）<pre><code>在二级缓存中，commit()不能是查询自身的commit();  </code></pre> commit会清理一级缓存和二级缓存：但是 清理二级缓存时，不能是查询自身的commit；</li>
+<li>在select标签中增加属性flushCache = “true”</li>
+</ol>
+<h3 id="四、三方提供的二级缓存"><a href="#四、三方提供的二级缓存" class="headerlink" title="四、三方提供的二级缓存:"></a>四、三方提供的二级缓存:</h3><p>echache    memcache<br>要想整合三方提供的缓存二级缓存（或自定义缓存），必须实现Cache接口<br>整合ehcache二级缓存：</p>
+<ol>
+<li><ul>
+<li>Ehcache-core.jar<ul>
+<li>mybatis-Ehcache.jar</li>
+<li>slf4j-api.jar</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>编写ehcache配置文件  Ehcache.xml</p>
+</li>
+<li><p>开启EhCache二级缓存</p>
+</li>
+</ol>
+<p>在xxxMaper.xml中开启<br><code>&lt;cache type=&quot;org.zhaoning.ehcache.Ehcache.xml&quot;&gt;
+&lt;/cache&gt;</code></p>
+<h2 id="九、逆向工程"><a href="#九、逆向工程" class="headerlink" title="九、逆向工程"></a>九、逆向工程</h2><p>表，类，接口，mapper.xml四者密切相关，因此 当知道一个的时候 其他三个应该可以自动生成。<br>表生成其他三个</p>
+<p>实现步骤：<br>        1. mybatis-generator-core.jar ,mybaits.jar  ojdbc.jar<br>        2. 逆向工程的配置文件generator.xml<br>        3. 执行</p>
+<p>mvn install:install-file -Dfile=C:\Users\asus\Desktop\ojdbc14.jar -DgroupId=com.oracle -DartifactId=ojdbc14 -Dversion=10.2.0.4.0 -Dpackaging=jar -DgeneratePom=true </p>
+]]></content>
+      <categories>
+        <category>后端</category>
+        <category>ssm</category>
+      </categories>
+      <tags>
+        <tag>Mybatis</tag>
       </tags>
   </entry>
   <entry>
@@ -260,6 +608,8 @@ live()        也是用来绑定事件，它可以用来绑定选择器匹配的
 </ul>
 <p><code>总结一句话：Spring就是一个轻量级的控制反转（IOC）和面向切面编程（AOP）的框架！</code></p>
 <h2 id="1-3、组成"><a href="#1-3、组成" class="headerlink" title="1.3、组成"></a>1.3、组成</h2><p><img src="/2020/04/04/Spring/spring%E4%B8%83%E5%A4%A7%E6%A8%A1%E5%9D%97.png" alt="七大板块"></p>
+<a id="more"></a>
+
 <h2 id="1-4、拓展"><a href="#1-4、拓展" class="headerlink" title="1.4、拓展"></a>1.4、拓展</h2><p>现代化的java开发，说白了就是基于Spring开发</p>
 <p><img src="/2020/04/04/Spring/%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF.png" alt="学习路线"></p>
 <ul>
@@ -505,6 +855,7 @@ live()        也是用来绑定事件，它可以用来绑定选择器匹配的
 ]]></content>
       <categories>
         <category>后端</category>
+        <category>ssm</category>
       </categories>
       <tags>
         <tag>Spring</tag>
@@ -531,7 +882,8 @@ live()        也是用来绑定事件，它可以用来绑定选择器匹配的
 
      <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-context<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-webmvc<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>servlet-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jsp-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-6. 在resources文件夹下创建configuration.xml</code></pre><ol start="2">
+6. 在resources文件夹下创建configuration.xml</code></pre><a id="more"></a>
+<ol start="2">
 <li>编写入门的程序        <ol>
 <li>在Java文件夹下创建一个控制器类</li>
 <li>将类交给ioc容器，在springMVC.xml中添加命名空间<br>开启注解扫描（&lt;context:component-scan base-package=”com.zhaoning”&gt;）</li>
@@ -772,6 +1124,7 @@ return &quot;redirect:/index.jsp&quot;</code></pre><p>  ​</p>
 ]]></content>
       <categories>
         <category>后端</category>
+        <category>ssm</category>
       </categories>
       <tags>
         <tag>SpringMVC</tag>
@@ -796,6 +1149,46 @@ return &quot;redirect:/index.jsp&quot;</code></pre><p>  ​</p>
 ]]></content>
       <tags>
         <tag>hello world</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MVC</title>
+    <url>/2020/04/06/MVC/</url>
+    <content><![CDATA[<h1 id="MVC设计模型"><a href="#MVC设计模型" class="headerlink" title="MVC设计模型"></a>MVC设计模型</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">M： Model，模型  一个功能 JavaBean实现</span><br><span class="line">V：View，视图   用于展示，以及与用户交互。html、css、js、jsp、jQuery等前段技术实现。</span><br><span class="line">C：Controller，控制器：接受（视图）请求，将请求跳转到模型进行处理，模型处理完毕后，再讲处理的结果返回给请求处。</span><br><span class="line"></span><br><span class="line">可以用jsp实现，但是一般建议用Servlet实现控制器。</span><br></pre></td></tr></table></figure>
+
+<p><strong>jsp-&gt;Java(Servlet)-&gt;JSP</strong></p>
+<p>步骤：  </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">View 发出请求 --&gt; Controller 选择 请求对应的模型  进行处理 --&gt; Model 使用特定的模型 进行数据处理 --&gt;返回处理结果给Controller--&gt;View 响应 （选择成功js页面进行显示）</span><br></pre></td></tr></table></figure>
+<hr>
+<p>一.  Servlet:<br>Java类必须符合一定的 规范：<br>      1. 必须继承 java.servlet.http.HttpServlet<br>      2. 重写其中的doGet()或doPost()方法</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">doGet() ：接受 并处理所有get提交方式的请求</span><br><span class="line">doPost() ：接受 并处理所有post提交方式的请求</span><br></pre></td></tr></table></figure>
+
+<p>Servlet要想使用，必须配置<br>Servlet2.5 : web.xml<br>Servlet3.0 : @WebServlet</p>
+<p><strong>Servlet2.0：</strong>  </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">用户发出请求     --&gt;  </span><br><span class="line">被 servler-mapping中的 url-pattern 拦截   --&gt;   </span><br><span class="line">找servler-mapping中的 servler-name   --&gt; </span><br><span class="line">找servlet中的name   --&gt;  </span><br><span class="line">找servlet中的servlet-class--&gt;</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>手动创建第一个Servlet </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">编写一个类，继承HttpServlet </span><br><span class="line">重写doGet(),doPost()方法 </span><br><span class="line">编写web，xml中的servlet映射关系</span><br></pre></td></tr></table></figure>
+<a id="more"></a></li>
+<li><p>借助Eclipse快速生成Servlet</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">直接新建Servlet即可</span><br><span class="line">Servlet2.5 与Servlet3.0 的区别：</span><br><span class="line">Servlet3.0不需要在web.xml中配置，但需要在Servlet类的定义处之上编写注解@WebServlet(url-pattern的值)</span><br><span class="line">匹配流程：请求地址 与@WebServlet中的值 进行匹配，如果匹配成功，则说明 请求的就是该注解所对应的类</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<hr>
+<p>项目根目录：WebContent、src（所有的构建路径 ）<br>   例如：<br>    WebContent  中有一个文件index.jsp<br>    src中有一个Servlet.java<br>    如果：index.jsp中请求<a href="asd"> …..</a> ，则 寻找范围：即会在src根目录中找  也会在WebContent根目录中找<br>    如果：index.jsp中请求<a href="a/asd"> …..</a>，则 寻找范围： 先在src或WebContent根目录中找a目录，然后在a目录中找asd  </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Web.xml 中的&#x2F;：代表项目根路径</span><br><span class="line">	http:&#x2F;&#x2F;localhost:8888&#x2F;Servlet30Project&#x2F;</span><br><span class="line">jsp中的&#x2F;：代表服务器根路径</span><br><span class="line">	http:&#x2F;&#x2F;localhost:8888&#x2F;</span><br></pre></td></tr></table></figure>
+<p><code>构建路径和WebContent都是根路径</code></p>
+<hr>
+<p>##Servlet生命周期<br>加载：<br>初始化：init() ,该方法会在Servlet 被加载并实例化的以后 执行<br>服务：service()  -&gt;doGet()   doPost()<br>销毁：destroy() ,Servlet被系统回收时执行<br>卸载：<br>init() :<br>    默认第一次访问Servlet时会被执行<br>    可以修改为tomca启动时自动执行 </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">2.5版本     &lt;servlet&gt;</span><br><span class="line"> 			 &lt;servlet-name&gt;a&lt;&#x2F;servlet-name&gt;</span><br><span class="line">	  &lt;servlet-class&gt;      org.lanqiao.Servlet.WelcomeServlet	&lt;&#x2F;servlet-class&gt;</span><br><span class="line"> 			 &lt;load-on-startup&gt;1&lt;&#x2F;load-on-startup&gt;</span><br><span class="line">  </span><br><span class="line">		 &lt;&#x2F;servlet&gt;</span><br><span class="line">3.0版本</span><br><span class="line">	@WebServlet(value&#x3D;&quot;&#x2F;WelcomeServlet&quot;,loadOnStartup&#x3D;1)</span><br></pre></td></tr></table></figure>
+<p>service()  -&gt;doGet()   doPost()  ：调用几次，执行几次<br>destroy():关闭tomcat服务器时，执行一次。</p>
+]]></content>
+      <categories>
+        <category>后端</category>
+        <category>三层架构</category>
+      </categories>
+      <tags>
+        <tag>MVC</tag>
       </tags>
   </entry>
 </search>

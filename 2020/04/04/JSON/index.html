@@ -90,10 +90,10 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="JSON">
 <meta property="og:url" content="http://yoursite.com/2020/04/04/JSON/index.html">
-<meta property="og:site_name" content="简单的小博客">
+<meta property="og:site_name" content="赵凝的小博客">
 <meta property="og:description" content="JSON是一种轻量级的数据交换格式，目前使用特别广泛采用完全独立于标称语言的文本格式来存储和表示数据。简洁和清晰的层次结构使得JSON成为理想的数据交换语言。     在js语言中，一切都是对象。因此，任何js支持通过json来表示，语法要求和语法格式如下:  对象表示为键值对 数据由逗号分隔   花括号保存对象   方括号保存数组    JSON键值对是用来保存js对象的一种方式，和js对象的写">
 <meta property="article:published_time" content="2020-04-04T13:04:25.976Z">
-<meta property="article:modified_time" content="2020-04-04T13:05:42.538Z">
+<meta property="article:modified_time" content="2020-04-06T13:33:48.937Z">
 <meta property="article:author" content="赵凝">
 <meta property="article:tag" content="JSON">
 <meta name="twitter:card" content="summary">
@@ -106,7 +106,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -132,7 +132,7 @@
 
 
 
-  <title>JSON | 简单的小博客</title>
+  <title>JSON | 赵凝的小博客</title>
   
 
 
@@ -162,7 +162,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">简单的小博客</span>
+        <span class="site-title">赵凝的小博客</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -302,7 +302,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="简单的小博客">
+      <meta itemprop="name" content="赵凝的小博客">
     </span>
 
     
@@ -400,6 +400,7 @@
 <p>要实现从JS对象转化为JSON字符串，使用JSON.stringify()方法：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var json &#x3D; JSON.stringify(&#123;a:&#39;Hello&#39;,b:&#39;World&#39;&#125;);&#x2F;&#x2F;结果是&#39;&#123;&quot;a&quot;:&quot;Hello&quot;,&quot;b&quot;:&quot;World&quot;&#125;&#39;</span><br></pre></td></tr></table></figure>
 <h2 id="Java转换JSON"><a href="#Java转换JSON" class="headerlink" title="Java转换JSON"></a>Java转换JSON</h2><p><strong>普通javaBean对象转换成JSON</strong></p>
+<a id="more"></a>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//    思考问题，我们正常返回他会走视图解析器，而json需要返回的是一个字符串;</span></span><br><span class="line"><span class="comment">//    市面上有很多的jar包可以实现这个功能，jackson，只需要一个简单的注解就可以实现了；</span></span><br><span class="line"><span class="comment">//  @ResponseBody,将服务器端返回的对象转换为json对象响应回去。</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/json1"</span>)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">json1</span><span class="params">()</span> <span class="keyword">throws</span> JsonProcessingException </span>&#123;</span><br><span class="line"><span class="comment">//        需要一个jackson的对象映射器，就是一个类，使用它可以直接将对象转换为json字符串；</span></span><br><span class="line">        ObjectMapper mapper = <span class="keyword">new</span> ObjectMapper();</span><br><span class="line"></span><br><span class="line"><span class="comment">//        创建一个对象</span></span><br><span class="line">        User user = <span class="keyword">new</span> User(<span class="string">"秦疆1号"</span>,<span class="number">1</span>,<span class="string">"男"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//       将java对象转换为json字符串；</span></span><br><span class="line">        String str = mapper.writeValueAsString(user);</span><br><span class="line"><span class="comment">//        由于使用了@ResponseBody注解，这里会将str以json格式的字符串返回，十分方便</span></span><br><span class="line">        <span class="keyword">return</span> str;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <p><strong>List数组转换成JSON</strong>  </p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(value=<span class="string">"/json3"</span>)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">json3</span><span class="params">()</span> <span class="keyword">throws</span> JsonProcessingException </span>&#123;</span><br><span class="line">        ObjectMapper mapper = <span class="keyword">new</span> ObjectMapper();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        List&lt;User&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        User user1 = <span class="keyword">new</span> User(<span class="string">"秦疆1"</span>,<span class="number">11</span>,<span class="string">"男"</span>);</span><br><span class="line">        User user2 = <span class="keyword">new</span> User(<span class="string">"秦疆2"</span>,<span class="number">22</span>,<span class="string">"男"</span>);</span><br><span class="line">        User user3 = <span class="keyword">new</span> User(<span class="string">"秦疆3"</span>,<span class="number">33</span>,<span class="string">"男"</span>);</span><br><span class="line">        User user4 = <span class="keyword">new</span> User(<span class="string">"秦疆4"</span>,<span class="number">44</span>,<span class="string">"男"</span>);</span><br><span class="line">        list.add(user1);</span><br><span class="line">        list.add(user2);</span><br><span class="line">        list.add(user3);</span><br><span class="line">        list.add(user4);</span><br><span class="line">        String str = mapper.writeValueAsString(list);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> str;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
@@ -533,7 +534,7 @@
             
                 <a href="/archives">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -544,7 +545,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -555,7 +556,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -572,6 +573,18 @@
                     <a href="https://github.com/zhaoningn" target="_blank" title="GitHub">
                       
                         <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="366111937@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="undefined" target="_blank" title="QQ">
+                      
+                        <i class="fa fa-fw fa-globe"></i>QQ</a>
                   </span>
                 
             </div>
@@ -607,6 +620,13 @@
       
 
       
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
 
     </div>
   </aside>
@@ -628,15 +648,9 @@
 </div>
 
 
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
 
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
 
 
 
@@ -653,11 +667,6 @@
       </div>
     </footer>
 
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
     
 
     
@@ -1134,6 +1143,6 @@
 
   
 
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 <script type="text/javascript" src="/js/src/clicklove.js"></script>
 </html>
