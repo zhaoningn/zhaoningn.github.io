@@ -44,7 +44,7 @@
 
 ]]></content>
       <categories>
-        <category>前端</category>
+        <category>数据交互</category>
       </categories>
       <tags>
         <tag>Ajax</tag>
@@ -328,7 +328,7 @@ live()        也是用来绑定事件，它可以用来绑定选择器匹配的
 <p>返回时间</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(value=<span class="string">"/json5"</span>)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">json5</span><span class="params">()</span> <span class="keyword">throws</span> JsonProcessingException </span>&#123;</span><br><span class="line">        ObjectMapper mapper = <span class="keyword">new</span> ObjectMapper();</span><br><span class="line"><span class="comment">//        1，如何让他不返回时间戳，我们要关闭时间戳功能</span></span><br><span class="line">        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS,<span class="keyword">false</span>);</span><br><span class="line"><span class="comment">//        时间格式化问题，自定义日期格式对象</span></span><br><span class="line">        SimpleDateFormat simpleDateFormat = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyy-MM-dd HH:mm:ss"</span>);</span><br><span class="line"><span class="comment">//        让mapper指定使劲按日期格式对象</span></span><br><span class="line">        mapper.setDateFormat(simpleDateFormat);</span><br><span class="line"><span class="comment">//        写一个日期对象</span></span><br><span class="line">        Date date = <span class="keyword">new</span> Date();</span><br><span class="line">        <span class="keyword">return</span> mapper.writeValueAsString(date);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>前端</category>
+        <category>数据交互</category>
       </categories>
       <tags>
         <tag>JSON</tag>
@@ -1190,5 +1190,640 @@ return &quot;redirect:/index.jsp&quot;</code></pre><p>  ​</p>
       <tags>
         <tag>MVC</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>js</title>
+    <url>/2020/04/14/js/</url>
+    <content><![CDATA[<h1 id="js"><a href="#js" class="headerlink" title="js"></a>js</h1><h2 id="一、数据转换"><a href="#一、数据转换" class="headerlink" title="一、数据转换"></a>一、数据转换</h2><h3 id="隐式转换："><a href="#隐式转换：" class="headerlink" title="隐式转换："></a>隐式转换：</h3><ol>
+<li><p>typeof()或typeof<br> ex : var num = 15;<br> var s = typeof(num); 获取num的数据类型  </p>
+</li>
+<li><p>NaN<br> Not a Number<br> 不是一个数字<br> isNaN(数据)：判断数据是否为非数字<br> 是 返回 false<br> 不是 返回 true  </p>
+<h3 id="强制转换："><a href="#强制转换：" class="headerlink" title="强制转换："></a>强制转换：</h3></li>
+<li><p>toString()<br>将任意类型的数据转换为string类型<br>语法：  变量.toString();</p>
+</li>
+<li><p>parseInt()<br> 作用：获取指定数据的整数部分<br> 语法：</p>
+<pre><code>var result = parseInt(数据)；  </code></pre><p> 从左向右依次转换，碰到第一个非整数，则停止转化<br> 如果第一个就是非整数字符，结果为NaN。  </p>
+</li>
+<li><p>parseFloat()<br> 作用：将指定的数据转换成小数<br> 语法：</p>
+<pre><code>var result = parseFloat(数据);  </code></pre><p> 同上</p>
+</li>
+<li><p>Number()<br> 作用：将一个字符串解析为number<br> 语法：</p>
+<pre><code>var result = Number(数据);  </code></pre><p> 如果包含不是数字的数 返回NaN</p>
+</li>
+</ol>
+<h2 id="二、函数"><a href="#二、函数" class="headerlink" title="二、函数"></a>二、函数</h2><ol>
+<li>定义语法： <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function 函数名()&#123;</span><br><span class="line">可执行语句；</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure></li>
+<li>调用语法：<pre><code>函数名();</code></pre></li>
+<li>作用域：<br> 就是变量或函数的可访问范围，它控制着变量或函数的可见性和生命周期。<br> 在js中，变量或函数的作用域可分为：  <ol>
+<li>函数作用域，只在当前函数内可访问。</li>
+<li>全局作用域，一经定义，代码的任何位置都可以访问</li>
+</ol>
+</li>
+</ol>
+<h2 id="三、数组"><a href="#三、数组" class="headerlink" title="三、数组"></a>三、数组</h2><ol>
+<li><p>创建空数组：  </p>
+<ol>
+<li>数组直接量：var arr = [];  </li>
+<li>用new ：var arr = new Array();</li>
+</ol>
+</li>
+<li><p>创建 并初始化：  </p>
+<ol>
+<li>var arr = [元素1,元素2,元素3];  </li>
+<li>new arr = new Array(元素1,元素2,元素3);</li>
+</ol>
+</li>
+<li><p>数组API</p>
+<ol>
+<li><p>String(数组名):  </p>
+<pre><code>将数组中每个元素转为字符串，用逗号分隔开  
+`套路：`对数组拍照，用于鉴别是否数组被修改过。  </code></pre></li>
+<li><p>数组名.join(“连接符”)：</p>
+<pre><code>将数组中每个元素转为字符串，用自定义的连接符分隔。
+套路：判断数组是空数组   数组名.join(&quot;&quot;)==&quot;&quot;</code></pre></li>
+<li><p>拼接：concat()  </p>
+<pre><code>var arr=arr1.concat(值1,值2,arr2,值3);  </code></pre></li>
+<li><p>选取：slice() 返回现有数组的一个子数组  </p>
+<pre><code>var arr = arr1.slice(起始位，截止位);含头不含尾  
+套路：复制数组 arr.slice();  </code></pre></li>
+<li><p>删除：splice()  </p>
+<pre><code>直接修改原数组  
+var deletes = arr.splice(start,n);  
+删除从start开始的n个元素  
+将arr删除后赋值给delets  </code></pre></li>
+<li><p>插入：splice(start,0,值1,值2);  </p>
+<pre><code>在arr中starti位置，插入新值1，值2 原starti位置的值及其之后的值向后移。</code></pre></li>
+<li><p>替换：splice(start,n,值1,值2);  </p>
+<pre><code>本质就是删除旧的，插入新的  
+强调：删除的元素个数和插入的新元素个数不必一致。  </code></pre></li>
+<li><p>颠倒：</p>
+<pre><code>reverse()颠倒数值中元素的顺序  
+arr.reverse();  
+强调：仅负责原样颠倒数组不负责排序  </code></pre></li>
+<li><p>排序：arr.sort()    默认将所有元素转为字符串在排列  </p>
+<pre><code>问题：只能排列字符串类型的元素  
+解决：使用自定义比较器函数  </code></pre></li>
+</ol>
+</li>
+</ol>
+<h2 id="四、DOM"><a href="#四、DOM" class="headerlink" title="四、DOM"></a>四、DOM</h2><p>document object model  </p>
+<ol>
+<li><p>按id属性，精确查找一个元素对象（效率非常高）  </p>
+<pre><code>`var elem = document.getElementById(&quot;id&quot;); `   
+`强调：`getElementById只能用在document上  
+`何时：`只用于精确查找一个元素  </code></pre></li>
+<li><p>按标签名找</p>
+<pre><code>`var elems = parent.getElementsByTagName(&quot;tag&quot;); `   
+查找指定parent节点下的所有标签为tag的子代节点  
+`强调：`父元素必须是单个对象  </code></pre><ol>
+<li>可用在任意父元素上</li>
+<li>不仅查直接节点，而且查所有子代节点</li>
+<li>返回一个伪数组，用[]取出唯一元素</li>
+</ol>
+</li>
+<li><p>通过name属性查找  </p>
+<pre><code>`var elems = document.getElementsByName(&apos;name&apos;) `   
+可以返回DOM数中具有指定name属性值的所有子元素集合  </code></pre></li>
+<li><p>通过class查找</p>
+<pre><code>查找父元素下指定class属性的元素  
+`var elems = parent.getElementsByClassName(&quot;class&quot;);`  </code></pre></li>
+<li><p>通过选择器查找  </p>
+<ol>
+<li>找一个元素：  <pre><code>`var elem = parent.querySelector(&quot;selector&quot;);`</code></pre></li>
+<li>找多个元素：  <pre><code>`var elems = parent.querySelectorAll(&quot;selector&quot;);`
+    返回指定选择器的第一个元素对象</code></pre></li>
+</ol>
+</li>
+<li><p>获取特殊元素body，html 对象</p>
+<ol>
+<li>获取body元素<pre><code>`document.body`</code></pre></li>
+<li>获取html元素<pre><code>`document.documentElement`</code></pre></li>
+</ol>
+</li>
+</ol>
+<h2 id="五、DOM进阶："><a href="#五、DOM进阶：" class="headerlink" title="五、DOM进阶："></a>五、DOM进阶：</h2><h3 id="1、DOM-文档对象模型"><a href="#1、DOM-文档对象模型" class="headerlink" title="1、DOM 文档对象模型"></a>1、DOM 文档对象模型</h3><ul>
+<li>文档：一个页面就是一个文档，DOM中使用document表示</li>
+<li>元素：页面中的所有标签都是元素，DOM中使用element表示</li>
+<li>节点：网页中的所有内容都是节点（标签，属性，文本，注释等），DOM中使用node表示<br><code>DOM把以上内容都看做是对象</code></li>
+</ul>
+<p>console.dir(timer);    打印我们返回的元素对象  更好的查看里面的属性和方法</p>
+<h2 id="2、事件三要素："><a href="#2、事件三要素：" class="headerlink" title="2、事件三要素："></a>2、事件三要素：</h2><ul>
+<li>事件源    </li>
+<li>事件类型       </li>
+<li>事件处理程序  </li>
+</ul>
+<h3 id="1、三要素"><a href="#1、三要素" class="headerlink" title="1、三要素"></a>1、三要素</h3><ol>
+<li><p>事件源<br>事件被触发的对象<br>谁（比如：按钮）获取对象</p>
+</li>
+<li><p>事件类型<br>如何触发<br>什么事件   （比如鼠标点击（onclick） 还是鼠标经过  还是键盘按下）</p>
+</li>
+<li><p>事件处理程序<br>通过一个函数赋值的方式 完成</p>
+ <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">btn.onclick &#x3D; function()&#123;</span><br><span class="line">alert(&quot;点秋香&quot;)；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="2、事件基础"><a href="#2、事件基础" class="headerlink" title="2、事件基础"></a>2、事件基础</h3><p>执行事件的步骤</p>
+<ol>
+<li>获取事件源</li>
+<li>注册事件（绑定事件）</li>
+<li>添加事件处理程序（采用函数赋值形式）</li>
+</ol>
+<h3 id="3、事件："><a href="#3、事件：" class="headerlink" title="3、事件："></a>3、事件：</h3><ul>
+<li>获得焦点 onfocus</li>
+<li>失去焦点 onblur</li>
+<li>鼠标经过 onmouseover</li>
+<li>鼠标离开 onmouseout</li>
+<li>鼠标移动 onmousemove</li>
+</ul>
+<h3 id="4、改变元素："><a href="#4、改变元素：" class="headerlink" title="4、改变元素："></a>4、改变元素：</h3><ol>
+<li>改变元素内容：  </li>
+</ol>
+<ul>
+<li><p><code>element.innerText</code>    从起始位置到终止位置的内容，但它去除html标签，同时空格 换行也会去掉</p>
+</li>
+<li><p><code>element.innerHTML</code>  从起始位置到全部内容，包括html标签，同时保留空格和换行</p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">例如：</span><br><span class="line">	var p &#x3D; document.querySelector(&quot;p&quot;);</span><br><span class="line">	p.innerText &#x3D; getDate();</span><br></pre></td></tr></table></figure>
+
+<p>  两者区别：</p>
+</li>
+</ul>
+<ol>
+<li><p>innerText 不识别html 标签 非标准 去除空格和换行</p>
+</li>
+<li><p>innerHTML 识别html标签 w3c标准 保留空格和换行</p>
+</li>
+</ol>
+<p><code>这两个属性是可读写的  可以获取元素里面的内容  p.innerHTML</code></p>
+<ol start="2">
+<li><p>修改元素属性<br>常用属性<br><code>innerText,innerHTML,src,href,id,alt,title</code></p>
+ <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">zxy.onlick &#x3D; function()&#123;</span><br><span class="line">img.src &#x3D; &#39;xxx&#39;;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>表单元素的属性操作  </p>
+<pre><code>利用DOM可以操作如下表单元素的属性：  
+    `type  value  checked  selected  disabled`</code></pre> <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">btn.disabled &#x3D; true;</span><br><span class="line">this.disabled &#x3D; true; </span><br><span class="line">this 指向的是事件函数的调用者</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>样式属性操作<br> 我们可以通过js修改元素的大小 颜色 位置等样式  </p>
+<pre><code>1. element.style  行内样式操作  
+2. element.className 类名样式操作</code></pre><p> <code>注意</code>  </p>
+<pre><code>JS里面的样式采用驼峰命名法  比如 fontSize  backgroundColor  
+JS修改style样式操作，产生的是行内样式，权重高</code></pre></li>
+</ol>
+<pre><code>1. 使用element.style 获得修改元素样式，如果样式比较少 或者 功能简单的情况下使用
+
+2. 我们可以通过 修改元素的`className`更改元素的样式  适合于样式较多或者功能复杂的情况
+    <figure class="highlight js"><table><tr><td class="code"><pre><span class="line">.change&#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line">类名.className = <span class="string">'change'</span>;</span><br></pre></td></tr></table></figure>
+    `会覆盖原类名`
+3. 如果想要保留原先的类名，我们可以这么做，多类名选择器  
+        类名.className=&apos;first change&apos;;</code></pre><ol start="5">
+<li><p>自定义属性的操作</p>
+<ol>
+<li><p>获取属性值  </p>
+<pre><code>`element.属性
+element.getAttribute(&apos;属性&apos;);`</code></pre><p> 区别：  </p>
+<pre><code>element.属性 获取内置属性值（元素本身自带的属性）  
+element.getAttribute(&apos;属性&apos;);  主要获得自定义的属性（标准） 我们程序员自定义的属性</code></pre></li>
+<li><p>设置属性值  </p>
+<pre><code>element.属性=&apos;值&apos;  设置内置属性值  
+element.setAttribute(&apos;属性&apos;,&apos;值&apos;);</code></pre><p> 区别：</p>
+<pre><code>element.属性  设置内置属性值
+element.setAttribute(&apos;属性&apos;,&apos;值&apos;);  主要设置自定义的属性 （标准）</code></pre></li>
+<li><p>移除属性  </p>
+<pre><code>element.removeAttribute(&apos;index&apos;);  </code></pre><p> H5规定：自定义属性以  data-开头<br> H5新增获取自定义属性  </p>
+<pre><code>element.dataset.属性名  或者 element.dataset[&apos;index&apos;]  
+dataset是一个集合，自定义属性的集合，以data-开头  </code></pre><p> 如果自定义属性里面有多个-连接的单词，我们获取的时候采取 驼峰命名法<br> 比如：  </p>
+<pre><code>data-list-name  
+dataset.listName或dataset[&apos;listName&apos;]</code></pre></li>
+</ol>
+</li>
+</ol>
+<h2 id="节点操作"><a href="#节点操作" class="headerlink" title="节点操作"></a>节点操作</h2><p>一、  </p>
+<ol>
+<li>利用DOM提供的方法获取元素  逻辑性不强，繁琐  </li>
+<li>利用节点层级关系获取元素<br> 利用父子兄节点关系获取元素<br> 逻辑性强，但是兼容性稍差</li>
+</ol>
+<p>二、一般的，节点至少用<code>nodeType(节点类型)，nodeName(节点名称)，nodeValue(节点值)</code>三个基本属性</p>
+<p>元素节点：nodeType 为 1<br>属性节点：nodeType 为 2<br>文本节点：nodeType 为 3（文本节点包含文字，空格，换行等）</p>
+<p><code>注意：</code>我们在实际开发中，节点操作主要操作的是元素节点</p>
+<p>三、</p>
+<ol>
+<li>获取父节点：节点.parentNode  <pre><code>返回最近的父节点  
+如果没有返回NULL</code></pre></li>
+</ol>
+<ol start="2">
+<li><p>获取子节点<br> parentNode.childNodes  (标准)  </p>
+<p> 返回 包含指定节点的子节点的集合，该集合为即时更新的集合</p>
+<p> <code>注意：</code>返回值里面包含了所有子节点，包括元素节点，文本节点等</p>
+<p> 如果只想获得里面的元素节点，则需要专门处理，所以我们一般不提倡使用childNodes</p>
+</li>
+</ol>
+<p>​<br>​    - 获取所有的子元素节点，也是我们实际开发常用的<br>​    parentNode.children</p>
+<pre><code>- 获取第一个子节点（包含所有节点）：
+            parentNode.firstChild  找不到返回null
+
+- 获取最后一个子节点（包含所有节点）：
+            parentNode.lastChild  找不到返回null
+
+
+- 获取第一个子元素：
+            parentNode.firstElementChild
+
+- 获取最后一个子元素：
+            parentNode.lastElementChild
+
+
+- 实际开发的写法，既没有兼容性问题又返回第一个子元素
+    parentNode.children[0]
+
+- 返回最后一个子元素
+            parentNode.children[parent.Node.children.length-1]</code></pre><ol start="3">
+<li><p>兄弟节点</p>
+<ul>
+<li><p>返回返回当前元素下一个兄弟节点，找不到则返回null：</p>
+<pre><code>node.nextSibling</code></pre></li>
+<li><p>返回当前元素下一个兄弟元素节点，找不到则返回null：</p>
+<pre><code>node.perviousSibling</code></pre></li>
+<li><p>返回当前元素下一个兄弟元素节点，找不到则返回null：</p>
+<pre><code>node.nextElementSibling</code></pre></li>
+<li><p>返回当前元素下一个兄弟元素节点，找不到则返回null：</p>
+<pre><code>node.perviousElementSibling  </code></pre></li>
+</ul>
+</li>
+</ol>
+<ol start="4">
+<li><p>增删节点</p>
+<ul>
+<li><p>创建节点（元素节点）<br>document.createElement(‘标签名’);</p>
+</li>
+<li><p>添加节点</p>
+<ol>
+<li>node.appendChild(child);<br>node 父级  child 子级   在后面追加元素</li>
+<li>node.insertBefore(child,指定元素)<br>在指定元素前加节点</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+<pre><code>- 删除节点
+        node.removeChild(child)
+        node 是父级
+
+
+`阻止链接跳转：javascript:void(0);或javascript:;`</code></pre><ol start="5">
+<li><p>复制节点  </p>
+<pre><code>node.cloneNode()  
+返回调用该方法的节点的一个副本</code></pre><p> <code>注意：</code>如果括号参数为空或者为false，则是浅拷贝，</p>
+<pre><code>true，深拷贝</code></pre><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for(var k in obj)&#123;</span><br><span class="line">       k 得到的是属性名</span><br><span class="line">       obj[k] 得到的是属性值</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>四、创建元素</p>
+<ol>
+<li><p>document.write()  如果页面文档流加载完毕，再调用这句话会导致页面重绘</p>
+</li>
+<li><p>innerHTML 是将内容写入某个DOM节点 ，不会导致页面全部重绘</p>
+</li>
+<li><p>innerHTML 创建多个元素效率更高（不拼接字符串，采取数组形式拼接），结构稍微复杂</p>
+</li>
+<li><p>createElement() 创建多个元素效率稍微低一点点，但是结构更清晰</p>
+</li>
+</ol>
+<p>alert() 弹出对话框</p>
+<h2 id="六、事件高级"><a href="#六、事件高级" class="headerlink" title="六、事件高级"></a>六、事件高级</h2><h3 id="1，注册事件（绑定事件）"><a href="#1，注册事件（绑定事件）" class="headerlink" title="1，注册事件（绑定事件）"></a>1，注册事件（绑定事件）</h3><p>两种方式：传统方式和方法监听注册方式</p>
+<ol>
+<li><p>传统方式：<br> 利用on开头的事件<br><code>&lt;button onclick = &quot;alert(&#39;hi&#39;)&quot;&gt;&lt;/button&gt;</code><br> but.onclick = function(){}<br> 特点：注册事件的唯一性<br> 同一个元素同一个事件只能设置一个处理函数，最后注册的处理函数将会覆盖前面注册的处理函数  </p>
+</li>
+<li><p>方法监听注册方式：<br> w3c标准  推荐方法<br> addEventListener()是一个方法<br> IE9之前不支持，可用attachEvent()<br> 特点：同一个元素同一个事件可以注册多个监听器<br> 按注册顺序依次执行   </p>
+ <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">addEventListener事件监听方式</span><br><span class="line">	</span><br><span class="line">eventTarget.addEventListener(type,listener[,useCapture])</span><br><span class="line">	</span><br><span class="line">divs[1].addEventListener(&#39;click&#39;,fn);</span><br><span class="line">function fn()&#123;</span><br><span class="line">alert(22);</span><br><span class="line">divs[1].removeEventListener(&#39;click&#39;,fn);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> 将指定的监听器注册到eventTarget（目标对象）上，当该对象触发指定事件时，就会执行事件处理函数</p>
+<p> 三个参数：  </p>
+<ul>
+<li>type：事件类型字符串，比如  click，mouseover</li>
+<li>listener：事件处理函数，事件发生时，会调用该监听函数</li>
+<li>useCapture：可选参数，是一个布尔值，默认是false</li>
+</ul>
+</li>
+</ol>
+<h3 id="2，删除事件"><a href="#2，删除事件" class="headerlink" title="2，删除事件"></a>2，删除事件</h3><ol>
+<li><p>传统方式<br> eventTarget.onclick = null;</p>
+</li>
+<li><p>方法监听注册方式<br> eventTarget.removeEventListener(type,listener[,useCapture];)</p>
+<p> eventTarget.detachEvent(eventNameWithOn,callback);</p>
+</li>
+</ol>
+<h3 id="3，DOM事件流"><a href="#3，DOM事件流" class="headerlink" title="3，DOM事件流"></a>3，DOM事件流</h3><ol>
+<li>JS代码中只能执行捕获或者冒泡其中的一个阶段</li>
+<li>onclick和attachEvent 只能得到冒泡阶段</li>
+<li>addEventListener()第三个参数如果是true，表示在事件捕获阶段调用事件处理程序如果是false（不写默认是false），表示在事件冒泡阶段调用事件处理程序</li>
+<li>实际开发中我们很少使用事件捕获，更关注事件冒泡。</li>
+<li>有些事件是没有冒泡的，比如：onblur,onfocus,onmouseenter,onmouseleave    </li>
+<li>事件冒泡有时候会带来麻烦，有时候又会帮助很巧妙的做某些事件</li>
+</ol>
+<h3 id="4，事件对象"><a href="#4，事件对象" class="headerlink" title="4，事件对象"></a>4，事件对象</h3><ol>
+<li>event 就是一个事件对象，写到我们侦听函数的小括号里面，当形参来看</li>
+<li>事件对象只有有了事件才会存在，它是系统给我们自动创建的，不需要我们传递参数</li>
+<li>事件对象 是 我们事件的一系列相关数据的集合，跟事件相关，比如鼠标点击里面就包含了鼠标的相关信息</li>
+<li>这个事件对象我们可以自己命名 比如  event ，evt，e</li>
+<li>事件对象也有兼容性问题   ie678  通过 window.event 兼容性的写法  e=e||window.event;</li>
+</ol>
+<p><strong>常见事件对象的属性和方法：</strong>  </p>
+<ol>
+<li><p>e.target 返回的是触发事件的对象（元素） this返回的是绑定事件的对象（元素）<br> 区别：e.target 点击了那个元素，就返回那个元素，this 那个元素绑定了这个点击事件，就返回谁</p>
+<p> IE678   e.srcElement</p>
+</li>
+</ol>
+<ol start="2">
+<li>e.type 返回事件类型</li>
+</ol>
+<ol start="3">
+<li>e.preventDefault(); 阻止默认行为（事件 让链接不跳转或让提交按钮不提交）  <pre><code>低版本：e.returnValue;  
+        return false;</code></pre></li>
+</ol>
+<h3 id="5，阻止事件冒泡"><a href="#5，阻止事件冒泡" class="headerlink" title="5，阻止事件冒泡"></a>5，阻止事件冒泡</h3><pre><code>    e.stopPropagation()
+IE678    e.cancelBubble = true;</code></pre><h3 id="6，事件委托"><a href="#6，事件委托" class="headerlink" title="6，事件委托"></a>6，事件委托</h3><pre><code>给父节点添加监听器，利用事件冒泡影响每一个子节点</code></pre><h3 id="7，鼠标事件"><a href="#7，鼠标事件" class="headerlink" title="7，鼠标事件"></a>7，鼠标事件</h3><p>禁止右键  </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">document.addEventListener(&#39;contextmenu&#39;,function(e)&#123;</span><br><span class="line">		e.preventDefault();</span><br><span class="line">	</span><br><span class="line">	&#125;)</span><br></pre></td></tr></table></figure>
+<p>禁止选中</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">document.addEventListener(&#39;selectstart&#39;,function(e)&#123;</span><br><span class="line">	e.preventDefault();</span><br><span class="line"></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+<p>​<br>​鼠标事件对象   </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">e.clientX		返回鼠标相对于浏览器窗口可视区的X坐标</span><br><span class="line">e.clientX</span><br><span class="line">e.pageX		返回鼠标相对于文档页面可的X坐标</span><br><span class="line">e.pageY</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="8，键盘事件"><a href="#8，键盘事件" class="headerlink" title="8，键盘事件"></a>8，键盘事件</h3><ul>
+<li><p>onkeyup      某个键盘按键被松开时触发</p>
+</li>
+<li><p>onkeydown    某个键盘按键被按下时触发</p>
+</li>
+<li><p>onkeypress     某个键盘按键被按下时触发（不识别功能键 ）</p>
+</li>
+</ul>
+<p><code>注意：</code><br>如果使用addEventListener不需要加on<br>    onkeypress和前面2个的区别是，它不识别功能键</p>
+<p>执行顺序：keydown  keypress  keyup</p>
+<p>键盘对象属性<br>        e.keyCode    返回该键的ASCLL值</p>
+<p><code>注意：</code><br>onkeydown 和onkeyup 不区分字母大小写，onkeypress区分大小写<br>在实际开发中，我们更多的使用keydown和keyup，他能识别所以的键。<br>keypress不识别功能键，但是keyCode属性能区分大小写，返回不同的ASCLL值 </p>
+<p>xxx.focus()获得焦点</p>
+<p>​    </p>
+<h1 id="BOM"><a href="#BOM" class="headerlink" title="BOM"></a>BOM</h1><h2 id="一，window对象是浏览器的顶级对象，它具有双重角色"><a href="#一，window对象是浏览器的顶级对象，它具有双重角色" class="headerlink" title="一，window对象是浏览器的顶级对象，它具有双重角色"></a>一，window对象是浏览器的顶级对象，它具有双重角色</h2><ol>
+<li><p>它是js访问浏览器窗口的一个接口</p>
+</li>
+<li><p>它是一个全局对象，定义在全局作用域中的变量，函数都会变成window对象的属性和方法<br>在调用的时候可以省略window，前面学习的对话框都属于window对象方法</p>
+<p> <code>注意：</code>window下的一个特殊属性 window.name</p>
+</li>
+</ol>
+<h2 id="二，窗口加载事件"><a href="#二，窗口加载事件" class="headerlink" title="二，窗口加载事件"></a>二，窗口加载事件</h2><ol>
+<li><p>window.onload=function(){}<br>​            或者<br>​    window.addEventListener(“load”,function(){})<br> window.onload是窗口（页面）加载事件，当文档内容完全加载完成会触发该事件，就调用的处理函数<br> <code>注意：</code>  </p>
+<ol>
+<li>有了window.onload就可以把js代码写到页面元素的上方，因为onload是等页面内容全部加载完毕，再去执行处理函数</li>
+<li>window.onload传统注册事件方式只能写一次，如果有多个，会以最后一个window,onload为准</li>
+<li>如果使用addEventListener则没有限制</li>
+</ol>
+</li>
+<li><p>document.addeventListener(‘DOMContentLoaded’,function(){})</p>
+<p> 仅当DOM加载完成，不包括样式表，图片，flash等等</p>
+</li>
+<li><p>window.onpageshow    是我们重新加载页面触发的时间</p>
+<pre><code>比load更安全</code></pre><p> 调整窗口大小事件</p>
+<p> window.onresize = function(){}<br> window.addEventListener(“resize”,function(){});</p>
+<p> window.onresize是调整窗口大小加载事件，当触发时就调用的处理函数</p>
+<p> <code>注意：</code>  </p>
+<ol>
+<li>只要窗口大小发生像素变化，就会触发这个事件</li>
+<li>我们经常利用这个事件完成响应式布局，window.innerWidth当前屏幕的宽度  <h2 id="三，定时器"><a href="#三，定时器" class="headerlink" title="三，定时器"></a>三，定时器</h2>​    window.setTimeout(调用函数,[延迟的毫秒数]);<br>​    用于设置一个定时器，该定时器在定时器到期后执行调用函数<br>​<br><code>注意：</code></li>
+</ol>
+</li>
+<li><p>window可以省略</p>
+</li>
+<li><p>这个调用函数可以直接写函数，或者写函数名或者采取字符串’函数名()’，第三种不推荐</p>
+</li>
+<li><p>延迟的毫秒数省略默认是0，如果写，必须是毫秒</p>
+</li>
+<li><p>因为定时器可能有很多，所以我们经常给定时器赋值一个标识符<br> window.clearTimeout(timeout ID)</p>
+<p> 取消了先前通过调用setTimeout()建立的定时器</p>
+<p> <code>注意：</code></p>
+<ol>
+<li>window可以省略</li>
+<li>里面的参数就是定时器的标识符（定时器的名字）</li>
+</ol>
+</li>
+</ol>
+<pre><code>window.setInterval(调用函数,[延迟的毫秒数]);  
+每隔这个延时时间，就去调用这个回调函数，重复调用这个函数      
+停止：chearInterval(名字)；
+
+`注意：`
+1. window可以省略
+2. 这个调用函数可以直接谐函数，或者写函数名或者采取字符串&apos;函数名()&apos;，第三种不推荐
+3. 延迟的毫秒数省略默认是0，如果写，必须是毫秒
+4. 因为定时器可能有很多，所以我们经常给定时器赋值一个标识符</code></pre><h2 id="四，this指向问题"><a href="#四，this指向问题" class="headerlink" title="四，this指向问题"></a>四，this指向问题</h2><p>一般情况下this的最终指向的是哪个调用它的对象</p>
+<ol>
+<li><p>全局作用域或者普通函数中this指向全局对象window（注意定时器里面的this指向window）</p>
+</li>
+<li><p>方法调用中  谁调用this指向谁</p>
+</li>
+<li><p>构造函数中this指向构造函数的实例对象</p>
+</li>
+</ol>
+<h2 id="五，同步和异步"><a href="#五，同步和异步" class="headerlink" title="五，同步和异步"></a>五，同步和异步</h2><p>为了解决这个问题，利用多核CPU的计算能力，HTML5提出Web Worker标准，允许JS脚本创建多个线程，于是，js中出现了同步和异步<br>本质区别：这条流水线上各个流程的执行顺序不同</p>
+<h2 id="六，执行机制"><a href="#六，执行机制" class="headerlink" title="六，执行机制"></a>六，执行机制</h2><ul>
+<li>同步任务：<br>  在主线程上执行，形成一个执行栈。</li>
+<li>异步任务：<br>  js的异步是通过回调函数实现的<br>  一般而言，异步任务有以下三种：    <ol>
+<li>普通事件：click，resize等</li>
+<li>资源加载：load，error等</li>
+<li>定时器：setLnterval，setTimeout等</li>
+</ol>
+</li>
+</ul>
+<pre><code>异步任务相关回调函数添加到任务队列中（消息队列）</code></pre><h2 id="七，location对象"><a href="#七，location对象" class="headerlink" title="七，location对象"></a>七，location对象</h2><table>
+<thead>
+<tr>
+<th align="center">属性</th>
+<th align="center">返回值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">*href</td>
+<td align="center">获取或者设置整个URL</td>
+</tr>
+<tr>
+<td align="center">host</td>
+<td align="center">返回主机（域名）</td>
+</tr>
+<tr>
+<td align="center">port</td>
+<td align="center">返回端口号，如果未写返回 空字符串</td>
+</tr>
+<tr>
+<td align="center">pathname</td>
+<td align="center">返回路径</td>
+</tr>
+<tr>
+<td align="center">*search</td>
+<td align="center">返回参数</td>
+</tr>
+<tr>
+<td align="center">hash</td>
+<td align="center">返回片段 #后面内容 常见于链接锚点</td>
+</tr>
+</tbody></table>
+<p>跳转页面：<br>    location.href = ‘<a href="http://www.baidu.com&#39;" target="_blank" rel="noopener">http://www.baidu.com&#39;</a>;</p>
+<p>​        </p>
+<table>
+<thead>
+<tr>
+<th align="center">方法</th>
+<th align="center">返回值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">location.assign()</td>
+<td align="center">跟href一样，可以跳转页面（也称为重定向页面）</td>
+</tr>
+<tr>
+<td align="center">location.replace()</td>
+<td align="center">替换当前页面，因为不记录历史，所以不能后退页面</td>
+</tr>
+<tr>
+<td align="center">location.reload()</td>
+<td align="center">重新加载页面，相当于刷新按钮或者f5，如果参数为true 强制刷新ctrl+f5</td>
+</tr>
+</tbody></table>
+<h2 id="八，navigator对象"><a href="#八，navigator对象" class="headerlink" title="八，navigator对象"></a>八，navigator对象</h2><p>包含有关浏览器的信息，他有很多属性，我们最常用的是userAgent,该属性可以返回由客户机发送服务器的user-agent头部的值</p>
+<h2 id="九，history对象"><a href="#九，history对象" class="headerlink" title="九，history对象"></a>九，history对象</h2><p>window对象给我们提供了一个history对象，与浏览器历史记录进行交互，该对象包含用户（在浏览器窗口中）访问过的URL</p>
+<p>​    </p>
+<table>
+<thead>
+<tr>
+<th align="center">方法</th>
+<th align="center">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">back()</td>
+<td align="center">后退功能</td>
+</tr>
+<tr>
+<td align="center">forward()</td>
+<td align="center">前进功能</td>
+</tr>
+<tr>
+<td align="center">go(参数)</td>
+<td align="center">参数1 前进    参数-1 后退</td>
+</tr>
+</tbody></table>
+<h1 id="高高级"><a href="#高高级" class="headerlink" title="高高级"></a>高高级</h1><h2 id="一，元素偏移量-offset-系列"><a href="#一，元素偏移量-offset-系列" class="headerlink" title="一，元素偏移量 offset 系列"></a>一，元素偏移量 offset 系列</h2><h3 id="1，offset翻译过来就是偏移量，我们使用offset系列相关属性可以动态的得到该元素的位置（偏移），大小等"><a href="#1，offset翻译过来就是偏移量，我们使用offset系列相关属性可以动态的得到该元素的位置（偏移），大小等" class="headerlink" title="1，offset翻译过来就是偏移量，我们使用offset系列相关属性可以动态的得到该元素的位置（偏移），大小等"></a>1，offset翻译过来就是偏移量，我们使用offset系列相关属性可以动态的得到该元素的位置（偏移），大小等</h3><p>获得元素距离带有定位父元素的位置<br>获得元素自身的大小（宽度高度）<br><code>注意：</code>返回的数值都不带单位</p>
+<table>
+<thead>
+<tr>
+<th align="center">offset属性</th>
+<th align="center">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">element.offsetParent</td>
+<td align="center">返回作为该元素带有定位的父级元素，如果父级都没有定位则返回body</td>
+</tr>
+<tr>
+<td align="center">.offsetTop</td>
+<td align="center">返回元素相对带有定位父元素上方的偏移</td>
+</tr>
+<tr>
+<td align="center">.offsetLeft</td>
+<td align="center">返回元素相对带有定位父元素左方的偏移</td>
+</tr>
+<tr>
+<td align="center">.offsetWidth</td>
+<td align="center">返回自身包括padding,边框，内容区的宽度，不带单位</td>
+</tr>
+<tr>
+<td align="center">.offsetHeight</td>
+<td align="center">返回自身包括padding,边框，内容区的高度，不带单位</td>
+</tr>
+</tbody></table>
+<h3 id="2，offset与style区别"><a href="#2，offset与style区别" class="headerlink" title="2，offset与style区别"></a>2，offset与style区别</h3><p>offset：  </p>
+<ul>
+<li>可以得到任意样式表中的样式值</li>
+<li>获得的数值是没有单位的</li>
+<li>offsetWidth包含padding+border+width</li>
+<li>offsetWidth等属性是只读属性，只能获取不能赋值<br>所以，我们想要获取元素大小位置，用offset更合适</li>
+</ul>
+<p>style：</p>
+<ul>
+<li>只能得到行内样式表中的样式值</li>
+<li>style.width获得的是带有单位的字符串</li>
+<li>style.width获得不包含padding和border的值</li>
+<li>style.width是可读写属性，可以获取也可以赋值<br>所以，我们想要给元素更改值，需要用style改变</li>
+</ul>
+<h2 id="二，元素可视区client系列"><a href="#二，元素可视区client系列" class="headerlink" title="二，元素可视区client系列"></a>二，元素可视区client系列</h2><p>client翻译过来就是客户端，我们使用client系列的相关属性来获取元素可视区的相关信息</p>
+<table>
+<thead>
+<tr>
+<th align="center">element.clientTop</th>
+<th align="center">返回元素上边框大小</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">element.clientLeft</td>
+<td align="center">返回元素左边框大小</td>
+</tr>
+<tr>
+<td align="center">*element.clientWidth</td>
+<td align="center">返回自身包括padding，内容区的宽度，不含边框，返回数值不带单位</td>
+</tr>
+<tr>
+<td align="center">*element.clientHeight</td>
+<td align="center">返回自身包括padding，内容区的高度，不含边框，返回数值不带单位</td>
+</tr>
+</tbody></table>
+<p>立即执行函数：<br>    (function(){})()或者(function(){}())</p>
+<p>主要作用：创建一个独立的作用域，避免了命名冲突问题</p>
+<h2 id="三，元素滚动scroll系列"><a href="#三，元素滚动scroll系列" class="headerlink" title="三，元素滚动scroll系列"></a>三，元素滚动scroll系列</h2><p>事件<br>scroll    翻译过来就是滚动的，我们使用该系列的相关属性可以动态的得到该元素的大小，滚动距离等</p>
+<table>
+<thead>
+<tr>
+<th align="center">element.scrollTop</th>
+<th align="center">返回被卷去的上侧距离，返回值不带单位</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">element.scrollLeft</td>
+<td align="center">返回被卷去的左侧距离，返回值不带单位</td>
+</tr>
+<tr>
+<td align="center">element.scrollWidth</td>
+<td align="center">返回自身实际的宽度，不含边框，</td>
+</tr>
+<tr>
+<td align="center">element.scrollHeight</td>
+<td align="center">返回自身实际的高度，不含边框，</td>
+</tr>
+</tbody></table>
+<p>​    </p>
+<table>
+<thead>
+<tr>
+<th align="center">页面被卷去的头部</th>
+<th align="center">window.pageYOffset</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">页面被卷去的左侧</td>
+<td align="center">window.pageXOffset</td>
+</tr>
+</tbody></table>
+<p>三大系列总结</p>
+<ol>
+<li>offset系列经常用于获得元素位置    offsetLeft         offsetTop</li>
+<li>client经常用于获取元素大小        clientWidth   clientHeight</li>
+<li>scroll经常用于获取滚动距离        scrollTop         scrollLeft</li>
+<li>注意页面滚动的距离通过window.pageXOffset获得</li>
+</ol>
+<p>mouseenter和mouseover<br>    当鼠标移动到元素上时就会触发mouseenter事件<br>    类似mouseover，它们两者之间的差别是<br>    mouseover鼠标经过自身盒子会触发，经过子盒子也会触发，mouseenter只有经过自身盒子才触发<br>    因为mouseenter不会冒泡</p>
+<pre><code>window.scroll(x,y)
+    滚动窗口至文档中特定位置</code></pre><p>移动端：<br>    手指触摸DOM元素事件：touchstart<br>    手指在DOM元素身上移动：touchmove<br>    手指离开DOM元素事件：touchend</p>
+<pre><code>触摸事件对象：
+    touches：正在触摸屏幕的所有手指的列表
+    targetTouches：正在触摸当前DOM元素的手指列表
+    如果侦听的是一个DOM元素，他们两个是一样的
+    changedTouches手指状态发生了改变的列表 从无到有 或者 从有到无
+    因为我们一般都是触摸元素，所以经常使用的是 targetTouches</code></pre>]]></content>
   </entry>
 </search>
