@@ -1420,6 +1420,8 @@ return &quot;redirect:/index.jsp&quot;</code></pre><p>  ​</p>
 </li>
 <li><p>Number()<br> 作用：将一个字符串解析为number<br> 语法：</p>
 <pre><code>var result = Number(数据);  </code></pre><p> 如果包含不是数字的数 返回NaN</p>
+<a id="more"></a>
+
 </li>
 </ol>
 <h2 id="二、函数"><a href="#二、函数" class="headerlink" title="二、函数"></a>二、函数</h2><ol>
