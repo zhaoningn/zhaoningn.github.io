@@ -291,6 +291,212 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/11/%E5%BC%95%E5%85%A5%E5%9B%BE%E7%89%87%E5%AE%A1%E6%A0%B8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="赵凝">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/touxiang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="赵凝的小博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/11/11/%E5%BC%95%E5%85%A5%E5%9B%BE%E7%89%87%E5%AE%A1%E6%A0%B8/" itemprop="url">引入图片审核</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-11-11T11:14:32+08:00">
+                2020-11-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="接入百度智能云实现内容审核"><a href="#接入百度智能云实现内容审核" class="headerlink" title="接入百度智能云实现内容审核"></a>接入百度智能云实现内容审核</h1><h2 id="请求限制"><a href="#请求限制" class="headerlink" title="请求限制"></a>请求限制</h2><p>请求图像需经过<code>base64编码</code>：图像的base64编码指将一副图像数据编码成一串字符串，使用该字符串代替图像地址。您可以首先得到图像的二进制，然后用Base64格式编码即可。</p>
+<p><strong>注意</strong>：图像的base64编码是不包含图像头的，如<code>（data:image/jpg;base64,）</code></p>
+<p><strong>请求格式支持</strong>：PNG、JPG、JPEG、BMP、GIF（仅对首帧进行审核）、Webp、TIFF</p>
+<p><strong>图像大小支持</strong>：图像要求base64后大于等于5kb，小于等于4M，最短边大于等于128像素，小于等于4096像素</p>
+<h2 id="调用方式一"><a href="#调用方式一" class="headerlink" title="调用方式一"></a>调用方式一</h2><p><strong>请求URL数据格式</strong></p>
+<p>向API服务地址使用POST发送请求，必须在URL中带上参数： <strong>access_token</strong> : 必须参数，参考“<a href="http://ai.baidu.com/docs#/Auth" target="_blank" rel="noopener">Access Token获取</a>”。</p>
+<blockquote>
+<p>注意：<code>access_token</code>的有效期为30天，需要每30天进行定期更换；</p>
+</blockquote>
+<h2 id="调用方式二"><a href="#调用方式二" class="headerlink" title="调用方式二"></a>调用方式二</h2><p><strong>请求头域内容</strong></p>
+<p>在请求的HTTP头域中包含以下信息：</p>
+<ul>
+<li>host（必填）</li>
+<li>x-bce-date （必填）</li>
+<li>x-bce-request-id（选填）</li>
+<li>authorization（必填）</li>
+<li>content-type（必填）</li>
+<li>content-length（选填）</li>
+</ul>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">POST</span> <span class="string">/rest/2.0/face/v1/detect</span> HTTP/1.1</span><br><span class="line"><span class="attribute">accept-encoding</span>: gzip, deflate</span><br><span class="line"><span class="attribute">x-bce-date</span>: 2015-03-24T13:02:00Z</span><br><span class="line"><span class="attribute">connection</span>: keep-alive</span><br><span class="line"><span class="attribute">accept</span>: */*</span><br><span class="line"><span class="attribute">host</span>: aip.baidubce.com</span><br><span class="line"><span class="attribute">x-bce-request-id</span>: 73c4e74c-3101-4a00-bf44-fe246959c05e</span><br><span class="line"><span class="attribute">content-type</span>: application/x-www-form-urlencoded</span><br><span class="line"><span class="attribute">authorization</span>: bce-auth-v1/46bd9968a6194b4bbdf0341f2286ccce/2015-03-24T13:02:00Z/1800/host;x-bce-date/994014d96b0eb26578e039fa053a4f9003425da4bfedf33f4790882fb4c54903</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>说明</strong>：方式二鉴权使用的<a href="https://cloud.baidu.com/doc/Reference/AuthenticationMechanism.html" target="_blank" rel="noopener">API认证机制</a>，authorization必须通过百度云的<a href="https://cloud.baidu.com/doc/Reference/GetAKSK.html" target="_blank" rel="noopener">AK/SK</a>生成。</p>
+</blockquote>
+<h2 id="调用内容审核平台-图像接口"><a href="#调用内容审核平台-图像接口" class="headerlink" title="调用内容审核平台-图像接口"></a>调用内容审核平台-图像接口</h2><p>内容审核平台-图像接口地址（调用服务）：</p>
+<p><a href="https://aip.baidubce.com/rest/2.0/solution/v1/img_censor/v2/user_defined" target="_blank" rel="noopener">https://aip.baidubce.com/rest/2.0/solution/v1/img_censor/v2/user_defined</a></p>
+<p>请求方式：POST<br>接口说明：内容审核图像API接口。</p>
+<p><strong>注意</strong>：<br>Content-Type为<code>application/x-www-form-urlencoded</code>，然后通过<code>urlencode</code>格式化请求体。</p>
+<p><strong>URL参数</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">参数</th>
+<th align="center">值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">access_token</td>
+<td align="center">通过API Key和Secret Key获取的access_token,参考“<a href="http://ai.baidu.com/docs#/Auth" target="_blank" rel="noopener">Access Token获取</a>”</td>
+</tr>
+</tbody></table>
+<p><strong>Header</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">参数</th>
+<th align="center">值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Content-Type</td>
+<td align="center">application/x-www-form-urlencoded</td>
+</tr>
+</tbody></table>
+<p>Body中放置请求参数，参数详情如下：</p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>数据类型</th>
+<th>是否必须</th>
+<th>备注</th>
+<th>样例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>image</td>
+<td>String</td>
+<td>N （和imgUrl二选一）</td>
+<td>待审核图像Base64编码字符串， 以图像文件形式请求时必填， 图像要求base64后 大于等于5kb，小于等于4M， 最短边大于等于128像素， 小于等于4096像素， 支持的图片格式：PNG、JPG、JPEG、BMP、GIF（仅对首帧进行审核）、Webp、TIFF</td>
+<td>/9j/4AAQSkZJRgABAQ AASABIAAD/4QBYRXh pZgAATU0AKgAAAAgA AgESAAMAAAABAAYAAIdp</td>
+</tr>
+<tr>
+<td>imgUrl</td>
+<td>String</td>
+<td>N （和image二选一）</td>
+<td>图像URL地址， 以URL形式请求， 图像Url需要做UrlEncode， 图像要求base64后大于等于5kb， 小于等于4M， 最短边大于等于128像素， 小于等于4096像素 支持的图片格式：PNG、JPG、JPEG、BMP、GIF（仅对首帧进行审核）、Webp、TIFF</td>
+<td><a href="https://ai-solution-admin.cdn.bcebos.com/audit%2Fdemo%2Fcensoring-demo.jpg" target="_blank" rel="noopener">https://ai-solution-admin.cdn.bcebos.com/audit%2Fdemo%2Fcensoring-demo.jpg</a></td>
+</tr>
+<tr>
+<td>imgType</td>
+<td>uint64</td>
+<td>N</td>
+<td>图片类型0:静态图片（PNG、JPG、JPEG、BMP、GIF（仅对首帧进行审核）、Webp、TIFF），1:GIF动态图片</td>
+<td>0</td>
+</tr>
+</tbody></table>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/27/SpringBoot/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1815,164 +2021,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/02/AJAX/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="赵凝">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/touxiang.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="赵凝的小博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/04/02/AJAX/" itemprop="url">AJAX</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-02T21:37:13+08:00">
-                2020-04-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E4%BA%A4%E4%BA%92/" itemprop="url" rel="index">
-                    <span itemprop="name">数据交互</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="AJAX"><a href="#AJAX" class="headerlink" title="AJAX"></a>AJAX</h1><p>三部曲：</p>
-<ol>
-<li>编写对应处理的Controller，返回消息或者字符串或者json格式的数据；</li>
-<li>编写ajax请求<ol>
-<li>url ：Controller请求</li>
-<li>data ：键值对</li>
-<li>success ：回调函数</li>
-</ol>
-</li>
-<li>给Ajax绑定事件，点击，失去焦点，键盘弹起</li>
-</ol>
-<h2 id="注意-：使用JQuery需要导入JQuery文件。"><a href="#注意-：使用JQuery需要导入JQuery文件。" class="headerlink" title="==注意==：使用JQuery需要导入JQuery文件。"></a>==注意==：使用JQuery需要导入JQuery文件。</h2><h2 id="具体实现步骤"><a href="#具体实现步骤" class="headerlink" title="具体实现步骤"></a>具体实现步骤</h2><p>一 ，Controller部分</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/ajax"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AjaxController</span> </span>&#123;</span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/a1"</span>)</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ajax</span><span class="params">(String name, HttpServletResponse response)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="string">"admin"</span>.equals(name))&#123;</span><br><span class="line">            response.getWriter().print(<span class="string">"true"</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            response.getWriter().print(<span class="string">"false"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/04/02/AJAX/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2029,7 +2077,7 @@
             
                 <a href="/archives">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
