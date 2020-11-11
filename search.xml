@@ -1861,6 +1861,8 @@ IE678    e.cancelBubble = true;</code></pre><h3 id="6，事件委托"><a href="#
 <li>git log –graph 图形界面</li>
 <li>git log –graph –pretty=oneline –abbrev-commit  清爽模式</li>
 </ol>
+<a id="more"></a>
+
 <p>如果某个文件 已提交，并且对其进行了修改，可以放弃修改（还原到已提交状态）:<code>git checkout -- xxx.txt</code></p>
 <p>删除已提交的文件（在对象区）    git rm xxx.txt （删除后会被放到暂存区）<br>                                                        彻底删除    git commit -m”彻底删除”</p>
 <p>重命名：git mv xxx1.txt  xxx2.txt<br>    原理（复制一份1 ，起名为2，然后删除1）</p>
@@ -2054,27 +2056,16 @@ IE678    e.cancelBubble = true;</code></pre><h3 id="6，事件委托"><a href="#
 <li><p>spring-boot-dependencies：核心依赖在父工程</p>
 </li>
 <li><p>我们在写或者引入一些springBoot依赖的时候，不需要指定版本，就因为有这些版本仓库</p>
-</li>
-<li><pre><code class="xml"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span>
-        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span>
-            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>
-            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>
-        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.junit.vintage<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit-vintage-engine<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 
-        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span>
-            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>
-            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>
-            <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span>
-            <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span>
-                <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span>
-                    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.junit.vintage<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>
-                    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit-vintage-engine<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>
-                <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span>
-            <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span>
-        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span>
-    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span>
-<span class="comment"><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">**启动器**</span><br><span class="line"></span><br><span class="line">- &#96;&#96;&#96;xml</span><br><span class="line">  &lt;dependency&gt;</span><br><span class="line">              &lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;</span><br><span class="line">              &lt;artifactId&gt;spring-boot-starter-web&lt;&#x2F;artifactId&gt;</span><br><span class="line">  &lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure></span></code></pre>
+
 </li>
+</ul>
+<p><strong>启动器</strong></p>
+ <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
 <li><p>启动器：说白了就是Springboot的启动场景</p>
 </li>
 <li><p>比如spring-boot-starter-web，他会帮我们自动导入web环境所有的依赖</p>
@@ -2284,28 +2275,73 @@ IE678    e.cancelBubble = true;</code></pre><h3 id="6，事件委托"><a href="#
 <p>默认使用application.properties的配置；</p>
 <h3 id="2、yml支持多文档块方式"><a href="#2、yml支持多文档块方式" class="headerlink" title="2、yml支持多文档块方式"></a>2、yml支持多文档块方式</h3><h3 id="3、激活指定profile"><a href="#3、激活指定profile" class="headerlink" title="3、激活指定profile"></a>3、激活指定profile</h3><ul>
 <li><p>在配置文件中指定spring.profiles.active=xxx</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8081</span></span><br><span class="line"></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">profiles:</span></span><br><span class="line">    <span class="attr">active:</span> <span class="string">dev</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8082</span></span><br><span class="line"></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">profiles:</span> <span class="string">dev</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8083</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">profiles:</span> <span class="string">prod</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><pre><code class="yaml"><span class="attr">server:</span>
-  <span class="attr">port:</span> <span class="number">8081</span>
-
-<span class="attr">spring:</span>
-  <span class="attr">profiles:</span>
-    <span class="attr">active:</span> <span class="string">dev</span>
-<span class="meta">---</span>
-<span class="attr">server:</span>
-  <span class="attr">port:</span> <span class="number">8082</span>
-
-<span class="attr">spring:</span>
-  <span class="attr">profiles:</span> <span class="string">dev</span>
-<span class="meta">---</span>
-<span class="attr">server:</span>
-  <span class="attr">port:</span> <span class="number">8083</span>
-<span class="attr">spring:</span>
-  <span class="attr">profiles:</span> <span class="string">prod</span>
-<span class="string"><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">- 命令行：</span><br><span class="line"></span><br><span class="line">  - --spring.profiles.active&#x3D;xxx</span><br><span class="line"></span><br><span class="line">    可以直接在测试的时候，配置传入命令行参数</span><br><span class="line"></span><br><span class="line">- 虚拟机参数：</span><br><span class="line"></span><br><span class="line">  ​	-Dspring.profiles.active&#x3D;xxx</span><br><span class="line"></span><br><span class="line">## 6、配置文件加载位置</span><br><span class="line"></span><br><span class="line">Spring Boot启动会扫描以下位置的application.properties或者application.yml文件作为Spring Boot的默认配置文件</span><br><span class="line"></span><br><span class="line">1. file:.&#x2F;config&#x2F;</span><br><span class="line">2. file:.&#x2F;</span><br><span class="line">3. classpath:&#x2F;config&#x2F;</span><br><span class="line">4. classpath:&#x2F;</span><br><span class="line"></span><br><span class="line">以上是按照优先级从高到低的顺序，所有位置的文件都会被加载，高优先级配置内容会覆盖低优先级配置内容</span><br><span class="line"></span><br><span class="line">我们也可以通过配置spring.config.location来改变默认配置（命令行模式）</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## 7、外部配置加载顺序</span><br><span class="line"></span><br><span class="line">Spring Boot 也可以从以下位置加载配置；优先级从高到低；高优先级的配置覆盖低优先级的配置，所有的配置会形成互补配置</span><br><span class="line"></span><br><span class="line">1. &#x3D;&#x3D;命令行参数&#x3D;&#x3D;</span><br><span class="line"></span><br><span class="line">   java -jar xxx.jar --server.port&#x3D;8087 --server.context-path&#x3D;&#x2F;asd</span><br><span class="line"></span><br><span class="line">2. 来自java:comp&#x2F;env的NDI属性</span><br><span class="line"></span><br><span class="line">3. Java系统属性（System.getProperties()）</span><br><span class="line"></span><br><span class="line">4. 操作系统环境变量</span><br><span class="line"></span><br><span class="line">5. RandomValuePropertySource配置的random.*属性值</span><br><span class="line"></span><br><span class="line">6. &#x3D;&#x3D;jar包外部的application-&#123;profile&#125;.properties或application.yml(带spring.profile)配置文件&#x3D;&#x3D;</span><br><span class="line"></span><br><span class="line">7. &#x3D;&#x3D;jar包内部的application-&#123;profile&#125;.properties或application.yml(带spring.profile)配置文件&#x3D;&#x3D;</span><br><span class="line"></span><br><span class="line">8. &#x3D;&#x3D;jar包外部的application.properties或application.yml(不带spring.profile)配置文件&#x3D;&#x3D;</span><br><span class="line"></span><br><span class="line">9. &#x3D;&#x3D;jar包内部的application.properties或application.yml(不带spring.profile)配置文件&#x3D;&#x3D;</span><br><span class="line"></span><br><span class="line">10. @Configuration注解类上的@PropertySource</span><br><span class="line"></span><br><span class="line">11. 通过SpringApplication.setDefaultProperties指定的默认属性</span><br><span class="line"></span><br><span class="line">12. 所有支持的配置加载来源</span><br><span class="line"></span><br><span class="line">##  8、自动配置</span><br><span class="line"></span><br><span class="line">###  1、自动配置原理</span><br><span class="line"></span><br><span class="line">配置文件到底能写什么？怎么写？自动配置原理</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">1. SpringBoot启动的时候加载主配置类，开启了自动配置功@EnableAutoConfiguration</span><br><span class="line"></span><br><span class="line">2. @EnableAutoConfiguration的作用：</span><br><span class="line"></span><br><span class="line">   1. 利用AutoConfigurationImportSelector给容器中导入一些组件</span><br><span class="line"></span><br><span class="line">   2. 详细可以查看selectImports方法中的内容，可以看导入那些组件</span><br><span class="line"></span><br><span class="line">   3. List&lt;String&gt; configurations &#x3D; getCandidateConfigurations(annotationMetadata, attributes);获取候选的配置</span><br><span class="line"></span><br><span class="line">      &#96;&#96;&#96;java</span><br><span class="line">      SpringFactoriesLoader.loadFactoryNames(getSpringFactoriesLoaderFactoryClass(),</span><br><span class="line">            getBeanClassLoader());</span><br><span class="line">      &#x2F;&#x2F;扫描所有jar包类路径下 META-INF&#x2F;spring.factories</span><br><span class="line">      &#x2F;&#x2F;把扫描到的这些文件的内容包装成properties对象</span><br><span class="line">      &#x2F;&#x2F;从properites中获取到EnableAutoConfiguration.class类（类名）对应的值，然后把他们添加在容器中</span><br></pre></td></tr></table></figure></span>
-</code></pre>
+<li><p>命令行：</p>
+<ul>
+<li><p>–spring.profiles.active=xxx</p>
+<p>可以直接在测试的时候，配置传入命令行参数</p>
 </li>
 </ul>
+</li>
+<li><p>虚拟机参数：</p>
+<p>​    -Dspring.profiles.active=xxx</p>
+</li>
+</ul>
+<h2 id="6、配置文件加载位置"><a href="#6、配置文件加载位置" class="headerlink" title="6、配置文件加载位置"></a>6、配置文件加载位置</h2><p>Spring Boot启动会扫描以下位置的application.properties或者application.yml文件作为Spring Boot的默认配置文件</p>
+<ol>
+<li>file:./config/</li>
+<li>file:./</li>
+<li>classpath:/config/</li>
+<li>classpath:/</li>
+</ol>
+<p>以上是按照优先级从高到低的顺序，所有位置的文件都会被加载，高优先级配置内容会覆盖低优先级配置内容</p>
+<p>我们也可以通过配置spring.config.location来改变默认配置（命令行模式）</p>
+<h2 id="7、外部配置加载顺序"><a href="#7、外部配置加载顺序" class="headerlink" title="7、外部配置加载顺序"></a>7、外部配置加载顺序</h2><p>Spring Boot 也可以从以下位置加载配置；优先级从高到低；高优先级的配置覆盖低优先级的配置，所有的配置会形成互补配置</p>
+<ol>
+<li><p>==命令行参数==</p>
+<p>java -jar xxx.jar –server.port=8087 –server.context-path=/asd</p>
+</li>
+<li><p>来自java:comp/env的NDI属性</p>
+</li>
+<li><p>Java系统属性（System.getProperties()）</p>
+</li>
+<li><p>操作系统环境变量</p>
+</li>
+<li><p>RandomValuePropertySource配置的random.*属性值</p>
+</li>
+<li><p>==jar包外部的application-{profile}.properties或application.yml(带spring.profile)配置文件==</p>
+</li>
+<li><p>==jar包内部的application-{profile}.properties或application.yml(带spring.profile)配置文件==</p>
+</li>
+<li><p>==jar包外部的application.properties或application.yml(不带spring.profile)配置文件==</p>
+</li>
+<li><p>==jar包内部的application.properties或application.yml(不带spring.profile)配置文件==</p>
+</li>
+<li><p>@Configuration注解类上的@PropertySource</p>
+</li>
+<li><p>通过SpringApplication.setDefaultProperties指定的默认属性</p>
+</li>
+<li><p>所有支持的配置加载来源</p>
+</li>
+</ol>
+<h2 id="8、自动配置"><a href="#8、自动配置" class="headerlink" title="8、自动配置"></a>8、自动配置</h2><h3 id="1、自动配置原理"><a href="#1、自动配置原理" class="headerlink" title="1、自动配置原理"></a>1、自动配置原理</h3><p>配置文件到底能写什么？怎么写？自动配置原理</p>
+<ol>
+<li><p>SpringBoot启动的时候加载主配置类，开启了自动配置功@EnableAutoConfiguration</p>
+</li>
+<li><p>@EnableAutoConfiguration的作用：</p>
+<ol>
+<li><p>利用AutoConfigurationImportSelector给容器中导入一些组件</p>
+</li>
+<li><p>详细可以查看selectImports方法中的内容，可以看导入那些组件</p>
+</li>
+<li><p>List<String> configurations = getCandidateConfigurations(annotationMetadata, attributes);获取候选的配置</String></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">SpringFactoriesLoader.loadFactoryNames(getSpringFactoriesLoaderFactoryClass(),</span><br><span class="line">      getBeanClassLoader());</span><br><span class="line"><span class="comment">//扫描所有jar包类路径下 META-INF/spring.factories</span></span><br><span class="line"><span class="comment">//把扫描到的这些文件的内容包装成properties对象</span></span><br><span class="line"><span class="comment">//从properites中获取到EnableAutoConfiguration.class类（类名）对应的值，然后把他们添加在容器中</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+</li>
+</ol>
 <p><strong>将类路径下 META-INF/spring.factories 里面配置的所有EnableAutoConfiguration的值加入到了容器中</strong></p>
 <p>每一个这样的xxxAutoConfiguration类都是容器中的一个组件，都加入到容器中；用他们来做自动配置；</p>
 <ol start="3">
