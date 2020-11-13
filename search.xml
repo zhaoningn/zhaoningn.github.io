@@ -3405,4 +3405,37 @@ IE678    e.cancelBubble = true;</code></pre><h3 id="6，事件委托"><a href="#
         <tag>java</tag>
       </tags>
   </entry>
+  <entry>
+    <title>十大经典排序</title>
+    <url>/2020/11/13/%E5%8D%81%E5%A4%A7%E7%BB%8F%E5%85%B8%E6%8E%92%E5%BA%8F/</url>
+    <content><![CDATA[<h2 id="一、冒泡排序"><a href="#一、冒泡排序" class="headerlink" title="一、冒泡排序"></a>一、冒泡排序</h2><h3 id="1-基本思想"><a href="#1-基本思想" class="headerlink" title="1. 基本思想"></a>1. 基本思想</h3><p>​        两个数比较大小，较大的数沉下去，较小的数冒起来</p>
+<h3 id="2-算法描述"><a href="#2-算法描述" class="headerlink" title="2. 算法描述"></a>2. 算法描述</h3><ul>
+<li>比较相邻的元素。如果第一个比第二个大，就交换它们两个；</li>
+<li>对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对，这样在最后的元素应该会是最大的数；</li>
+<li>针对所有的元素重复以上的步骤，除了最后一个；</li>
+<li>重复步骤1~3，直到排序完成。</li>
+</ul>
+<h3 id="3-动图演示"><a href="#3-动图演示" class="headerlink" title="3.动图演示"></a>3.动图演示</h3><p><img src="/2020/11/13/%E5%8D%81%E5%A4%A7%E7%BB%8F%E5%85%B8%E6%8E%92%E5%BA%8F/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F.gif" alt="冒泡排序"></p>
+<h3 id="4-代码实现"><a href="#4-代码实现" class="headerlink" title="4. 代码实现"></a>4. 代码实现</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] bubbleSort(<span class="keyword">int</span>[] array) &#123;</span><br><span class="line">    <span class="comment">//判断数组的长度是否为0</span></span><br><span class="line">     <span class="keyword">if</span> (array.length == <span class="number">0</span>)</span><br><span class="line">         <span class="keyword">return</span> array;</span><br><span class="line">    <span class="comment">//双重循环遍历数组</span></span><br><span class="line">    <span class="comment">//第一层，从0开始，i每次加一，使得里面的循环每次都减少一次</span></span><br><span class="line">     <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.length; i++)</span><br><span class="line">         <span class="comment">//第二层，每次从0开始，每循环完一次，循环的长度就减一，因为每循环完一次，就会有一个数被排好</span></span><br><span class="line">         <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; array.length - <span class="number">1</span> - i; j++)</span><br><span class="line">             <span class="keyword">if</span> (array[j + <span class="number">1</span>] &lt; array[j]) &#123;</span><br><span class="line">                 <span class="keyword">int</span> temp = array[j + <span class="number">1</span>];</span><br><span class="line">                 array[j + <span class="number">1</span>] = array[j];</span><br><span class="line">                 array[j] = temp;</span><br><span class="line">             &#125;</span><br><span class="line">     <span class="keyword">return</span> array;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="二、选择排序"><a href="#二、选择排序" class="headerlink" title="二、选择排序"></a>二、选择排序</h2><h3 id="1-基本思想："><a href="#1-基本思想：" class="headerlink" title="1. 基本思想："></a>1. 基本思想：</h3><p>选择排序(Selection-sort)是一种简单直观的排序算法。它的工作原理：首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置，然后，再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。以此类推，直到所有元素均排序完毕。</p>
+<h3 id="2-算法描述-1"><a href="#2-算法描述-1" class="headerlink" title="2. 算法描述"></a>2. 算法描述</h3><p>(n个记录的直接选择排序可经过n-1趟直接选择排序得到有序结果）</p>
+<p>说明：无序区就是还没排序的区域，有序区就是已经排好的区域，只用到了一个数组</p>
+<ul>
+<li>初始状态：无序区为R[1..n]，有序区为空；</li>
+<li>第i趟排序(i=1,2,3…n-1)开始时，当前有序区和无序区分别为R[1..i-1]和R[i..n]。该趟排序从当前无序区中选出关键字最小的记录 R[k]，将它与无序区的第1个记录R交换，使R[1..i]和R[i+1..n)分别变为记录个数增加1个的新有序区和记录个数减少1个的新无序区；</li>
+<li>n-1趟结束，数组有序化了。</li>
+</ul>
+<h3 id="3-动图演示-1"><a href="#3-动图演示-1" class="headerlink" title="3. 动图演示"></a>3. 动图演示</h3><p><img src="/2020/11/13/%E5%8D%81%E5%A4%A7%E7%BB%8F%E5%85%B8%E6%8E%92%E5%BA%8F/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F.gif" alt="选择排序"></p>
+<h3 id="4-代码实现-1"><a href="#4-代码实现-1" class="headerlink" title="4. 代码实现"></a>4. 代码实现</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] selectionSort(<span class="keyword">int</span>[] array) &#123;</span><br><span class="line">        <span class="keyword">if</span> (array.length == <span class="number">0</span>)</span><br><span class="line">             <span class="keyword">return</span> array;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.length; i++) &#123;    	   <span class="comment">// 一共循环n-1次就可以实现了</span></span><br><span class="line">            <span class="keyword">int</span> minIndex = i;            				  <span class="comment">// 将无序区的第一个元素下标存起来，令它为最小值</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &lt; array.length; j++) &#123;       <span class="comment">//从无序区的第一个元素开始，到最后一个元素结束</span></span><br><span class="line">                <span class="keyword">if</span> (array[j] &lt; array[minIndex])			  <span class="comment">//找到最小的数</span></span><br><span class="line">                    minIndex = j; 						<span class="comment">//将最小数的索引保存</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//将最小的数和无序区第一个数进行交换</span></span><br><span class="line">            <span class="keyword">int</span> temp = array[minIndex];</span><br><span class="line">            array[minIndex] = array[i];</span><br><span class="line">            array[i] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> array;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>算法</category>
+        <category>排序算法</category>
+      </categories>
+      <tags>
+        <tag>排序算法</tag>
+      </tags>
+  </entry>
 </search>
