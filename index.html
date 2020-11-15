@@ -291,6 +291,378 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AE%80%E4%BB%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="赵凝">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/touxiang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="赵凝的小博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/11/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AE%80%E4%BB%8B/" itemprop="url">设计模式简介</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-11-14T17:36:13+08:00">
+                2020-11-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h2><h3 id="1-设计模式遵循六大原则"><a href="#1-设计模式遵循六大原则" class="headerlink" title="1. 设计模式遵循六大原则"></a>1. 设计模式遵循六大原则</h3><ol>
+<li>单一职责（一个类和方法只做一件事）</li>
+<li>里氏替换（多态，子类可扩展父类）</li>
+<li>依赖倒置（细节依赖抽象，下层依赖上层）</li>
+<li>接口隔离（建立单一的接口）</li>
+<li>迪米特原则（最少知道，降低耦合）</li>
+<li>开闭原则（抽象架构，扩展实现）</li>
+</ol>
+<h3 id="2-三个模式"><a href="#2-三个模式" class="headerlink" title="2. 三个模式"></a>2. 三个模式</h3><h4 id="1、创建型模式"><a href="#1、创建型模式" class="headerlink" title="1、创建型模式"></a>1、创建型模式</h4><p>这类模式提供创建对象的机制，能够提升已有代码的灵活性和可复用性</p>
+<table>
+<thead>
+<tr>
+<th align="center">类型</th>
+<th align="center">图稿</th>
+<th align="center">业务场景</th>
+<th align="center">实现要点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">工厂方法</td>
+<td align="center"><img src="/2020/11/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AE%80%E4%BB%8B/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E5%9B%BE%E7%A8%BF.png" alt="工厂方法图稿"></td>
+<td align="center">多种类型商品不同接口，统一发奖服务搭建场景</td>
+<td align="center">定义⼀个创建对象的接⼝，让其⼦类⾃ ⼰决定实例化哪⼀个⼯⼚类，⼯⼚模式 使其创建过程延迟到⼦类进⾏。</td>
+</tr>
+<tr>
+<td align="center">抽 象 ⼯ ⼚</td>
+<td align="center"><img src="/2020/11/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AE%80%E4%BB%8B/%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E5%9B%BE%E7%A8%BF.png" alt="抽象工厂图稿"></td>
+<td align="center">替换Redis双集群 升级，代理类抽象 场景</td>
+<td align="center">提供⼀个创建⼀系列相关或相互依赖对 象的接⼝，⽽⽆需指定它们具体的类。</td>
+</tr>
+<tr>
+<td align="center">建 造 者</td>
+<td align="center"><img src="/2020/11/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AE%80%E4%BB%8B/%E5%BB%BA%E9%80%A0%E8%80%85%E5%9B%BE%E7%A8%BF.png" alt="建造者图稿"></td>
+<td align="center">各项装修物料组合 套餐选配场景</td>
+<td align="center">将⼀个复杂的构建与其表示相分离，使 得同样的构建过程可以创建不同的表 示。</td>
+</tr>
+<tr>
+<td align="center">原 型</td>
+<td align="center"><img src="/2020/11/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AE%80%E4%BB%8B/%E5%8E%9F%E5%9E%8B%E5%9B%BE%E7%A8%BF.png" alt="原型图稿"></td>
+<td align="center">上机考试多套试， 每⼈题⽬和答案乱 序排列场景</td>
+<td align="center">⽤原型实例指定创建对象的种类，并且 通过拷⻉这些原型创建新的对象。</td>
+</tr>
+<tr>
+<td align="center">单 例</td>
+<td align="center"><img src="/2020/11/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AE%80%E4%BB%8B/%E5%8D%95%E4%BE%8B%E5%9B%BE%E7%A8%BF.png" alt="单例图稿"></td>
+<td align="center">7种单例模式案 例，Effective Java 作者推荐枚举单例 模式</td>
+<td align="center">保证⼀个类仅有⼀个实例，并提供⼀个 访问它的全局访问点。</td>
+</tr>
+</tbody></table>
+<h4 id="2、结构型模式"><a href="#2、结构型模式" class="headerlink" title="2、结构型模式"></a>2、结构型模式</h4><p>这类模式介绍如何将对象和类组装成较大的结构，并同时保持结构的灵活和高效</p>
+<table>
+<thead>
+<tr>
+<th align="left">类型</th>
+<th align="center">图稿</th>
+<th align="center">业务场景</th>
+<th align="center">实现要点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">适 配 器</td>
+<td align="center"><img src="/2020/11/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AE%80%E4%BB%8B/%E9%80%82%E9%85%8D%E5%99%A8%E5%9B%BE%E7%A8%BF.png" alt="适配器图稿"></td>
+<td align="center">从多个MQ消息体中， 抽取指定字段值场景</td>
+<td align="center">将⼀个类的接⼝转换成客户希望的另外 ⼀个接⼝。适配器模式使得原本由于接 ⼝不兼容⽽不能⼀起⼯作的那些类可以 ⼀起⼯作。</td>
+</tr>
+<tr>
+<td align="left">桥 接</td>
+<td align="center"><img src="/2020/11/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AE%80%E4%BB%8B/%E6%A1%A5%E6%8E%A5%E5%9B%BE%E7%A8%BF.png" alt="桥接图稿"></td>
+<td align="center">多⽀付渠道(微信、⽀ 付宝)与多⽀付模式(刷 脸、指纹)场景</td>
+<td align="center">将抽象部分与实现部分分离，使它们都 可以独⽴的变化。</td>
+</tr>
+<tr>
+<td align="left">组 合</td>
+<td align="center"><img src="/2020/11/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AE%80%E4%BB%8B/%E7%BB%84%E5%90%88%E5%9B%BE%E7%A8%BF.png" alt="组合图稿"></td>
+<td align="center">营销差异化⼈群发券， 决策树引擎搭建场景</td>
+<td align="center">将对象组合成树形结构以表示”部分-整 体”的层次结构。组合模式使得⽤户对 单个对象和组合对象的使⽤具有⼀致 性。</td>
+</tr>
+<tr>
+<td align="left">装 饰</td>
+<td align="center"><img src="/2020/11/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AE%80%E4%BB%8B/%E8%A3%85%E9%A5%B0%E5%9B%BE%E7%A8%BF.png" alt="装饰图稿"></td>
+<td align="center">SSO单点登录功能扩 展，增加拦截⽤户访问 ⽅法范围场景</td>
+<td align="center">动态地给⼀个对象添加⼀些额外的职 责。就增加功能来说，装饰器模式相⽐ ⽣成⼦类更为灵活。</td>
+</tr>
+<tr>
+<td align="left">外观</td>
+<td align="center"><img src="/2020/11/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AE%80%E4%BB%8B/%E5%A4%96%E8%A7%82%E5%9B%BE%E7%A8%BF.png" alt="外观图稿"></td>
+<td align="center">基于SpringBoot开发 ⻔⾯模式中间件，统⼀ 控制接⼝⽩名单场景</td>
+<td align="center">为⼦系统中的⼀组接⼝提供⼀个⼀致的 界⾯，外观模式定义了⼀个⾼层接⼝， 这个接⼝使得这⼀⼦系统更加容易使 ⽤。</td>
+</tr>
+<tr>
+<td align="left">享元</td>
+<td align="center"><img src="/2020/11/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AE%80%E4%BB%8B/%E4%BA%AB%E5%85%83%E5%9B%BE%E7%A8%BF.png" alt="享元图稿"></td>
+<td align="center">基于Redis秒杀，提供 活动与库存信息查询场 景</td>
+<td align="center">运⽤共享技术有效地⽀持⼤量细粒度的 对象。</td>
+</tr>
+<tr>
+<td align="left">代理</td>
+<td align="center"><img src="/2020/11/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AE%80%E4%BB%8B/%E4%BB%A3%E7%90%86%E5%9B%BE%E7%A8%BF.png" alt="代理图稿"></td>
+<td align="center">模拟mybatis-spring中 定义DAO接⼝，使⽤代 理类⽅式操作数据库原 理实现场景</td>
+<td align="center">为其他对象提供⼀种代理以控制对这个 对象的访问。</td>
+</tr>
+</tbody></table>
+<h4 id="3、行为模式"><a href="#3、行为模式" class="headerlink" title="3、行为模式"></a>3、行为模式</h4><p>负责对象间的高效沟通和职责委派</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th align="center">图稿</th>
+<th align="center">业务场景</th>
+<th align="center">实现要点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>责任链</td>
+<td align="center"><img src="/2020/11/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AE%80%E4%BB%8B/%E8%B4%A3%E4%BB%BB%E9%93%BE.png" alt="责任链"></td>
+<td align="center">模拟618电商⼤促 期间，项⽬上线流 程多级负责⼈审批 场景</td>
+<td align="center">避免请求发送者与接收者耦合在⼀起，让多 个对象都有可能接收请求，将这些对象连接 成⼀条链，并且沿着这条链传递请求，直到 有对象处理它为⽌。</td>
+</tr>
+<tr>
+<td>命令</td>
+<td align="center"><img src="/2020/11/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AE%80%E4%BB%8B/%E5%91%BD%E4%BB%A4.png" alt="命令"></td>
+<td align="center">模拟⾼档餐厅⼋⼤菜系，小二点单厨师烹饪场景</td>
+<td align="center">将一个请求封装成一个对象，从而使您可以用不同的请求对客户进行参数化</td>
+</tr>
+<tr>
+<td>迭代器</td>
+<td align="center"><img src="/2020/11/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AE%80%E4%BB%8B/%E8%BF%AD%E4%BB%A3%E5%99%A8.png" alt="迭代器"></td>
+<td align="center">模拟公司组织架构 树结构关系，深度 迭代遍历⼈员信息 输出场景</td>
+<td align="center">提供⼀种⽅法顺序访问⼀个聚合对象中各个 元素, ⽽⼜⽆须暴露该对象的内部表示。</td>
+</tr>
+<tr>
+<td>中介者</td>
+<td align="center"><img src="/2020/11/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AE%80%E4%BB%8B/%E4%B8%AD%E4%BB%8B%E8%80%85.png" alt="中介者"></td>
+<td align="center">按照Mybatis原理 ⼿写ORM框架，给 JDBC⽅式操作数据 库增加中介者场景</td>
+<td align="center">⽤⼀个中介对象来封装⼀系列的对象交互， 中介者使各对象不需要显式地相互引⽤，从 ⽽使其耦合松散，⽽且可以独⽴地改变它们 之间的交互。</td>
+</tr>
+<tr>
+<td>备忘录</td>
+<td align="center"><img src="/2020/11/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AE%80%E4%BB%8B/%E5%A4%87%E5%BF%98%E5%BD%95.png" alt="备忘录"></td>
+<td align="center">模拟互联⽹系统上 线过程中，配置⽂ 件回滚场景</td>
+<td align="center">在不破坏封装性的前提下，捕获⼀个对象的 内部状态，并在该对象之外保存这个状态。</td>
+</tr>
+<tr>
+<td>观察者</td>
+<td align="center"><img src="/2020/11/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AE%80%E4%BB%8B/%E8%A7%82%E5%AF%9F%E8%80%85.png" alt="观察者"></td>
+<td align="center">模拟类似⼩客⻋指 标摇号过程，监听 消息通知⽤户中签 场景</td>
+<td align="center">定义对象间的⼀种⼀对多的依赖关系，当⼀ 个对象的状态发⽣改变时，所有依赖于它的 对象都得到通知并被⾃动更新。</td>
+</tr>
+<tr>
+<td>状态</td>
+<td align="center"><img src="/2020/11/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AE%80%E4%BB%8B/%E7%8A%B6%E6%80%81.png" alt="状态"></td>
+<td align="center">模拟系统营销活 动，状态流程审核 发布上线场景</td>
+<td align="center">允许对象在内部状态发⽣改变时改变它的⾏ 为，对象看起来好像修改了它的类。</td>
+</tr>
+<tr>
+<td>策略</td>
+<td align="center"><img src="/2020/11/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AE%80%E4%BB%8B/%E7%AD%96%E7%95%A5.png" alt="策略"></td>
+<td align="center">模拟多种营销类型 优惠券，折扣⾦额 计算策略场景</td>
+<td align="center">定义⼀系列的算法,把它们⼀个个封装起来, 并且使它们可相互替换。</td>
+</tr>
+<tr>
+<td>模板方法</td>
+<td align="center"><img src="/2020/11/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AE%80%E4%BB%8B/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95.png" alt="模板方法"></td>
+<td align="center">模拟爬⾍各类电商 商品，⽣成营销推 ⼴海报场景</td>
+<td align="center">定义⼀个操作中的算法的⻣架，⽽将⼀些步 骤延迟到⼦类中。模板⽅法使得⼦类可以不 改变⼀个算法的结构即可᯿定义该算法的某 些特定步骤。</td>
+</tr>
+<tr>
+<td>访问者</td>
+<td align="center"><img src="/2020/11/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AE%80%E4%BB%8B/%E8%AE%BF%E9%97%AE%E8%80%85.png" alt="访问者"></td>
+<td align="center">模拟家⻓与校⻓， 对学⽣和⽼师的不 同视⻆信息的访问 场景</td>
+<td align="center">主要将数据结构与数据操作分离。</td>
+</tr>
+</tbody></table>
+<h3 id="3-六大原则详解"><a href="#3-六大原则详解" class="headerlink" title="3. 六大原则详解"></a>3. 六大原则详解</h3><h4 id="1-单一职责原则"><a href="#1-单一职责原则" class="headerlink" title="1. 单一职责原则"></a>1. 单一职责原则</h4><p>就一个类而言，应该仅有一个引起它变化的原因</p>
+<p>我们做编程的时候，很自然的就会给一个类加各种各样的功能，比如我们写一个窗体应用程序，一般都会生成一个Form这样的类，于是我们就把各种各样的代码（商业运算，sql语句）写到这个类中，这就意味着，无论什么需求要添加，都要更改这个窗体类，这样维护麻烦，复用也不可能，也缺乏灵活行。</p>
+<p>如果一个类承担的职责过多，就等于把这些职责耦合在一起，一个职责的变化可能会削弱或者抑制这个类完成其他职责的能力，这种耦合会导致脆弱的设计，当变化发生时，设计会遭受到意想不到的破坏。</p>
+<p>软件设计真正要做的许多内容，就是发现职责并把那些职责相互分离。</p>
+<p>如果能想到多于一个的动机去改变一个类，那么这个类就具有对于一个的职责</p>
+<h4 id="2-开放-封闭原则"><a href="#2-开放-封闭原则" class="headerlink" title="2. 开放-封闭原则"></a>2. 开放-封闭原则</h4><p>软件实体（类、模块、函数等等）应该可以扩展，但是不可以修改</p>
+<p>对于扩展是开放的，对于更改是封闭的</p>
+<p>我们在做任何系统的时候，都不要指望系统一开始时需求确定，救再也不会变化，这是不显示也不科学的想法，而既然需求是一定会变化的，那么如何在面对需求的变化时，设计的软件可以相对容易修改，不至于说，新需求一来，就要把整个程序推倒重来。</p>
+<p>怎样的设计才能面对需求的改变却可以保持相对稳定，从而是的系统可以在第一个版本以后不断推出新的版本。</p>
+<p>无论模块是对么的 ‘封闭’，都会存在一些无法对之封闭的变化。既然不可能完全封闭，设计人员必须对于他设计的模块应该对那种变化封闭做出选择。他必须先猜测出最有可能发生的变化的种类，然后构造抽象来隔离那些变化。</p>
+<p>等到变化发生时立即采取行动</p>
+<p>在我们最初编写代码时，假设变化不会发生，当变化发生时，我们就创建抽象来隔离以后发生同类变化。</p>
+<p>面对需求，对程序的改动是通过增加新代码进行的，而不是更改现有的代码</p>
+<p><img src="/2020/11/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AE%80%E4%BB%8B/E:%5C%E7%AC%94%E8%AE%B0%E6%88%AA%E5%9B%BE%5C%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%5C%E5%85%AD%E5%A4%A7%E5%8E%9F%E5%88%99%5C%E5%BC%80%E5%8F%91-%E5%B0%81%E9%97%AD%E5%8E%9F%E5%88%99%E5%AE%9E%E7%8E%B0%E8%AE%A1%E7%AE%97%E5%99%A8.png" alt="开发-封闭原则实现计算器"></p>
+<p>我们希望在开发工作展开不久就知道可能发生的变化，查明可能发生的变化所等待的时间越长，要创建正确的抽象就越困难</p>
+<p>开放-封闭原则是面向对象设计的核心所在。遵循这个原则可以带来面向对象技术所声称的巨大好处，也就是可维护，可扩展，可复用，灵活性好。开发人员应该仅对程序中呈现出频繁变化的那些部分做出抽象，然而，对于应用程序中的每个部分都可以的进行抽象同样不是一个好主意。拒绝不成熟的抽象本身一样重要</p>
+<h4 id="3-依赖倒置"><a href="#3-依赖倒置" class="headerlink" title="3. 依赖倒置"></a>3. 依赖倒置</h4><p>A. 高层模块不应该依赖底层模块，两个都应该依赖抽象</p>
+<p>B. 抽象不应该依赖细节，细节应该依赖抽象</p>
+<p>抽象不依赖细节，细节应该依赖于抽象，针对接口编程，不要对实现编程。</p>
+<p>在面向过程开发时，为了使得常用代码可以复用，一般都会把这些常用代码写成许许多多函数的程序库，这样我们在做新项目时，去调用这些底层函数就可以，比如我们做的项目大多要访问数据库，所以我们就把访问数据库的代码写成了函数，每次做新项目时就去调用这些函数，这也就叫做高层模块依赖底层模块。当我们要做新项目时，法相业务逻辑的高层模块都是一样的，但客户却希望使用不同的数据库或存储信息方式，这就出麻烦了。我们希望再次利用这些高层模块，但高层模块都是与底层的访问数据库绑定在一起的，没办法复用。而如果不管高层模块还是底层模块，它们都依赖于抽象，具体一点就是接口或抽象类，只要接口是稳定的，那么任何一个的更改都不用担心其他受到影响，这就是的无论高层模块还是底层模块都还可以很容易的被复用</p>
+<p>依赖倒置可以说是面向对象设计的标志，用哪种语言来编写程序不重要，如果编写时考虑的都是如何针对抽象编程而不是针对细节编程，即程序中所有的依赖关系都是终止与抽象类或者接口，那就是面向对象的设计，反之那就是过程化的设计了</p>
+<h4 id="4-里氏代换原则"><a href="#4-里氏代换原则" class="headerlink" title="4. 里氏代换原则"></a>4. 里氏代换原则</h4><p>子类型必须能够替换掉它们的父类型</p>
+<p>一个软件实体如果使用的是一个父类的话，那么一定适用于其子类，而且它察觉不出父类对象和子类对象的区别，也就是说，在软件里面，把父类都替换成它的子类，程序的行为没有变化。</p>
+<p>例：</p>
+<p>面向对象设计时，一个是鸟类，一个是企鹅类，如果鸟是可以飞的，企鹅不会飞，那么企鹅是鸟么，企鹅可以继承鸟这个类么</p>
+<p>因为子类拥有父类的所有非private的行为和属性。但是鸟会飞，企鹅不会飞。因为所有的鸟都能飞，但是企鹅不能飞，所以不能继承</p>
+<p><img src="/2020/11/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AE%80%E4%BB%8B/E:%5C%E7%AC%94%E8%AE%B0%E6%88%AA%E5%9B%BE%5C%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%5C%E5%85%AD%E5%A4%A7%E5%8E%9F%E5%88%99%5C%E4%BC%81%E9%B9%85%E4%B8%8E%E9%B8%9F.png" alt="企鹅与鸟"></p>
+<p>只有当子类可以替换掉父类，软件单位的功能不受到影响时，父类才能真正被复用，而子类也能够在父类的基础上增加新的行为</p>
+<p><img src="/2020/11/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AE%80%E4%BB%8B/E:%5C%E7%AC%94%E8%AE%B0%E6%88%AA%E5%9B%BE%5C%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%5C%E5%85%AD%E5%A4%A7%E5%8E%9F%E5%88%99%5C%E4%BC%81%E9%B9%85%E4%B8%8E%E9%B8%9F.png" alt="企鹅与鸟"></p>
+<p>正是由于子类型的可替换性才使得使用父类类型的模块在无需修改的情况下就可以扩展</p>
+<p><img src="/2020/11/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AE%80%E4%BB%8B/E:%5C%E7%AC%94%E8%AE%B0%E6%88%AA%E5%9B%BE%5C%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%5C%E5%85%AD%E5%A4%A7%E5%8E%9F%E5%88%99%5C%E9%87%8C%E6%B0%8F%E4%B8%8E%E4%BE%9D%E8%B5%96%E5%80%92%E7%BD%AE.png" alt="里氏与依赖倒置"></p>
+<h4 id="5-迪米特法则"><a href="#5-迪米特法则" class="headerlink" title="5. 迪米特法则"></a>5. 迪米特法则</h4><p>如果两个类不必彼此直接通信，那么这两个类就不应当发生直接的相互作用，如果其中一个类需要调用另一个类的某一个方法的话，可以通过第三者转发这个调用。</p>
+<p>在类的结构设计上，每一个类都应当尽量降低成员的访问权限。</p>
+<p>迪米特法则其根本思想，是强调了类之间的松耦合。</p>
+<p>类之间的耦合越弱，越有利于复用，一个处在弱耦合的类被修改，不会对有关系的类造成波及</p>
+<h4 id="6-接口隔离"><a href="#6-接口隔离" class="headerlink" title="6. 接口隔离"></a>6. 接口隔离</h4><p>设计应用程序的时候，如果一个模块包含多个子模块，那么我们应该小心对模块做出抽象。设想该模块由一个类实现，我们可以把系统抽象成一个接口。但是要添加一个新的模块扩展程序时，如果要添加的模块只包含原系统中的一些子模块，那么系统就会强迫我们实现接口中的所有方法，并且要编写一些哑方法。这样的接口被称为肚胖接口或者被污染的接口，使用这样的接口将会给系统引入一些不当的行为，这些不当的行为可能导致不正确的结果，也可能导入资源浪费。</p>
+<p>1.接口隔离</p>
+<p>接口隔离原则 表明客户端不应该被强迫实现一些他们不会使用的接口，应该把胖接口中的方法分组，然后用多个接口替代它，每个接口服务于一个子模块。简单地说，就是使用多个专门的接口比使用单个接口要好很多。</p>
+<p>主要观点如下：</p>
+<p><strong>1）一个类对另外一个类的依赖性应当是建立在最小的接口上的。</strong></p>
+<p>ISP 可以达到不强迫客户（接口的使用方法）依赖于他们不用的方法，接口的实现类应该只呈现为单一职责的角色（遵循 SRP 原则） ISP 还可以降低客户之间的相互影响—当某个客户要求提供新的职责（需要变化）而迫使接口发生改变时，影响到其他客户程序的可能性最小。</p>
+<p><strong>2）客户端程序不应该依赖它不需要的接口方法（功能）。</strong></p>
+<p>客户端程序就应该依赖于它不需要的接口方法（功能），那依赖于什么？依赖它所需要的接口。客户端需要什么接口就是提供什么接口，把不需要的接口剔除，这就要求对接口进行细化，保证其纯洁性。</p>
+<p>比如在继承时，由于子类将继承父类中的所有可用方法；而父类中的某些方法，在子类中可能并不需要。例如，普通员工和经理都继承自雇员这个接口，员工需要每天写工作日志，而经理不需要。因此不能用工作日志来卡经理，也就是经理不应该依赖于提交工作日志这个方法。</p>
+<p>可以看出，ISP和SRP在概念上是有一定交叉的。事实上，很多设计模式在概念上都有交叉，甚至你很难判断一段代码属于哪一种设计模式。</p>
+<p>ISP强调的是接口对客户端的承诺越少越好，并且要做到专一。当某个客户程序的要求发生变化，而迫使接口发生改变时，影响到其他客户程序的可能性小。这实际上就是接口污染的问题。</p>
+<p>2.对接口的污染</p>
+<p>过于臃肿的接口设计是对接口的污染。所谓的接口污染就是为接口添加不必要的职责，如果开发人员在接口中增加一个新功能的目的只是减少接口实现类的数目，则此设计将导致接口被不断地“污染”并“变胖”。</p>
+<p>“接口隔离”其实就是定制化服务设计的原则。使用接口的多重继承实现对不同的接口的组合，从而对外提供组合功能—达到“按需提供服务”。 接口即要拆，但也不能拆得太细，这就得有个标准，这就是高内聚。接口应该具备一些基本的功能，能独一完成一个基本的任务。</p>
+<p>在实际应用中，会遇到如下问题：比如，我需要一个能适配多种类型数据库的 DAO 实现，那么首先应实现一个数据库操作的接口，其中规定一些数据库操作的基本方法，比如连接数据库、增删改查、关闭数据库等。这是一个最少功能的接口。对于一些 MySQL 中特有的而其他数据库里并不存在的或性质不同的方法，如 PHP 里可能用到的 MySQL 的 pconnect 方法，其他数据库里并不存在和这个方法相同的概念，这个方法也就不应该出现在这个基本的接口里，那这个基本的接口应该有哪些基本的方法呢？PDO已经告诉你了。</p>
+<p>PDO 是一个抽象的数据库接口层，它告诉我们一个基本的数据库操作接口应该实现哪些基本的方法。接口是一个高层次的抽象，所以接口里的方法都应该是通用的、基本的、不易变化的。</p>
+<p>还有一个问题，那些特有的方法应该怎么实现？根据ISP原则，这些方法可以在别一个接口中存在，让这个“异类”同时实现这两个接口。</p>
+<p>对于接口的污染，可以考虑这两条处理方式：</p>
+<ul>
+<li>利用委托分离接口。</li>
+<li>利用多继承分离接口。</li>
+</ul>
+<p>委托模式中，有两个对象参与处理同一个请求，接受请求的对象将请求委托给另一个对象来处理，如策略模式、代理模式等中都应用到了委托的概念。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/13/%E5%8D%81%E5%A4%A7%E7%BB%8F%E5%85%B8%E6%8E%92%E5%BA%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1867,180 +2239,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/06/JDBC/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="赵凝">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/touxiang.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="赵凝的小博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/04/06/JDBC/" itemprop="url">JDBC</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-06T21:37:55+08:00">
-                2020-04-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">后端</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="JDBC"><a href="#JDBC" class="headerlink" title="JDBC"></a>JDBC</h1><p><code>使用JDBC操作数据库时，如果对数据库进行了更换，只需要替换：驱（jar包），具体驱动类，连接字符串，用户名（数据库名），密码（数据库密码）</code><br><code>先开的后关，后开的先关</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">      if(rs !&#x3D;null)     rs.close();			</span><br><span class="line">if (stmt !&#x3D; null)  stmt.close();</span><br><span class="line">if (connection !&#x3D; null)  connection.close();</span><br></pre></td></tr></table></figure>
-
-<h2 id="1-JDBC"><a href="#1-JDBC" class="headerlink" title="1. JDBC"></a>1. JDBC</h2><p>Java DataBase Connectivity  可以为多种关系型数据库DBMS 提供统一的</p>
-<h2 id="2-JDBC-API"><a href="#2-JDBC-API" class="headerlink" title="2.JDBC  API"></a>2.JDBC  API</h2><p>提供了各种操作接口   （接口，方法，类）</p>
-<h2 id="3-JDBC-DriverManager"><a href="#3-JDBC-DriverManager" class="headerlink" title="3.JDBC DriverManager"></a>3.JDBC DriverManager</h2><p>管理不同的数据库驱动 （Oracle驱动/mysql驱动）</p>
-<h2 id="4-各种数据库驱动"><a href="#4-各种数据库驱动" class="headerlink" title="4.各种数据库驱动"></a>4.各种数据库驱动</h2><p>相应的数据库厂商提供的（第三方公司提供，谁开发数据库谁提供 （jar包）  ），<br>    作用： 连接/直接操作数据库。</p>
-<h2 id="5-数据库驱动"><a href="#5-数据库驱动" class="headerlink" title="5.数据库驱动"></a>5.数据库驱动</h2><ol>
-<li>驱动jar包 </li>
-<li>具体驱动类</li>
-<li>连接字符串</li>
-</ol>
-<p><code>Oracle</code> </p>
-<ol>
-<li>ojdbc-x.jar</li>
-<li>oracle.jdbc.OracleDriver.class</li>
-<li>jdbc:oracle:thin:@localhost:1521:数据库实例名</li>
-</ol>
-<p><code>MySQL</code></p>
-<ol>
-<li>mysql-connector-java-x.jar        </li>
-<li>com.mysql.jdbc.Driver.class            </li>
-<li>jdbc:mysql://localhost:3306/数据库实例名</li>
-</ol>
-<p><code>SqlServer</code>                </p>
-<ol>
-<li>sql jdbc -x.jar            </li>
-<li>com.microsoft.sqlserver.jdbc.SQLServerDriver.class  </li>
-<li>jabc:microsoft:sqlserver:localhost:1433:databasename=数据库实例名</li></ol>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/04/06/JDBC/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2097,7 +2295,7 @@
             
                 <a href="/archives">
               
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
