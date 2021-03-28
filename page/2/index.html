@@ -291,6 +291,185 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/06/Mybatis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="赵凝">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/touxiang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="赵凝的小博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/04/06/Mybatis/" itemprop="url">Mybatis</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-06T21:38:00+08:00">
+                2020-04-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">后端</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%90%8E%E7%AB%AF/ssm/" itemprop="url" rel="index">
+                    <span itemprop="name">ssm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Mybatis"><a href="#Mybatis" class="headerlink" title="Mybatis"></a>Mybatis</h1><h2 id="1、概念"><a href="#1、概念" class="headerlink" title="1、概念"></a>1、概念</h2><p>MyBatis可以简化JDBC操作，实现数据的持久化（将数据存入数据库）<br><code>ORM：</code>Object Relational Mapping   ORM可以将对象和表一 一映射起来<br>person对象 - - -&gt; person表<br>ORM是概念，Mybatis是ORM的实现<br>ORM可以使得开发人员 像操作对象一样  操作数据库表。  </p>
+<h2 id="2、MyBatis的环境搭建"><a href="#2、MyBatis的环境搭建" class="headerlink" title="2、MyBatis的环境搭建"></a>2、MyBatis的环境搭建</h2><ol>
+<li>创建maven工程并导入坐标</li>
+<li>创建实体类和dao的接口</li>
+<li>创建Mybatis的主配置文件<pre><code>`SqlMapConifg.xml`</code></pre></li>
+<li>创建映射配置文件  <code>InterfacePersonDao.xml</code></li>
+</ol>
+<h2 id="3、环境搭建的注意事项："><a href="#3、环境搭建的注意事项：" class="headerlink" title="3、环境搭建的注意事项："></a>3、环境搭建的注意事项：</h2><ol>
+<li>创建InterfacePersonDao.xml  和InterfacePersonDao.java时 名称是为了和我们之前的知识保持一致<br>在Mybatis中  它把持久层的操作接口名称和映射文件也叫做：Mapper</li>
+<li>mybatis的映射配置文件位置必须和dao接口的包结构相同。</li>
+<li>映射配置文件的mapper标签namespace属性的取值必须是dao接口的全限定类名</li>
+<li>映射配置文件的操作配置，id属性的取值必须是dao接口的方法名</li>
+</ol>
+<p><code>当我们遵从了第二，三，四点之后，我们在开发中就无需在写dao的实现类</code></p>
+<h2 id="5、mybatis的入门案例："><a href="#5、mybatis的入门案例：" class="headerlink" title="5、mybatis的入门案例："></a>5、mybatis的入门案例：</h2><ol>
+<li>读取配置文件</li>
+<li>创建SqlSessionFactory工厂</li>
+<li>创建SqlSession</li>
+<li>创建Dao接口的代理对象</li>
+<li>执行dao中的方法</li>
+<li>释放资源  </li>
+</ol>
+<p><code>注意事项：</code><br>    不要忘记在映射配置中告知mybatis要封装到那个实体类中<br><code>配置的方式：</code>制定实体类的全限定类名</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/04/06/Mybatis/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/06/JDBC/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1494,7 +1673,7 @@ DOM对象也不能使用JQuery对象的属性和方法</code></pre></li></ol>
             
                 <a href="/archives">
               
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1582,7 +1761,7 @@ DOM对象也不能使用JQuery对象的属性和方法</code></pre></li></ol>
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; 2020 &mdash; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
